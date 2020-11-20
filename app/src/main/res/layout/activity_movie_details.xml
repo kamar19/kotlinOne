@@ -41,38 +41,43 @@
         android:id="@+id/imageViewPath"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toTopOf="@+id/guidelinePath"
-        app:layout_constraintEnd_toStartOf="@+id/MovieDetailsTextViewPath"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewPath"
         app:layout_constraintTop_toTopOf="@+id/guidelinePath"
         app:srcCompat="@drawable/Path" />
 
     <TextView
-        android:id="@+id/MovieDetailsTextViewPath"
+        android:id="@+id/TextViewPath"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="roboto"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_condensed_light"
         android:text="@string/path_back"
+
         android:textColor="@color/colorPath"
         app:layout_constraintBottom_toTopOf="@+id/guidelinePath"
         app:layout_constraintTop_toTopOf="@+id/guidelinePath"
-        tools:layout_editor_absoluteX="32dp"
-        />
+        tools:layout_editor_absoluteX="32dp" />
 
 
     <TextView
-        android:id="@+id/MovieDetailsTextViewTegLine"
-        android:layout_width="wrap_content"
+        android:id="@+id/TextViewTegLine"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:text="@string/textViewTegLine"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="400dp" />
+        android:textAppearance="@style/tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewName" />
 
     <TextView
-        android:id="@+id/MovieDetailsTextViewName"
-        android:layout_width="343dp"
-        android:layout_height="85dp"
+        android:id="@+id/TextViewName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
         android:fontFamily="@font/roboto_condensed_light"
         android:gravity="center_vertical"
         android:lineHeight="40sp"
@@ -81,9 +86,9 @@
         android:text="@string/MovieDetailsTextViewName"
         android:textAppearance="@style/name"
         android:textColor="@color/colorName"
-        android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCenter"
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalCenter"
+        tools:layout_editor_absoluteX="53dp"
         tools:targetApi="p" />
 
 
@@ -94,44 +99,91 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:gravity="center_horizontal|center_vertical"
         android:text="@string/MovieDetailsTextViewSomeId"
         android:textAppearance="@style/some_id"
-        android:gravity="center_horizontal|center_vertical"
-        />
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="290dp" />
 
     <RelativeLayout
         android:id="@+id/pg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="11dp"
+        android:layout_height="6dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:background="@drawable/pg"
-        />
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="241dp" />
 
     <View
         android:id="@+id/rectangle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/shape_rect"
         android:alpha="0.9"
-        />
-
-
-
+        android:background="@drawable/shape_rect" />
 
 
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="467dp" />
+        android:layout_margin="16dp"
+        android:layout_marginTop="19dp"
+        android:numStars="5"
+        android:rating="4"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:stepSize="1"
+        android:textAppearance="@style/tag"
+        android:theme="@style/MyRatingBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine" />
+
+    <TextView
+        android:id="@+id/textViewStoryLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewStoryLine"
+        android:textColor="@color/colorTextGrey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ratingBar"
+        tools:layout_editor_absoluteY="481dp" />
+
+    <TextView
+        android:id="@+id/textViewStoryLineContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textViewStoryLineContent"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="545dp" />
+
+    <TextView
+        android:id="@+id/StyleStoryLineContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/storyLineContent"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="580dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="insideInset"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="648dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
