@@ -1,4 +1,4 @@
-package ru.kaimar20.kotlinOne
+package ru.firstSet.kotlinOne
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

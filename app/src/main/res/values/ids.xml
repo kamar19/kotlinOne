@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="guidelineCenter" type="id">guidelineCenter</item>
+    <item name="guidelinePath" type="id">guidelinePath</item>
+    <item name="guidelineHorizontalCenter" type="id">guidelineHorizontalCenter</item>
+    <item name="imageViewPath" type="id">imageViewPath</item>
+    <item name="MovieDetailsTextViewPath" type="id">MovieDetailsTextViewPath</item>
+    <item name="MovieDetailsTextViewTegLine" type="id">MovieDetailsTextViewTegLine</item>
+    <item name="MovieDetailsTextViewName" type="id">MovieDetailsTextViewName</item>
+    <item name="MovieDetailsTextViewSomeId" type="id">MovieDetailsTextViewSomeId</item>
+    <item name="pg" type="id">pg</item>
+    <item name="ratingBar" type="id">ratingBar</item>
+</resources>

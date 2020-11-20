@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">kotlinOne</string>
+    <string name="activityMainTextView1">Hello!!!!</string>
+    <string name="MovieDetailsTextViewName">Avengers: End Game</string>
+    <string name="path_back">Back</string>
+    <string name="textViewTegLine">Action, Adventure, Fantasy</string>
+    <string name="MovieDetailsTextViewSomeId">13+</string>
+
+
+    <string name="todo">TODO</string>
+
+
 </resources>

@@ -1,4 +1,4 @@
-package ru.kaimar20.kotlinOne
+package ru.firstSet.kotlinOne
 
 import org.junit.Test
 
