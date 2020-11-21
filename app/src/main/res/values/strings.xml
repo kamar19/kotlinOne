@@ -13,8 +13,10 @@
     <string name="textViewStoryLine">Storyline</string>
     <string name="storyLineContent">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
     <string name="heading">Cast</string>
-    <string name="robert_down">Robert Downey Jr.</string>
-    <string name="chris_evans">Chris\u00E2\u0080\u00A8Evans</string>
-    <string name="mark_ruffal">Mark\u00E2\u0080\u00A8Ruffalo</string>
+    <string name="robert_down">Robert \nDowney Jr.</string>
+    <string name="chris_evans">Chris \nEvans</string>
+    <string name="mark_ruffal">Mark \nRuffalo</string>
+    <string name="chris_hemsworth">Chris \nHemsworth</string>
+
 
 </resources>
