@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guidelinePath"
         app:layout_constraintEnd_toStartOf="@+id/TextViewPath"
         app:layout_constraintTop_toTopOf="@+id/guidelinePath"
-        app:srcCompat="@drawable/Path" />
+        app:srcCompat="@drawable/path" />
 
     <TextView
         android:id="@+id/TextViewPath"
@@ -65,7 +65,8 @@
         android:id="@+id/TextViewTegLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/textViewTegLine"
         android:textAppearance="@style/tag"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,10 +132,10 @@
 
     <RatingBar
         android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="19dp"
+        android:layout_width="241dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:numStars="5"
         android:rating="4"
         android:scaleX=".5"
@@ -154,81 +155,179 @@
         android:text="@string/textViewReview"
         android:textColor="@color/colorTextGrey"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar"
-        tools:layout_editor_absoluteY="481dp" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine" />
 
     <TextView
         android:id="@+id/textViewStoryLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/textViewStoryLine"
         android:textAppearance="@style/after_the_d"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="545dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     <TextView
         android:id="@+id/StyleStoryLineContent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/storyLineContent"
         android:textAppearance="@style/after_the_d"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="580dp"
 
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textViewStoryLine"
+        tools:layout_editor_absoluteX="16dp" />
 
     <HorizontalScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="665dp">
+        app:layout_constraintTop_toBottomOf="@+id/StyleStoryLineContent">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/heading"
-                android:layout_width="243dp"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="8sp"
                 android:text="@string/heading"
                 android:textAppearance="@style/heading" />
 
-            <View
-                android:id="@+id/movie"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/movie"
-                tools:ignore="ObsoleteLayoutParam" />
 
-            <TextView
-                android:id="@+id/robert_down"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:text="@string/robert_down"
-                android:textAppearance="@style/robert_down"
-                android:lineSpacingExtra="2sp"
-                android:gravity="center_vertical"
-                tools:ignore="ObsoleteLayoutParam" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/movie1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ovie"
+                    tools:ignore="ObsoleteLayoutParam" />
+
+                <TextView
+                    android:id="@+id/robert_down1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/robert_down"
+                    android:textAppearance="@style/robert_down"
+                    tools:ignore="ObsoleteLayoutParam" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/movie2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/ovie"
+                    tools:ignore="ObsoleteLayoutParam" />
+
+                <TextView
+                    android:id="@+id/robert_down2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/robert_down"
+                    android:textAppearance="@style/robert_down"
+                    tools:ignore="ObsoleteLayoutParam" />
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/movie3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/ovie"
+                    tools:ignore="ObsoleteLayoutParam" />
+
+                <TextView
+                    android:id="@+id/robert_down3"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/robert_down"
+                    android:textAppearance="@style/robert_down"
+                    tools:ignore="ObsoleteLayoutParam" />
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/movie4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/ovie"
+                    tools:ignore="ObsoleteLayoutParam" />
+
+                <TextView
+                    android:id="@+id/robert_down4"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/robert_down"
+                    android:textAppearance="@style/robert_down"
+                    tools:ignore="ObsoleteLayoutParam" />
+
+
+            </LinearLayout>
         </LinearLayout>
-
-
     </HorizontalScrollView>
 
 
