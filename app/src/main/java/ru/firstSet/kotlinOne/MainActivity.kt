@@ -1,7 +1,8 @@
-package ru.kaimar20.kotlinOne
+package ru.firstSet.kotlinOne
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.kaimar20.kotlinOne.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
