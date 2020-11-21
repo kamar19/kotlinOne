@@ -6,9 +6,6 @@
     <string name="textViewTegLine">Action, Adventure, Fantasy</string>
     <string name="MovieDetailsTextViewSomeId">13+</string>
 
-
-    <string name="todo">TODO</string>
-
     <string name="textViewReview">125 Reviews</string>
     <string name="textViewStoryLine">Storyline</string>
     <string name="storyLineContent">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
@@ -17,6 +14,7 @@
     <string name="chris_evans">Chris \nEvans</string>
     <string name="mark_ruffal">Mark \nRuffalo</string>
     <string name="chris_hemsworth">Chris \nHemsworth</string>
+    <string name="todo">TODO</string>
 
 
 </resources>
