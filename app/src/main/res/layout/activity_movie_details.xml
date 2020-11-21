@@ -7,9 +7,8 @@
     android:background="@color/colorBackgroud"
     tools:context=".MovieDetailsActivity">
 
-
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineCenter"
+        android:id="@+id/guidelineCenter2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -17,52 +16,48 @@
 
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelinePath"
+        android:id="@+id/guidelinePath2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHorizontalCenter"
+        android:id="@+id/guidelineHorizontalCenter2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:barrierDirection="bottom"
-
-        />
 
     <ImageView
-        android:id="@+id/imageViewPath"
+        android:id="@+id/imageViewPath2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toTopOf="@+id/guidelinePath"
-        app:layout_constraintEnd_toStartOf="@+id/TextViewPath"
-        app:layout_constraintTop_toTopOf="@+id/guidelinePath"
+        app:layout_constraintBottom_toTopOf="@+id/guidelinePath2"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewPath2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelinePath2"
         app:srcCompat="@drawable/path" />
 
     <TextView
-        android:id="@+id/TextViewPath"
+        android:id="@+id/TextViewPath2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:fontFamily="@font/roboto_condensed_light"
         android:text="@string/path_back"
-
         android:textColor="@color/colorPath"
-        app:layout_constraintBottom_toTopOf="@+id/guidelinePath"
-        app:layout_constraintTop_toTopOf="@+id/guidelinePath"
+        app:layout_constraintBottom_toTopOf="@+id/guidelinePath2"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPath2"
+        app:layout_constraintTop_toTopOf="@+id/guidelinePath2"
         tools:layout_editor_absoluteX="32dp" />
 
 
     <TextView
-        android:id="@+id/TextViewTegLine"
+        android:id="@+id/TextViewTegLine2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -87,8 +82,8 @@
         android:text="@string/MovieDetailsTextViewName"
         android:textAppearance="@style/name"
         android:textColor="@color/colorName"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCenter"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalCenter"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCenter2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalCenter2"
         tools:layout_editor_absoluteX="53dp"
         tools:targetApi="p" />
 
@@ -100,35 +95,25 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/MovieDetailsTextViewSomeId"
         android:textAppearance="@style/some_id"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="290dp" />
+        app:layout_constraintBottom_toTopOf="@+id/TextViewName"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/pg"
-        android:layout_width="11dp"
-        android:layout_height="6dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/pg"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="241dp" />
 
     <View
         android:id="@+id/rectangle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:alpha="0.9"
-        android:background="@drawable/shape_rect" />
-
+        android:background="@drawable/shape_rect"
+        app:layout_constraintBottom_toBottomOf="@+id/MovieDetailsTextViewSomeId"
+        app:layout_constraintEnd_toEndOf="@+id/MovieDetailsTextViewSomeId"
+        app:layout_constraintStart_toStartOf="@+id/MovieDetailsTextViewSomeId"
+        app:layout_constraintTop_toTopOf="@+id/MovieDetailsTextViewSomeId" />
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -146,7 +131,7 @@
         android:transformPivotX="0dp"
         android:transformPivotY="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine" />
+        app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine2" />
 
     <TextView
         android:id="@+id/textViewReview"
@@ -155,9 +140,9 @@
         android:text="@string/textViewReview"
         android:textColor="@color/colorTextGrey"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineCenter2"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine2" />
 
     <TextView
         android:id="@+id/textViewStoryLine"
@@ -175,6 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+
         android:layout_marginEnd="16dp"
         android:text="@string/storyLineContent"
         android:textAppearance="@style/after_the_d"
@@ -182,153 +168,176 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewStoryLine"
         tools:layout_editor_absoluteX="16dp" />
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/StyleStoryLineContent">
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/heading"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:gravity="center_vertical"
-                android:lineSpacingExtra="8sp"
-                android:text="@string/heading"
-                android:textAppearance="@style/heading" />
+        android:lineSpacingExtra="8sp"
+        android:text="@string/heading"
+        android:textAppearance="@style/heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StyleStoryLineContent" />
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+    <View
+        android:id="@+id/movie1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/ovie"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/movie2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading"
+        tools:ignore="ObsoleteLayoutParam" />
 
-                <View
-                    android:id="@+id/movie1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ovie"
-                    tools:ignore="ObsoleteLayoutParam" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="2sp"
+        android:minLines="2"
+        android:layout_marginEnd="4dp"
+        android:text="@string/robert_down"
+        android:textAppearance="@style/robert_down"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie1"
+        tools:ignore="ObsoleteLayoutParam" />
 
-                <TextView
-                    android:id="@+id/robert_down1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="2sp"
-                    android:text="@string/robert_down"
-                    android:textAppearance="@style/robert_down"
-                    tools:ignore="ObsoleteLayoutParam" />
-            </LinearLayout>
+    <View
+        android:id="@+id/movie2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="4dp"
+        android:background="@drawable/ovie"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/movie3"
+        app:layout_constraintStart_toEndOf="@+id/movie1"
+        app:layout_constraintTop_toBottomOf="@+id/heading"
+        tools:ignore="ObsoleteLayoutParam" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="2sp"
+        android:minLines="2"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/chris_evans"
+        android:textAppearance="@style/robert_down"
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintTop_toBottomOf="@+id/movie2"
+        tools:ignore="ObsoleteLayoutParam" />
 
-                <View
-                    android:id="@+id/movie2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/ovie"
-                    tools:ignore="ObsoleteLayoutParam" />
-
-                <TextView
-                    android:id="@+id/robert_down2"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="2sp"
-                    android:text="@string/robert_down"
-                    android:textAppearance="@style/robert_down"
-                    tools:ignore="ObsoleteLayoutParam" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <View
-                    android:id="@+id/movie3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/ovie"
-                    tools:ignore="ObsoleteLayoutParam" />
-
-                <TextView
-                    android:id="@+id/robert_down3"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="2sp"
-                    android:text="@string/robert_down"
-                    android:textAppearance="@style/robert_down"
-                    tools:ignore="ObsoleteLayoutParam" />
+    <View
+        android:id="@+id/movie3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="4dp"
+        android:background="@drawable/ovie"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/movie4"
+        app:layout_constraintStart_toEndOf="@+id/movie2"
+        app:layout_constraintTop_toBottomOf="@+id/heading"
+        tools:ignore="ObsoleteLayoutParam" />
 
 
-            </LinearLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="2sp"
+        android:minLines="2"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        android:text="@string/robert_down"
+        android:textAppearance="@style/robert_down"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/movie3"
 
-                <View
-                    android:id="@+id/movie4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/ovie"
-                    tools:ignore="ObsoleteLayoutParam" />
-
-                <TextView
-                    android:id="@+id/robert_down4"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="2sp"
-                    android:text="@string/robert_down"
-                    android:textAppearance="@style/robert_down"
-                    tools:ignore="ObsoleteLayoutParam" />
+        tools:ignore="ObsoleteLayoutParam" />
 
 
-            </LinearLayout>
-        </LinearLayout>
-    </HorizontalScrollView>
+    <View
+        android:id="@+id/movie4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/ovie"
+        app:contentDescription="1:1"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/movie3"
+        app:layout_constraintTop_toBottomOf="@+id/heading"
+
+        tools:ignore="ObsoleteLayoutParam" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:layout_marginStart="4dp"
+        android:lineSpacingExtra="2sp"
+        android:minLines="2"
+        android:layout_marginEnd="16dp"
+        android:text="@string/robert_down"
+        android:textAppearance="@style/robert_down"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/movie4"
+        tools:ignore="ObsoleteLayoutParam" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,8 +15,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         val transmittedString:String? = intent.getStringExtra(TRANSMITTEDSTRING)
         val transmittedInt: Int = intent.getIntExtra(TRANSMITTEDINT,-1)
 
-        val textView: TextView = findViewById(R.id.movieDetailsActivityTextView1)
-        textView.setText( transmittedString)
+//        val textView: TextView = findViewById(R.id.movieDetailsActivityTextView1)
+//        textView.setText( transmittedString)
 //
     }
 
