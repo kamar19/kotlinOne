@@ -33,9 +33,47 @@
 
     <style name="tag">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#FF3466
-        </item>
+        <item name="android:textColor">#FF3466</item>
 
+    </style>
+
+    <style name="MyRatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorTextGrey</item>
+        <item name="colorControlActivated">#FF3466</item>
+    </style>
+
+
+    <style name="styleStoryLine">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ECECEC</item>
+        <item name="android:shadowColor">#80000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">6</item>
+        <item name="android:shadowRadius">12</item>
+    </style>
+
+    <style name="styleStoryLineContent">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF </item>
+    </style>
+
+    <style name="after_the_d">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="heading">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:shadowColor">#80000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">6</item>
+        <item name="android:shadowRadius">12</item>
+    </style>
+
+    <style name="robert_down">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#D8D8D8</item>
     </style>
 
 

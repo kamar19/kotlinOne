@@ -4,9 +4,9 @@
     <item name="guidelinePath" type="id">guidelinePath</item>
     <item name="guidelineHorizontalCenter" type="id">guidelineHorizontalCenter</item>
     <item name="imageViewPath" type="id">imageViewPath</item>
-    <item name="MovieDetailsTextViewPath" type="id">MovieDetailsTextViewPath</item>
-    <item name="MovieDetailsTextViewTegLine" type="id">MovieDetailsTextViewTegLine</item>
-    <item name="MovieDetailsTextViewName" type="id">MovieDetailsTextViewName</item>
+    <item name="TextViewPath" type="id">MovieDetailsTextViewPath</item>
+    <item name="TextViewTegLine" type="id">MovieDetailsTextViewTegLine</item>
+    <item name="TextViewName" type="id">MovieDetailsTextViewName</item>
     <item name="MovieDetailsTextViewSomeId" type="id">MovieDetailsTextViewSomeId</item>
     <item name="pg" type="id">pg</item>
     <item name="ratingBar" type="id">ratingBar</item>

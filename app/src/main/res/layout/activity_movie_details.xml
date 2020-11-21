@@ -142,14 +142,16 @@
         android:stepSize="1"
         android:textAppearance="@style/tag"
         android:theme="@style/MyRatingBar"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine" />
 
     <TextView
-        android:id="@+id/textViewStoryLine"
+        android:id="@+id/textViewReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textViewStoryLine"
+        android:text="@string/textViewReview"
         android:textColor="@color/colorTextGrey"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -157,10 +159,11 @@
         tools:layout_editor_absoluteY="481dp" />
 
     <TextView
-        android:id="@+id/textViewStoryLineContent"
+        android:id="@+id/textViewStoryLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textViewStoryLineContent"
+        android:text="@string/textViewStoryLine"
+        android:textAppearance="@style/after_the_d"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="545dp" />
 
@@ -169,21 +172,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/storyLineContent"
+        android:textAppearance="@style/after_the_d"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="580dp" />
+        tools:layout_editor_absoluteY="580dp"
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarStyle="insideInset"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="648dp">
+        />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="104dp"
+        tools:layout_editor_absoluteY="665dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="243dp"
+                android:layout_height="24dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/heading"
+                android:textAppearance="@style/heading" />
+
+            <View
+                android:id="@+id/movie"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/movie"
+                tools:ignore="ObsoleteLayoutParam" />
+
+            <TextView
+                android:id="@+id/robert_down"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/robert_down"
+                android:textAppearance="@style/robert_down"
+                android:lineSpacingExtra="2sp"
+                android:gravity="center_vertical"
+                tools:ignore="ObsoleteLayoutParam" />
+
+
+
+
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
