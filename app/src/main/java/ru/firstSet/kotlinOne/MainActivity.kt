@@ -4,12 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val textView: TextView = findViewById(R.id.activityMainTextView1)
         textView.setOnClickListener{ moveToNextScreen()}
     }
@@ -23,13 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         intent.putExtra(MovieDetailsActivity.TRANSMITTEDSTRING,transmittedString)
 //        intent.putExtra(MovieDetailsActivity.TRANSMITTEDBOOLEAN,transmittedBoolean)
-
         intent.putExtra(MovieDetailsActivity.TRANSMITTEDINT,transmittedInt)
-
-
         startActivity(intent)
 
-
 //        TODO("Not yet implemented")
+
     }
 }
