@@ -1,20 +1,17 @@
 <resources>
-    <string name="app_name">kotlinOne</string>
-    <string name="activityMainTextView1">Hello!!!!</string>
-    <string name="MovieDetailsTextViewName">Avengers: \nEnd Game</string>
-    <string name="path_back">Back</string>
+    <string name="appName">kotlinOne</string>
+    <string name="activityMainCenterTextView">Hello!!!!</string>
+    <string name="movieDetailsTextViewName">Avengers: \nEnd Game</string>
+    <string name="pathBack">Back</string>
     <string name="textViewTegLine">Action, Adventure, Fantasy</string>
-    <string name="MovieDetailsTextViewSomeId">13+</string>
-
+    <string name="movieDetailsTextViewSomeId">13+</string>
     <string name="textViewReview">125 Reviews</string>
     <string name="textViewStoryLine">Storyline</string>
     <string name="storyLineContent">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
     <string name="heading">Cast</string>
-    <string name="robert_down">Robert \nDowney Jr.</string>
-    <string name="chris_evans">Chris \nEvans</string>
-    <string name="mark_ruffal">Mark \nRuffalo</string>
-    <string name="chris_hemsworth">Chris \nHemsworth</string>
+    <string name="robertDown">Robert \nDowney Jr.</string>
+    <string name="chrisEvans">Chris \nEvans</string>
+    <string name="markRuffal">Mark \nRuffalo</string>
+    <string name="chrisHemsworth">Chris \nHemsworth</string>
     <string name="todo">TODO</string>
-
-
 </resources>

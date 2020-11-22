@@ -17,20 +17,19 @@
             android:layout_height="wrap_content"
             tools:context=".MovieDetailsActivity">
 
-
             <ImageView
                 android:id="@+id/poster"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
                 android:src="@drawable/orig"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/todo" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/view2"
+                android:id="@+id/posterBack"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/gradient_poster"
@@ -41,14 +40,12 @@
                 app:srcCompat="@drawable/orig"
                 tools:layout_editor_absoluteY="170dp" />
 
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineCenter2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
-
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelinePath2"
@@ -63,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.4" />
-
 
             <ImageView
                 android:id="@+id/imageViewPath2"
@@ -83,13 +79,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:fontFamily="@font/roboto_condensed_light"
-                android:text="@string/path_back"
+                android:text="@string/pathBack"
                 android:textColor="@color/colorPath"
                 app:layout_constraintBottom_toTopOf="@+id/guidelinePath2"
                 app:layout_constraintStart_toEndOf="@+id/imageViewPath2"
-                app:layout_constraintTop_toTopOf="@+id/guidelinePath2"
-                tools:layout_editor_absoluteX="32dp" />
-
+                app:layout_constraintTop_toTopOf="@+id/guidelinePath2" />
 
             <TextView
                 android:id="@+id/TextViewTegLine2"
@@ -114,30 +108,27 @@
                 android:lineHeight="40sp"
                 android:lineSpacingExtra="0sp"
                 android:minLines="2"
-                android:text="@string/MovieDetailsTextViewName"
+                android:text="@string/movieDetailsTextViewName"
                 android:textAppearance="@style/name"
                 android:textColor="@color/colorName"
                 app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCenter2"
                 app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalCenter2"
-                tools:layout_editor_absoluteX="53dp"
                 tools:targetApi="p" />
-
 
             <TextView
                 android:id="@+id/MovieDetailsTextViewSomeId"
                 android:layout_width="0dp"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="12dp"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="@string/MovieDetailsTextViewSomeId"
-                android:textAppearance="@style/some_id"
+                android:text="@string/movieDetailsTextViewSomeId"
+                android:textAppearance="@style/someId"
                 app:layout_constraintBottom_toTopOf="@+id/TextViewName"
                 app:layout_constraintStart_toStartOf="parent" />
-
 
             <View
                 android:id="@+id/rectangle"
@@ -187,7 +178,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/textViewStoryLine"
-                android:textAppearance="@style/after_the_d"
+                android:textAppearance="@style/afterTheD"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
@@ -196,14 +187,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-
                 android:layout_marginEnd="16dp"
                 android:text="@string/storyLineContent"
-                android:textAppearance="@style/after_the_d"
-
+                android:textAppearance="@style/afterTheD"
                 app:layout_constraintTop_toBottomOf="@+id/textViewStoryLine"
                 tools:layout_editor_absoluteX="16dp" />
-
 
             <TextView
                 android:id="@+id/heading"
@@ -212,13 +200,11 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
-
                 android:lineSpacingExtra="8sp"
                 android:text="@string/heading"
                 android:textAppearance="@style/heading"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/StyleStoryLineContent" />
-
 
             <View
                 android:id="@+id/movie1"
@@ -236,7 +222,7 @@
                 tools:ignore="ObsoleteLayoutParam" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/nameCasts1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -247,8 +233,8 @@
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="2sp"
                 android:minLines="2"
-                android:text="@string/robert_down"
-                android:textAppearance="@style/robert_down"
+                android:text="@string/robertDown"
+                android:textAppearance="@style/robertDown"
                 app:layout_constraintEnd_toEndOf="@+id/movie1"
                 app:layout_constraintStart_toStartOf="@+id/movie1"
                 app:layout_constraintTop_toBottomOf="@+id/movie1"
@@ -271,7 +257,7 @@
                 tools:ignore="ObsoleteLayoutParam" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/nameCasts2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -281,8 +267,8 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
                 android:minLines="2"
-                android:text="@string/chris_evans"
-                android:textAppearance="@style/robert_down"
+                android:text="@string/chrisEvans"
+                android:textAppearance="@style/robertDown"
                 app:layout_constraintEnd_toEndOf="@+id/movie2"
                 app:layout_constraintStart_toStartOf="@+id/movie2"
                 app:layout_constraintTop_toBottomOf="@+id/movie2"
@@ -304,9 +290,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/heading"
                 tools:ignore="ObsoleteLayoutParam" />
 
-
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/nameCasts3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -317,13 +302,12 @@
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="2sp"
                 android:minLines="2"
-                android:text="@string/robert_down"
-                android:textAppearance="@style/robert_down"
+                android:text="@string/robertDown"
+                android:textAppearance="@style/robertDown"
                 app:layout_constraintEnd_toEndOf="@+id/movie3"
                 app:layout_constraintStart_toStartOf="@+id/movie3"
                 app:layout_constraintTop_toBottomOf="@+id/movie3"
                 tools:ignore="ObsoleteLayoutParam" />
-
 
             <View
                 android:id="@+id/movie4"
@@ -343,11 +327,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/movie3"
                 app:layout_constraintTop_toBottomOf="@+id/heading"
-
                 tools:ignore="ObsoleteLayoutParam" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/nameCasts4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -358,16 +341,14 @@
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="2sp"
                 android:minLines="2"
-                android:text="@string/robert_down"
-                android:textAppearance="@style/robert_down"
+                android:text="@string/robertDown"
+                android:textAppearance="@style/robertDown"
                 app:layout_constraintEnd_toEndOf="@+id/movie4"
                 app:layout_constraintStart_toStartOf="@+id/movie4"
                 app:layout_constraintTop_toBottomOf="@+id/movie4"
                 tools:ignore="ObsoleteLayoutParam" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

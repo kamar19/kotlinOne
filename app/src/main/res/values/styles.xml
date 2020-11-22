@@ -5,7 +5,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
 
     <style name="AppTheme0" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -14,7 +13,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
 
     <style name="name">
         <item name="android:textSize">40sp</item>
@@ -26,7 +24,7 @@
         <item name="android:shadowRadius">12</item>
     </style>
 
-    <style name="some_id">
+    <style name="someId">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
@@ -42,7 +40,6 @@
         <item name="colorControlActivated">#FF3466</item>
     </style>
 
-
     <style name="styleStoryLine">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#ECECEC</item>
@@ -54,10 +51,10 @@
 
     <style name="styleStoryLineContent">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#FFFFFF </item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
-    <style name="after_the_d">
+    <style name="afterTheD">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
@@ -72,10 +69,9 @@
         <item name="android:shadowRadius">12</item>
     </style>
 
-    <style name="robert_down">
+    <style name="robertDown">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#D8D8D8</item>
     </style>
-
 
 </resources>

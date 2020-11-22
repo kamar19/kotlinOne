@@ -1,17 +1,12 @@
-<shape xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:ignore="ExtraText"
-    android:shape="rectangle" >
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:shape="rectangle"
+    tools:ignore="ExtraText">
     <gradient
         android:angle="90"
-        android:endColor="#00ffffff"
         android:centerColor="#00ffffff"
+        android:endColor="#00ffffff"
         android:startColor="#aa000000"
         android:type="linear">
-
     </gradient>
-
-
-
-
 </shape>
