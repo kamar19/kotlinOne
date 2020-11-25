@@ -74,4 +74,25 @@
         <item name="android:textColor">#D8D8D8</item>
     </style>
 
+    <style name="fmlStyleWarszawaPo">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="fmlStyleSomeId">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="fmlStyleTag">
+
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">#FF3466</item>
+    </style>
+
+    <style name="fmlStyleTextViewMin">
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">#565665</item>
+    </style>
+
 </resources>
