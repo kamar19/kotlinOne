@@ -22,5 +22,5 @@
     <string name="fmlSomeId">13+</string>
     <string name="fmlTag">Action, Adventure, Drama</string>
     <string name="fmlTextViewMin">137 min</string>
-
+        <string name="fmlNameMovie">Avengers: End Game</string>
 </resources>
