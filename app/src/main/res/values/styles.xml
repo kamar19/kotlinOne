@@ -40,8 +40,6 @@
         <item name="colorControlActivated">#FF3466</item>
     </style>
 
-
-
     <style name="styleStoryLine">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#ECECEC</item>
@@ -90,17 +88,14 @@
         <item name="android:textSize">8sp</item>
         <item name="android:textColor">#FF3466</item>
     </style>
+
     <style name="fmlStyleTextViewMin">
         <item name="android:textSize">8sp</item>
         <item name="android:textColor">#565665</item>
     </style>
 
     <style name="fmlStyleNameMovie">
-
-        <item name="android:textSize">
-            14sp
-        </item>
-
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="fmlRatingBar" parent="Theme.AppCompat">
@@ -113,14 +108,12 @@
         <item name="android:textColor">#6D6D80</item>
     </style>
 
-        <style name="fmlCustomRatingBar" parent="@android:style/Widget.RatingBar">
-            <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
-            <item name="android:minHeight">8dp</item>
-            <item name="minHeight">8dp</item>
-            <item name="maxHeight">8dp</item>
-            <item name="android:maxHeight">8dp</item>
-        </style>
-
-
+    <style name="fmlCustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
+        <item name="android:minHeight">8dp</item>
+        <item name="minHeight">8dp</item>
+        <item name="maxHeight">8dp</item>
+        <item name="android:maxHeight">8dp</item>
+    </style>
 
 </resources>
