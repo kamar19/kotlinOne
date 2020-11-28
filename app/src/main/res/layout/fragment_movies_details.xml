@@ -149,8 +149,6 @@
                 android:layout_marginEnd="16dp"
                 android:numStars="5"
                 android:rating="4"
-                android:scaleX=".5"
-                android:scaleY=".5"
                 android:stepSize="1"
                 android:textAppearance="@style/tag"
                 android:theme="@style/MyRatingBar"

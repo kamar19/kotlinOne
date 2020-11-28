@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,7 +28,6 @@
                 app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath10"
                 tools:ignore="MissingConstraints" />
 
-
             <View
                 android:id="@+id/fmlMainBackGround"
                 android:layout_width="match_parent"
@@ -35,11 +35,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/bg_botton"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
-
-
+                tools:ignore="MissingConstraints" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/fmlGuidelinePath10"
@@ -53,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.18" />
+                app:layout_constraintGuide_percent="0.16" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/fmlGuidelinePath50"
@@ -62,13 +58,6 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.50" />
 
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/fmlguidelineCenter25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.25" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/fmlguidelineCenter50"
@@ -116,7 +105,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="27dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="22dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/fml_bg_move"
                 app:layout_constraintBottom_toBottomOf="@id/fmlGuidelinePath50"
@@ -126,37 +115,23 @@
                 tools:ignore="MissingConstraints" />
 
             <ImageView
-                android:id="@+id/fmlImageViewMovie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-
-                android:layout_marginStart="2dp"
-                android:layout_marginBottom="48dp"
-                android:background="@drawable/movie_movies_list"
-                android:contentDescription="@string/todo"
-                android:scaleType="fitStart"
-                app:layout_constraintBottom_toBottomOf="@id/fmlGuidelinePath50"
-                app:layout_constraintEnd_toEndOf="@+id/fmlBackGroundMovie"
-                app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
-                app:layout_constraintTop_toTopOf="@+id/fmlBackGroundMovie"
-                tools:ignore="MissingConstraints" />
-
-            <View
-                android:id="@+id/fmlMask"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/fmlMovieOrig"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="2dp"
-
-                android:foreground="@drawable/fml_mask"
-                app:layout_constraintBottom_toBottomOf="@id/fmlImageViewMovie"
-                app:layout_constraintEnd_toEndOf="@+id/fmlImageViewMovie"
-                app:layout_constraintStart_toStartOf="@+id/fmlImageViewMovie"
+                android:layout_marginBottom="48dp"
+                android:contentDescription="@string/todo"
+                android:foreground="@drawable/mask"
+                android:scaleType="fitStart"
+                android:src="@drawable/movie_orig"
+                app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
+                app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
+                app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
                 app:layout_constraintTop_toTopOf="@+id/fmlBackGroundMovie"
                 tools:ignore="MissingConstraints,UnusedAttribute" />
 
@@ -172,7 +147,7 @@
                 android:alpha="0.9"
                 android:background="@drawable/fml_rectangle"
                 app:layout_constraintBottom_toTopOf="@+id/fmlGuidelinePath20"
-                app:layout_constraintStart_toStartOf="@+id/fmlImageViewMovie"
+                app:layout_constraintStart_toStartOf="@+id/fmlMovieOrig"
                 app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath20"
                 tools:ignore="MissingConstraints" />
 
@@ -201,13 +176,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="13dp"
-                android:layout_marginEnd="6dp"
+                android:layout_marginEnd="11dp"
                 android:alpha="0.75"
                 android:background="@drawable/like"
                 android:contentDescription="@string/todo"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toTopOf="@+id/fmlGuidelinePath20"
-                app:layout_constraintEnd_toEndOf="@+id/fmlImageViewMovie"
+                app:layout_constraintEnd_toEndOf="@+id/fmlBackGroundMovie"
+
                 app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath20"
                 tools:ignore="MissingConstraints" />
 
@@ -215,7 +191,7 @@
             <TextView
                 android:id="@+id/fmlTextViewMin"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="12dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
@@ -239,32 +215,32 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center_vertical"
-                android:lineSpacingExtra="4sp"
+                android:lineSpacingExtra="3sp"
                 android:text="@string/fmlNameMovie"
                 android:textAppearance="@style/fmlStyleNameMovie"
                 android:textColor="@color/colorPath"
                 app:layout_constraintBottom_toTopOf="@+id/fmlTextViewMin"
                 app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie"
-
                 tools:ignore="MissingConstraints" />
 
             <RatingBar
                 android:id="@+id/fmlRatingBar"
-                android:layout_width="245dp"
-                android:layout_height="41dp"
+                style="@style/fmlCustomRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginBottom="10dp"
                 android:numStars="5"
                 android:rating="4"
-                android:scaleX=".2"
-                android:scaleY=".2"
+                android:scaleX=".7"
+                android:scaleY=".7"
                 android:stepSize="1"
                 android:textAppearance="@style/tag"
-                android:theme="@style/MyRatingBar"
+                android:theme="@style/fmlCustomRatingBar"
                 android:transformPivotX="0dp"
-                android:transformPivotY="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/fmlNameMovie"
+                android:transformPivotY="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fmlMovieOrig"
                 app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie" />
-
 
             <TextView
                 android:id="@+id/fmlTag"
@@ -274,16 +250,39 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="3sp"
                 android:text="@string/fmlTag"
-                android:textAppearance="@style/tag"
+                android:textAppearance="@style/fmlStyleTag"
                 app:layout_constraintBottom_toTopOf="@+id/fmlRatingBar"
                 app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
                 tools:ignore="MissingConstraints" />
 
+            <TextView
+                android:id="@+id/textViewReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/textViewReview"
+                android:textAllCaps="true"
+                android:theme="@style/fmlStyleReview"
+                app:layout_constraintBottom_toBottomOf="@+id/fmlMovieOrig"
+                app:layout_constraintStart_toEndOf="@+id/fmlRatingBar"
+                app:layout_constraintTop_toBottomOf="@+id/fmlTag"
+                tools:ignore="UnknownIdInLayout" />
 
-
+            <Button
+                android:id="@+id/fml_button"
+                android:layout_width="84dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/fml_button"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="7dp"
+                tools:ignore="MissingConstraints" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
