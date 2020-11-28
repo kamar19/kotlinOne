@@ -8,27 +8,33 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 
-interface SomeFragmentClickListener {
-    fun onChangeFragment()
-}
 
 class FragmentMoviesList() : Fragment() {
     private var someFragmentClickListener: SomeFragmentClickListener? = null
+    private var buttonChangeFragment: Button? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
-        view?.findViewById<Button>(R.id.fml_button)?.apply {
-            setOnClickListener {
-                //меняем акивность
-                someFragmentClickListener?.onChangeFragment()
-            }
+//    ): View? {
+//        val view = inflater.inflate(R.layout.fragment_movies_list, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_movies_list, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        buttonChangeFragment = view.findViewById<Button>(R.id.fml_button).apply {
+            setOnClickListener { someFragmentClickListener?.onChangeFragment() }
         }
-        return view
+//        view?.findViewById<Button>(R.id.fml_button)?.apply {
+//            setOnClickListener {
+//                //меняем активность
+//                someFragmentClickListener?.onChangeFragment()
+//            }
+
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,12 +44,51 @@ class FragmentMoviesList() : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        someFragmentClickListener=null
+        someFragmentClickListener = null
     }
+
+    fun setListener(l: SomeFragmentClickListener) {
+        someFragmentClickListener = l
+    }
+
+    interface SomeFragmentClickListener {
+        fun onChangeFragment()
+    }
+
 }
-
-
-//    var fragmentClickLestener: FragmentClickLestener
+//
+//class WS03SolutionFragment : Fragment() {
+//
+//    private var btnIncrement: Button? = null
+//    private var btnChangeBackground: Button? = null
+//    private var listener: ClickListener? = null
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? = inflater.inflate(R.layout.fragment_root_ws_03, container, false)
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        btnIncrement = view.findViewById<Button>(R.id.btn_increment).apply {
+//            setOnClickListener { listener?.increaseValue() }
+//        }
+//        btnChangeBackground = view.findViewById<Button>(R.id.btn_change_background).apply {
+//            setOnClickListener { listener?.changeBackground() }
+//        }
+//
+//    }
+//
+//    fun setListener(l: ClickListener) {
+//        listener = l
+//    }
+//
+//    interface ClickListener {
+//        fun increaseValue()
+//        fun changeBackground()
+//    }
+//}
 
 
 
