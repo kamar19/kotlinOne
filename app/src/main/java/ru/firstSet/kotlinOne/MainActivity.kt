@@ -15,8 +15,6 @@ class MainActivity : AppCompatActivity(), FragmentMoviesList.SomeFragmentClickLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        if (savedInstanceState==null){
-
         someFragment = rootFragment
         someFragment.apply {
             supportFragmentManager.beginTransaction()
@@ -24,32 +22,25 @@ class MainActivity : AppCompatActivity(), FragmentMoviesList.SomeFragmentClickLi
                 .addToBackStack(FRAGMENT_TAG_MOVIES_LIST)
                 .commit()
         }
-//        } else {
-//            supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MOVIES_LIST)
-//
-//        }
-
-
     }
 
     override fun onChangeFragment() {
-        someFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MOVIES_DETAILS)
-        if (someFragment == null) {
-            someFragment = secondFragment
-            someFragment.apply {
-                supportFragmentManager.beginTransaction()
-                    .add(R.id.frameLayoutContainer, secondFragment, FRAGMENT_TAG_MOVIES_DETAILS)
-                    .addToBackStack(FRAGMENT_TAG_MOVIES_DETAILS)
-                    .commit()
-            }
-
-        } else {
-            supportFragmentManager.beginTransaction()
-                .show(secondFragment)
-                .hide(rootFragment)
-                .commit()
-        }
-
+//        someFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MOVIES_DETAILS)
+//        if (someFragment == null) {
+//            someFragment = secondFragment
+//            someFragment.apply {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayoutContainer, secondFragment)
+            .commit()
+//            }
+//        } else {
+//            supportFragmentManager.beginTransaction()
+//                .show(secondFragment)
+//                .commit()
+//        }
+//        supportFragmentManager.beginTransaction()
+//            .remove(rootFragment)
+//            .commit()
     }
 
     companion object {
@@ -58,22 +49,28 @@ class MainActivity : AppCompatActivity(), FragmentMoviesList.SomeFragmentClickLi
     }
 
     override fun onChangeSecondFragment() {
-        someFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MOVIES_LIST)
-        if (someFragment == null) {
-            someFragment = rootFragment
-            someFragment.apply {
-                supportFragmentManager.beginTransaction()
-                    .add(R.id.frameLayoutContainer, rootFragment, FRAGMENT_TAG_MOVIES_LIST)
-                    .addToBackStack(FRAGMENT_TAG_MOVIES_LIST)
-                    .commit()
-            }
-        } else {
-            supportFragmentManager.beginTransaction()
-                .hide(secondFragment)
-                .show(rootFragment)
-                .commit()
-        }
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayoutContainer, rootFragment)
+            .commit()
+
+//        someFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MOVIES_LIST)
+//        if (someFragment == null) {
+//            someFragment = rootFragment
+//            someFragment.apply {
+//                supportFragmentManager.beginTransaction()
+//                    .add(R.id.frameLayoutContainer, rootFragment, FRAGMENT_TAG_MOVIES_LIST)
+//                    .addToBackStack(FRAGMENT_TAG_MOVIES_LIST)
+//                    .commit()
+//            }
+//        } else {
+//            supportFragmentManager.beginTransaction()
+//                .show(rootFragment)
+//                .commit()
+//        }
+//        supportFragmentManager.beginTransaction()
+//            .remove(secondFragment)
+//            .commit()
 
 
 //        supportFragmentManager.beginTransaction()
@@ -81,30 +78,5 @@ class MainActivity : AppCompatActivity(), FragmentMoviesList.SomeFragmentClickLi
 //            .show(rootFragment)
 //            .commit()
     }
-}
 
-//class WS03SolutionActivity : AppCompatActivity(), WS03SolutionFragment.ClickListener {
-//
-//    private val rootFragment = WS03SolutionFragment().apply { setListener(this@WS03SolutionActivity) }
-//    private val secondFragment = WS03SecondFragment()
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_ws02_ws03)
-//
-//        supportFragmentManager.beginTransaction()
-//            .apply {
-//                add(R.id.persistent_container, rootFragment)
-//                add(R.id.fragments_container, secondFragment)
-//                commit()
-//            }
-//    }
-//
-//    override fun increaseValue() {
-//        secondFragment.increaseValue()
-//    }
-//
-//    override fun changeBackground() {
-//        secondFragment.changeBackground()
-//    }
-//}
+}

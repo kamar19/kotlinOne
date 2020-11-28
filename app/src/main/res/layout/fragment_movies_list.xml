@@ -109,14 +109,13 @@
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/fml_bg_move"
                 app:layout_constraintBottom_toBottomOf="@id/fmlGuidelinePath50"
-                app:layout_constraintEnd_toStartOf="@+id/fmlguidelineCenter50"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fmlWarszawaPo"
                 tools:ignore="MissingConstraints" />
 
             <ImageView
                 android:id="@+id/fmlMovieOrig"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -130,7 +129,6 @@
                 android:scaleType="fitStart"
                 android:src="@drawable/movie_orig"
                 app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
-                app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
                 app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
                 app:layout_constraintTop_toTopOf="@+id/fmlBackGroundMovie"
                 tools:ignore="MissingConstraints,UnusedAttribute" />
@@ -175,18 +173,17 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="13dp"
+                android:layout_marginStart="144dp"
                 android:layout_marginEnd="11dp"
                 android:alpha="0.75"
                 android:background="@drawable/like"
                 android:contentDescription="@string/todo"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toTopOf="@+id/fmlGuidelinePath20"
-                app:layout_constraintEnd_toEndOf="@+id/fmlBackGroundMovie"
-
+                app:layout_constraintStart_toStartOf="@+id/fmlMovieOrig"
+                app:layout_constraintEnd_toEndOf="@+id/fmlMovieOrig"
                 app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath20"
                 tools:ignore="MissingConstraints" />
-
 
             <TextView
                 android:id="@+id/fmlTextViewMin"
