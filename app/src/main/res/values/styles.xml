@@ -40,6 +40,8 @@
         <item name="colorControlActivated">#FF3466</item>
     </style>
 
+
+
     <style name="styleStoryLine">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#ECECEC</item>

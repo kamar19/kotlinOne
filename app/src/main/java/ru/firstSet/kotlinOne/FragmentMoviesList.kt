@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 
 class FragmentMoviesList() : Fragment() {
     private var someFragmentClickListener: SomeFragmentClickListener? = null
-    private var buttonChangeFragment: Button? = null
+    private var fmlCombinedShape: View? = null
 
 
     override fun onCreateView(
@@ -24,7 +24,7 @@ class FragmentMoviesList() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        buttonChangeFragment = view.findViewById<Button>(R.id.fml_button).apply {
+        fmlCombinedShape = view.findViewById<View>(R.id.fmlCombinedShape).apply {
             setOnClickListener { someFragmentClickListener?.onChangeFragment() }
         }
 //        view?.findViewById<Button>(R.id.fml_button)?.apply {

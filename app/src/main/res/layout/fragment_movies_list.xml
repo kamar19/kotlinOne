@@ -274,17 +274,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/fmlTag"
                 tools:ignore="UnknownIdInLayout" />
 
-            <Button
-                android:id="@+id/fml_button"
-                android:layout_width="84dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="16dp"
-                android:text="@string/fml_button"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="7dp"
-                tools:ignore="MissingConstraints" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
