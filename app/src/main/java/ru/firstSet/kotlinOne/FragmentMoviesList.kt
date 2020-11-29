@@ -23,12 +23,11 @@ class FragmentMoviesList() : Fragment() {
         fmlConstraintLayoutList =
             view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
                 setOnClickListener {
-                    activity?.supportFragmentManager?.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
-                        .let {
-                            activity?.supportFragmentManager?.beginTransaction()
-                                ?.add(R.id.frameLayoutContainer, FragmentMoviesDetails())
-                                ?.addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
-                                ?.commit()
+                    activity?.let{ it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
+                        it.supportFragmentManager.beginTransaction()
+                                .add(R.id.frameLayoutContainer, FragmentMoviesDetails())
+                                .addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
+                                .commit()
                         }
                 }
             }
