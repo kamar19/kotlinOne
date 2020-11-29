@@ -20,18 +20,3 @@ class MainActivity : AppCompatActivity() {
         const val FRAGMENT_TAG_MOVIES_DETAILS = "MoviesDetails"
     }
 }
-
-
-//    override fun onChangeFragment() {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.frameLayoutContainer, secondFragment, FRAGMENT_TAG_MOVIES_DETAILS)
-//            .commit()
-//    }
-//
-//    override fun onChangeSecondFragment() {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.frameLayoutContainer, rootFragment, FRAGMENT_TAG_MOVIES_LIST)
-//            .commit()
-//    }
-
-
