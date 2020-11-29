@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 
 class FragmentMoviesList() : Fragment() {
-    private var someFragmentClickListener: SomeFragmentClickListener? = null
-    private var fmlCombinedShape: View? = null
+    private var fmlConstraintLayoutList: ConstraintLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,30 +20,16 @@ class FragmentMoviesList() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fmlCombinedShape = view.findViewById<View>(R.id.fmlCombinedShape).apply {
-            setOnClickListener { someFragmentClickListener?.onChangeFragment() }
-        }
+        fmlConstraintLayoutList =
+            view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
+                setOnClickListener {
+                    activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.frameLayoutContainer, FragmentMoviesDetails())
+                        ?.addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
+                        ?.commit()
+                }
+            }
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is SomeFragmentClickListener)
-            someFragmentClickListener = context
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        someFragmentClickListener = null
-    }
-
-    fun setListener(l: SomeFragmentClickListener) {
-        someFragmentClickListener = l
-    }
-
-    interface SomeFragmentClickListener {
-        fun onChangeFragment()
-    }
-
 }
 
 

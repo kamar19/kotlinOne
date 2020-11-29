@@ -17,33 +17,6 @@
             android:layout_height="wrap_content"
             tools:context=".MovieDetailsActivity">
 
-            <View
-                android:id="@+id/fmlBgMoveList"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/bg"
-                app:layout_constraintBottom_toTopOf="@+id/fmlGuidelinePath10"
-                app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath10"
-                tools:ignore="MissingConstraints" />
-
-            <View
-                android:id="@+id/fmlMainBackGround"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/bg_botton"
-                tools:ignore="MissingConstraints" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/fmlGuidelinePath10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.08" />
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/fmlGuidelinePath20"
                 android:layout_width="wrap_content"
@@ -58,83 +31,96 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.50" />
 
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/fmlguidelineCenter50"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fmlConstraintLayoutList"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5" />
-
-
-            <View
-                android:id="@+id/fmlCombinedShape"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/combined_shape"
-                app:layout_constraintBottom_toTopOf="@+id/fmlGuidelinePath10"
+                android:layout_height="40dp"
+                android:layout_marginTop="44dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath10"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:context=".MovieDetailsActivity"
+                tools:ignore="MissingConstraints">
 
-            <TextView
-                android:id="@+id/fmlWarszawaPo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:gravity="center_vertical"
-                android:lineSpacingExtra="4sp"
-                android:text="@string/fmlWarszawaPo"
-                android:textAppearance="@style/fmlStyleWarszawaPo"
-                app:layout_constraintBottom_toTopOf="@+id/fmlGuidelinePath10"
-                app:layout_constraintStart_toEndOf="@+id/fmlCombinedShape"
-                app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath10"
-                tools:ignore="MissingConstraints" />
+                <View
+                    android:id="@+id/fmlBgMoveList"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/bg"
+                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
+                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
+                    tools:ignore="MissingConstraints" />
+
+                <View
+                    android:id="@+id/fmlCombinedShape"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/combined_shape"
+                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/fmlTextViewList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="4sp"
+                    android:text="@string/fmlWarszawaPo"
+                    android:textAppearance="@style/fmlStyleWarszawaPo"
+                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
+                    app:layout_constraintStart_toEndOf="@+id/fmlCombinedShape"
+                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
+                    tools:ignore="MissingConstraints" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:id="@+id/fmlBackGroundMovie"
-                android:layout_width="0dp"
+                android:layout_width="170dp"
                 android:layout_height="0dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="-2dp"
-
+                android:layout_alignParentBottom="true"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="27dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/fml_bg_move"
                 app:layout_constraintBottom_toBottomOf="@id/fmlGuidelinePath50"
                 app:layout_constraintEnd_toEndOf="@+id/fmlMovieOrig"
-
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fmlWarszawaPo"
+                app:layout_constraintTop_toBottomOf="@+id/fmlConstraintLayoutList"
                 tools:ignore="MissingConstraints" />
 
             <ImageView
                 android:id="@+id/fmlMovieOrig"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="2dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="2dp"
                 android:layout_marginBottom="48dp"
                 android:contentDescription="@string/todo"
                 android:foreground="@drawable/mask"
-                android:scaleType="fitStart"
                 android:src="@drawable/movie_orig"
                 app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
-                app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
+                app:layout_constraintEnd_toEndOf="@+id/fmlBackGroundMovie"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/fmlBackGroundMovie"
-                app:layout_constraintEnd_toStartOf=""
                 tools:ignore="MissingConstraints,UnusedAttribute" />
 
             <View

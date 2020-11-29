@@ -20,10 +20,11 @@
             <ImageView
                 android:id="@+id/poster"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:contentDescription="@string/todo"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/orig"
+                app:layout_constraintBottom_toTopOf="@id/TextViewName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -92,6 +93,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/textViewTegLine"
+                android:textAlignment="textStart"
                 android:textAppearance="@style/tag"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +170,7 @@
                 android:textColor="@color/colorTextGrey"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineCenter2"
-                app:layout_constraintStart_toStartOf="@+id/guidelineCenter2"
+                app:layout_constraintStart_toEndOf="@+id/ratingBar"
                 app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine2" />
 
             <TextView

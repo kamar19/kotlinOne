@@ -20,5 +20,5 @@
     <string name="fmlTag">Action, Adventure, Drama</string>
     <string name="fmlTextViewMin">137 min</string>
     <string name="fmlNameMovie">Avengers: End Game</string>
-    <string name="fml_button">button</string>
+    <string name="oveList">button</string>
 </resources>
