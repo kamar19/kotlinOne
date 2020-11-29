@@ -14,4 +14,11 @@
     <string name="markRuffal">Mark \nRuffalo</string>
     <string name="chrisHemsworth">Chris \nHemsworth</string>
     <string name="todo">TODO</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fmlWarszawaPo">Movies list</string>
+    <string name="fmlSomeId">13+</string>
+    <string name="fmlTag">Action, Adventure, Drama</string>
+    <string name="fmlTextViewMin">137 min</string>
+    <string name="fmlNameMovie">Avengers: End Game</string>
+    <string name="oveList">button</string>
 </resources>

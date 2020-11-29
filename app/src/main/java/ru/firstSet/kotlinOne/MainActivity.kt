@@ -1,20 +1,22 @@
 package ru.firstSet.kotlinOne
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import android.view.View
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val textView: TextView = findViewById(R.id.activityMainCenterTextView)
-        textView.setOnClickListener{ moveToNextScreen()}
+        supportFragmentManager.beginTransaction()
+            .add(R.id.frameLayoutContainer, FragmentMoviesList())
+            .addToBackStack(FRAGMENT_TAG_MOVIES_LIST)
+            .commit()
     }
 
-    private fun moveToNextScreen() {
-        val intent=Intent(this,MovieDetailsActivity::class.java)
-        startActivity(intent)
+    companion object {
+        const val FRAGMENT_TAG_MOVIES_LIST = "MoviesList"
+        const val FRAGMENT_TAG_MOVIES_DETAILS = "MoviesDetails"
     }
 }

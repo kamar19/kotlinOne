@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KotlinOne">
-        <activity android:name=".MovieDetailsActivity"></activity>
-        <activity android:name="ru.firstSet.kotlinOne.MainActivity">
+        <activity android:name=".FragmentMoviesDetails"></activity>
+        <activity android:name=".MovieDetailsActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
