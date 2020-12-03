@@ -28,17 +28,29 @@ class MoviesViewAdapter(context: Context, var movieList: List<Movie>) :
 
     class MoviesViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        private val textViewSomeId: TextView = itemView.findViewById(R.id.fmlSomeId)
-        private val textViewMinuteTime: TextView = itemView.findViewById(R.id.fmlTextViewMinuteTime)
-        private val textViewNameMovie: TextView = itemView.findViewById(R.id.fmlNameMovie)
-        private val textViewTag: TextView = itemView.findViewById(R.id.fmlTag)
-        private val textViewReview: TextView = itemView.findViewById(R.id.fmlTextViewReview)
-        private val imageViewMovieOrig: ImageView = itemView.findViewById(R.id.fmlIsLike)
-        private val imageViewLike: ImageView = itemView.findViewById(R.id.fmlNameImageViewOrig)
-        private val ratingBarRating: RatingBar = itemView.findViewById(R.id.fmlRatingBar)
+        private val textViewSomeId: TextView
+        private val textViewMinuteTime: TextView
+        private val textViewNameMovie: TextView
+        private val textViewTag: TextView
+        private val textViewReview: TextView
+        private val imageViewMovieOrig: ImageView
+        private val imageViewLike: ImageView
+        private val ratingBarRating: RatingBar
+
+        init {
+            this.textViewSomeId = itemView.findViewById(R.id.fmlSomeId)
+            this.textViewMinuteTime = itemView.findViewById(R.id.fmlTextViewMinuteTime)
+            this.textViewNameMovie = itemView.findViewById(R.id.fmlNameMovie)
+            this.textViewTag= itemView.findViewById(R.id.fmlTag)
+            this.textViewReview = itemView.findViewById(R.id.fmlTextViewReview)
+            this.imageViewMovieOrig = itemView.findViewById(R.id.fmlNameImageViewOrig)
+            this.imageViewLike = itemView.findViewById(R.id.fmlIsLike)
+            this.ratingBarRating = itemView.findViewById(R.id.fmlRatingBar)
+        }
 
         fun bind(movie: Movie) {
             this.imageViewMovieOrig.setImageResource(movie.nameImageView!!)
+
             if (movie.isLike) this.imageViewLike.setImageResource(R.drawable.like_red)
             else imageViewLike.setImageResource(R.drawable.like)
             this.ratingBarRating.rating = movie.ratingBarRating!!.toFloat()
