@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackgroud">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".MovieDetailsActivity"
+            tools:ignore="MissingConstraints">
+
+            <View
+                android:id="@+id/fmlBackGroundMovie"
+                android:layout_width="170dp"
+                android:layout_height="296dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/fml_bg_move"
+                app:layout_constraintEnd_toEndOf="@+id/fmlNameImageViewOrig"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/fmlNameImageViewOrig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="48dp"
+                android:contentDescription="@string/todo"
+                android:foreground="@drawable/mask"
+                android:src="@drawable/avengers_end_game"
+                app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
+                app:layout_constraintEnd_toEndOf="@+id/fmlBackGroundMovie"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fmlBackGroundMovie"
+                tools:ignore="MissingConstraints,UnusedAttribute" />
+
+            <View
+                android:id="@+id/fmlRectangle"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:alpha="0.9"
+                android:background="@drawable/fml_rectangle"
+                app:layout_constraintStart_toStartOf="@+id/fmlNameImageViewOrig"
+                app:layout_constraintTop_toTopOf="@+id/fmlNameImageViewOrig"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="105dp" />
+
+            <TextView
+                android:id="@+id/fmlSomeId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/fmlSomeId"
+                android:textAppearance="@style/fmlStyleSomeId"
+                app:layout_constraintBottom_toBottomOf="@+id/fmlRectangle"
+                app:layout_constraintEnd_toEndOf="@+id/fmlRectangle"
+                app:layout_constraintStart_toStartOf="@+id/fmlRectangle"
+                app:layout_constraintTop_toTopOf="@+id/fmlRectangle"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/fmlIsLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="6dp"
+                android:alpha="0.75"
+                android:background="@drawable/like"
+                android:contentDescription="@string/todo"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="@+id/fmlNameImageViewOrig"
+                app:layout_constraintTop_toTopOf="@+id/fmlNameImageViewOrig"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="110dp" />
+
+            <TextView
+                android:id="@+id/fmlTextViewMinuteTime"
+                android:layout_width="0dp"
+                android:layout_height="12dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/fmlTextViewMin"
+                android:textAppearance="@style/fmlStyleTextViewMin"
+                app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
+                app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
+                app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/fmlNameMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/fmlNameMovie"
+                android:textAppearance="@style/fmlStyleNameMovie"
+                android:textColor="@color/colorPath"
+                app:layout_constraintBottom_toTopOf="@+id/fmlTextViewMinuteTime"
+                app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie"
+                tools:ignore="MissingConstraints" />
+
+            <RatingBar
+                android:id="@+id/fmlRatingBar"
+                style="@style/fmlCustomRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="10dp"
+                android:numStars="5"
+                android:rating="4"
+                android:scaleX=".7"
+                android:scaleY=".7"
+                android:stepSize="1"
+                android:textAppearance="@style/tag"
+                android:theme="@style/fmlCustomRatingBar"
+                android:transformPivotX="0dp"
+                android:transformPivotY="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fmlNameImageViewOrig"
+                app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie" />
+
+            <TextView
+                android:id="@+id/fmlTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/fmlTag"
+                android:textAppearance="@style/fmlStyleTag"
+                app:layout_constraintBottom_toTopOf="@+id/fmlRatingBar"
+                app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/fmlTextViewReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/textViewReview"
+                android:textAllCaps="true"
+                android:theme="@style/fmlStyleReview"
+                app:layout_constraintBottom_toBottomOf="@+id/fmlNameImageViewOrig"
+                app:layout_constraintStart_toEndOf="@+id/fmlRatingBar"
+                app:layout_constraintTop_toBottomOf="@+id/fmlTag"
+                tools:ignore="UnknownIdInLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
