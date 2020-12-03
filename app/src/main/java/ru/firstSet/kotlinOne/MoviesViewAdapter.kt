@@ -1,16 +1,20 @@
 package ru.firstSet.kotlinOne
 
 import android.content.Context
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class MoviesViewAdapter(context: Context, var moviesList: List<Movie>) :
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
-    private val inflater : LayoutInflater
+    private val inflater: LayoutInflater
     private val moviesLists: List<Movie>
+
     init {
         inflater = LayoutInflater.from(context)
         moviesLists = moviesList
@@ -18,11 +22,8 @@ class MoviesViewAdapter(context: Context, var moviesList: List<Movie>) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val view: View =  inflater.inflate(R.layout.view_holder_movie, parent, false)
-//        val view: View =  inflater.inflate(R.layout.other, parent, false)
+        val view: View = inflater.inflate(R.layout.view_holder_movie, parent, false)
         return MoviesViewHolder(view)
-
-//        return MoviesViewHolder(view)
     }
 
 
@@ -36,17 +37,24 @@ class MoviesViewAdapter(context: Context, var moviesList: List<Movie>) :
     fun getItem(position: Int): Movie = moviesLists[position]
 
 
-    class MoviesViewHolder( itemView:View) :
+    class MoviesViewHolder(itemView: View) :
 //    RecyclerView.ViewHolder(inflater.inflate(R.layout.view_holder_movie, parent, false)) {
         RecyclerView.ViewHolder(itemView) {
+
         private val textViewSomeId: TextView
         private val textViewMinuteTime: TextView
         private val textViewNameMovie: TextView
         private val textViewTag: TextView
         private val textViewReview: TextView
-//    private var imageViewMovieOrig: ImageView?=null
-//    private var imageViewLike: ImageView?=null
-//    private var ratingBarRating: RatingBar?=null
+        private val imageViewMovieOrig: ImageView
+        private val imageViewLike: ImageView
+        private val ratingBarRating: RatingBar
+
+
+
+
+
+
 
         init {
             this.textViewSomeId = itemView.findViewById(R.id.fmlSomeId)
@@ -54,17 +62,17 @@ class MoviesViewAdapter(context: Context, var moviesList: List<Movie>) :
             this.textViewNameMovie = itemView.findViewById(R.id.fmlNameMovie)
             this.textViewTag = itemView.findViewById(R.id.fmlTag)
             this.textViewReview = itemView.findViewById(R.id.fmlTextViewReview)
-//        imageViewLike = itemView.findViewById(R.id.fmlIsLike)
-//        imageViewMovieOrig = itemView.findViewById(R.id.fmlNameImageViewOrig)
-//        ratingBarRating = itemView.findViewById(R.id.fmlRatingBar)
+            this.imageViewLike = itemView.findViewById(R.id.fmlIsLike)
+            this.imageViewMovieOrig = itemView.findViewById(R.id.fmlNameImageViewOrig)
+            this.ratingBarRating = itemView.findViewById(R.id.fmlRatingBar)
         }
 
 
         fun bind(movie: Movie) {
-//        imageViewMovieOrig?.setImageDrawable(Drawable.createFromPath(movie.nameImageView))
-//        if (movie.isLike) imageViewLike?.setImageDrawable(Drawable.createFromPath("like_red"))
-//        else imageViewLike?.setImageDrawable(Drawable.createFromPath("like"))
-//        ratingBarRating?.rating = movie.ratingBarRating!!.toFloat()
+            this.imageViewMovieOrig.setImageResource(movie.nameImageView!!)
+            if (movie.isLike) this.imageViewLike.setImageResource(R.drawable.like_red)
+            else imageViewLike.setImageResource(R.drawable.like)
+            this.ratingBarRating.rating = movie.ratingBarRating!!.toFloat()
             this.textViewSomeId.text = movie.someId
             this.textViewMinuteTime.text = movie.minuteTime
             this.textViewNameMovie.text = movie.nameMovie
