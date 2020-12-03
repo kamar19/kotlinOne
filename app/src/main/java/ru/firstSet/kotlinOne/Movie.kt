@@ -1,8 +1,5 @@
 package ru.firstSet.kotlinOne
 
-import android.widget.RatingBar
-import android.widget.TextView
-
 data class Movie(
     val nameImageView: Int? = null,
     val nameMovie: String? = null,

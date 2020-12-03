@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="11dp"
     android:background="@color/colorBackgroud">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,6 +12,13 @@
             android:layout_height="wrap_content"
             tools:context=".MovieDetailsActivity"
             tools:ignore="MissingConstraints">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/fmlGuidelinePath50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.50" />
 
             <View
                 android:id="@+id/fmlBackGroundMovie"
@@ -20,7 +28,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
                 android:background="@drawable/fml_bg_move"
+                app:layout_constraintBottom_toBottomOf="@id/fmlGuidelinePath50"
                 app:layout_constraintEnd_toEndOf="@+id/fmlNameImageViewOrig"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
