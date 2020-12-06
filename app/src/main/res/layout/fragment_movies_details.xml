@@ -18,7 +18,7 @@
             tools:context=".MovieDetailsActivity">
 
             <ImageView
-                android:id="@+id/poster"
+                android:id="@+id/fmdPoster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/todo"
@@ -34,10 +34,10 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/gradient_poster"
-                app:layout_constraintBottom_toBottomOf="@id/poster"
-                app:layout_constraintEnd_toEndOf="@id/poster"
-                app:layout_constraintStart_toStartOf="@id/poster"
-                app:layout_constraintTop_toTopOf="@id/poster"
+                app:layout_constraintBottom_toBottomOf="@id/fmdPoster"
+                app:layout_constraintEnd_toEndOf="@id/fmdPoster"
+                app:layout_constraintStart_toStartOf="@id/fmdPoster"
+                app:layout_constraintTop_toTopOf="@id/fmdPoster"
                 app:srcCompat="@drawable/orig"
                 tools:layout_editor_absoluteY="170dp" />
 
@@ -49,45 +49,45 @@
                 app:layout_constraintGuide_percent="0.5" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/fmlGuidelinePath10"
+                android:id="@+id/fmdGuidelinePath10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.1" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineHorizontalCenter2"
+                android:id="@+id/fmdGuidelineHorizontalCenter2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.4" />
 
             <ImageView
-                android:id="@+id/imageViewPath2"
+                android:id="@+id/fmdImageViewPath"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:contentDescription="@string/todo"
-                app:layout_constraintBottom_toTopOf="@+id/fmlGuidelinePath10"
-                app:layout_constraintEnd_toStartOf="@+id/fmlTextViewPath2"
+                app:layout_constraintBottom_toTopOf="@+id/fmdGuidelinePath10"
+                app:layout_constraintEnd_toStartOf="@+id/fmdTextViewPath"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath10"
+                app:layout_constraintTop_toTopOf="@+id/fmdGuidelinePath10"
                 app:srcCompat="@drawable/path" />
 
             <TextView
-                android:id="@+id/fmlTextViewPath2"
+                android:id="@+id/fmdTextViewPath"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:fontFamily="@font/roboto_condensed_light"
                 android:text="@string/pathBack"
                 android:textColor="@color/colorPath"
-                app:layout_constraintBottom_toTopOf="@+id/fmlGuidelinePath10"
-                app:layout_constraintStart_toEndOf="@+id/imageViewPath2"
-                app:layout_constraintTop_toTopOf="@+id/fmlGuidelinePath10" />
+                app:layout_constraintBottom_toTopOf="@+id/fmdGuidelinePath10"
+                app:layout_constraintStart_toEndOf="@+id/fmdImageViewPath"
+                app:layout_constraintTop_toTopOf="@+id/fmdGuidelinePath10" />
 
             <TextView
-                android:id="@+id/TextViewTegLine2"
+                android:id="@+id/fmdTextViewTeg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -113,12 +113,12 @@
                 android:text="@string/movieDetailsTextViewName"
                 android:textAppearance="@style/name"
                 android:textColor="@color/colorName"
-                app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCenter2"
-                app:layout_constraintTop_toTopOf="@+id/guidelineHorizontalCenter2"
+                app:layout_constraintBottom_toTopOf="@+id/fmdGuidelineHorizontalCenter2"
+                app:layout_constraintTop_toTopOf="@+id/fmdGuidelineHorizontalCenter2"
                 tools:targetApi="p" />
 
             <TextView
-                android:id="@+id/MovieDetailsTextViewSomeId"
+                android:id="@+id/fmdSomeId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -138,13 +138,13 @@
                 android:layout_height="24dp"
                 android:alpha="0.9"
                 android:background="@drawable/shape_rect"
-                app:layout_constraintBottom_toBottomOf="@+id/MovieDetailsTextViewSomeId"
-                app:layout_constraintEnd_toEndOf="@+id/MovieDetailsTextViewSomeId"
-                app:layout_constraintStart_toStartOf="@+id/MovieDetailsTextViewSomeId"
-                app:layout_constraintTop_toTopOf="@+id/MovieDetailsTextViewSomeId" />
+                app:layout_constraintBottom_toBottomOf="@+id/fmdSomeId"
+                app:layout_constraintEnd_toEndOf="@+id/fmdSomeId"
+                app:layout_constraintStart_toStartOf="@+id/fmdSomeId"
+                app:layout_constraintTop_toTopOf="@+id/fmdSomeId" />
 
             <RatingBar
-                android:id="@+id/ratingBar"
+                android:id="@+id/fmdRatingBar"
                 android:layout_width="241dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -159,10 +159,10 @@
                 android:transformPivotX="0dp"
                 android:transformPivotY="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine2" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdTextViewTeg" />
 
             <TextView
-                android:id="@+id/fmlTextViewReview"
+                android:id="@+id/fmdTextViewReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textViewReview"
@@ -170,8 +170,8 @@
                 android:textColor="@color/colorTextGrey"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineCenter2"
-                app:layout_constraintStart_toEndOf="@+id/ratingBar"
-                app:layout_constraintTop_toBottomOf="@+id/TextViewTegLine2" />
+                app:layout_constraintStart_toEndOf="@+id/fmdRatingBar"
+                app:layout_constraintTop_toBottomOf="@+id/fmdTextViewTeg" />
 
             <TextView
                 android:id="@+id/textViewStoryLine"
@@ -182,7 +182,7 @@
                 android:text="@string/textViewStoryLine"
                 android:textAppearance="@style/afterTheD"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdRatingBar" />
 
             <TextView
                 android:id="@+id/StyleStoryLineContent"

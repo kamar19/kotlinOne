@@ -1,6 +1,5 @@
 package ru.firstSet.kotlinOne
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +7,12 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ru.firstSet.kotlinOne.Data.Movie
 
-class MoviesViewAdapter(private val someClickListener: SomeInterfaceClickListener, val movieList: List<Movie>) :
+class MoviesViewAdapter(
+    private val someClickListener: SomeInterfaceClickListener,
+    var movieList: List<Movie>
+) :
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
         MoviesViewHolder(
@@ -23,10 +26,10 @@ class MoviesViewAdapter(private val someClickListener: SomeInterfaceClickListene
         }
     }
 
-
-
-
-
+    fun bindMovie(movieList: List<Movie>) {
+        this.movieList = movieList
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = movieList.size
 
@@ -57,9 +60,12 @@ class MoviesViewAdapter(private val someClickListener: SomeInterfaceClickListene
             this.textViewReview.text = movie.review
         }
     }
-interface SomeInterfaceClickListener {
-    fun onClick(id: Int)
+
+    interface SomeInterfaceClickListener {
+        fun onClick(id: Int)
+    }
 }
-}
+
+
 
 
