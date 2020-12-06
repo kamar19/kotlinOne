@@ -24,7 +24,7 @@
                 android:contentDescription="@string/todo"
                 android:scaleType="fitXY"
                 android:src="@drawable/orig"
-                app:layout_constraintBottom_toTopOf="@id/TextViewName"
+                app:layout_constraintBottom_toTopOf="@id/fmdMovieName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -97,10 +97,10 @@
                 android:textAppearance="@style/tag"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextViewName" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdMovieName" />
 
             <TextView
-                android:id="@+id/TextViewName"
+                android:id="@+id/fmdMovieName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -129,7 +129,7 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/movieDetailsTextViewSomeId"
                 android:textAppearance="@style/someId"
-                app:layout_constraintBottom_toTopOf="@+id/TextViewName"
+                app:layout_constraintBottom_toTopOf="@+id/fmdMovieName"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <View

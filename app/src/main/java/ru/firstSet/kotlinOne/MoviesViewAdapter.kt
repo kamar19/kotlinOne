@@ -9,51 +9,47 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MoviesViewAdapter(context: Context, var movieList: List<Movie>) :
+class MoviesViewAdapter(private val someClickListener: SomeInterfaceClickListener, val movieList: List<Movie>) :
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
-    private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private val moviesLists: List<Movie> = movieList
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val view: View = inflater.inflate(R.layout.view_holder_movie, parent, false)
-        return MoviesViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
+        MoviesViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie, parent, false)
+        )
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         holder.bind(getItem(position));
+        holder.itemView.setOnClickListener {
+            someClickListener.onClick(position)
+        }
     }
 
-    override fun getItemCount(): Int = moviesLists.size
 
-    fun getItem(position: Int): Movie = moviesLists[position]
+
+
+
+
+    override fun getItemCount(): Int = movieList.size
+
+    fun getItem(position: Int): Movie = movieList[position]
 
     class MoviesViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        private val textViewSomeId: TextView
-        private val textViewMinuteTime: TextView
-        private val textViewNameMovie: TextView
-        private val textViewTag: TextView
-        private val textViewReview: TextView
-        private val imageViewMovieOrig: ImageView
-        private val imageViewLike: ImageView
-        private val ratingBarRating: RatingBar
-
-        init {
-            this.textViewSomeId = itemView.findViewById(R.id.fmlSomeId)
-            this.textViewMinuteTime = itemView.findViewById(R.id.fmlTextViewMinuteTime)
-            this.textViewNameMovie = itemView.findViewById(R.id.fmlNameMovie)
-            this.textViewTag= itemView.findViewById(R.id.fmlTag)
-            this.textViewReview = itemView.findViewById(R.id.fmlTextViewReview)
-            this.imageViewMovieOrig = itemView.findViewById(R.id.fmlNameImageViewOrig)
-            this.imageViewLike = itemView.findViewById(R.id.fmlIsLike)
-            this.ratingBarRating = itemView.findViewById(R.id.fmlRatingBar)
-        }
+        private val textViewSomeId: TextView = itemView.findViewById(R.id.fmlSomeId)
+        private val textViewMinuteTime: TextView = itemView.findViewById(R.id.fmlTextViewMinuteTime)
+        private val textViewNameMovie: TextView = itemView.findViewById(R.id.fmlNameMovie)
+        private val textViewTag: TextView = itemView.findViewById(R.id.fmlTag)
+        private val textViewReview: TextView = itemView.findViewById(R.id.fmlTextViewReview)
+        private val imageViewMovieOrig: ImageView = itemView.findViewById(R.id.fmlNameImageViewOrig)
+        private val imageViewLike: ImageView = itemView.findViewById(R.id.fmlIsLike)
+        private val ratingBarRating: RatingBar = itemView.findViewById(R.id.fmlRatingBar)
 
         fun bind(movie: Movie) {
-            this.imageViewMovieOrig.setImageResource(movie.nameImageView!!)
-
+            if (movie.nameImageView != null)
+                this.imageViewMovieOrig.setImageResource(movie.nameImageView)
             if (movie.isLike) this.imageViewLike.setImageResource(R.drawable.like_red)
             else imageViewLike.setImageResource(R.drawable.like)
-            this.ratingBarRating.rating = movie.ratingBarRating!!.toFloat()
+            if (movie.ratingBarRating != null)
+                this.ratingBarRating.rating = movie.ratingBarRating.toFloat()
             this.textViewSomeId.text = movie.someId
             this.textViewMinuteTime.text = movie.minuteTime
             this.textViewNameMovie.text = movie.nameMovie
@@ -61,6 +57,9 @@ class MoviesViewAdapter(context: Context, var movieList: List<Movie>) :
             this.textViewReview.text = movie.review
         }
     }
+interface SomeInterfaceClickListener {
+    fun onClick(id: Int)
+}
 }
 
 

@@ -1,5 +1,6 @@
 package ru.firstSet.kotlinOne
 
+import android.app.FragmentManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class FragmentMoviesList() : Fragment() {
+class FragmentMoviesList() : Fragment(), MoviesViewAdapter.SomeInterfaceClickListener {
     private var fmlConstraintLayoutList: ConstraintLayout? = null
-    private var moviesList: List<Movie> = ArrayList()
+    private var moviesList: List<Movie> = generateMovies()
+    private var listRecyclerView: RecyclerView? = null
+    private val clickListener = object : MoviesViewAdapter.SomeInterfaceClickListener {
+        override fun onClick(id: Int) {
+            doOnClick(id)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        moviesList = generateMovies()
         retainInstance = true
     }
 
@@ -27,22 +33,43 @@ class FragmentMoviesList() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
-        listRecyclerView.layoutManager = GridLayoutManager(activity, 2)
-        listRecyclerView.adapter = MoviesViewAdapter(this.context!!, moviesList)
+        listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
+        listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
+        listRecyclerView?.adapter = MoviesViewAdapter(clickListener, moviesList)
         fmlConstraintLayoutList =
             view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
                 setOnClickListener {
-                    activity?.let {
-                        it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
-                        it.supportFragmentManager.beginTransaction()
-                            .add(R.id.frameLayoutContainer, FragmentMoviesDetails())
-                            .addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
-                            .commit()
-                    }
+                    callFragmentMovieDetails(1)
                 }
             }
     }
+
+    override fun onClick(id: Int) {
+        doOnClick(id)
+    }
+
+    fun callFragmentMovieDetails(id: Int) {
+        val frarment2: Fragment = FragmentMoviesDetails()
+        val bundle = Bundle()
+        bundle.putString("nameMovie", moviesList[id].nameMovie)
+        frarment2.arguments = bundle
+
+        activity?.let {
+            it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
+            it.supportFragmentManager.beginTransaction()
+                .add(R.id.frameLayoutContainer, frarment2)
+                .addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
+                .commit()
+        }
+    }
+
+
+    private fun doOnClick(id: Int) {
+
+        callFragmentMovieDetails(id)
+    }
+
+
 }
 
 fun generateMovies(): List<Movie> {
@@ -169,6 +196,7 @@ fun generateMovies(): List<Movie> {
         )
     )
 }
+
 
 
 

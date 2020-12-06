@@ -2,7 +2,7 @@ package ru.firstSet.kotlinOne
 
 data class Movie(
     val nameImageView: Int? = null,
-    val nameMovie: String? = null,
+    var nameMovie: String? = "",
     val someId: String? = null,
     val isLike: Boolean = false,
     val minuteTime: String? = null,
