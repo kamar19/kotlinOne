@@ -21,4 +21,5 @@
     <string name="fmlTextViewMin">137 min</string>
     <string name="fmlNameMovie">Avengers: End Game</string>
     <string name="oveList">button</string>
+    <string name="fragmentMovieChosenText">You chose: %1$s</string>
 </resources>
