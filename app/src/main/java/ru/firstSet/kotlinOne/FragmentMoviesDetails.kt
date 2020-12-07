@@ -48,7 +48,7 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private fun idToDate(itemView: View, id: Int) {
-        val tempList: List<Movie> = MoviesDataSource().getMoviesList()
+        val tempList: List<Movie> = ru.firstSet.kotlinOne.DataSource.MoviesDataSource.getMoviesList()
         val movie: Movie = tempList[id]
         val imageViewPoster: ImageView = itemView.findViewById(R.id.fmdPoster)
         val textViewTag: TextView = itemView.findViewById(R.id.fmdTextViewTeg)

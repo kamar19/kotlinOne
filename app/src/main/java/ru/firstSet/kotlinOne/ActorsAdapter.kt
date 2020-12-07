@@ -20,24 +20,20 @@ class ActorsAdapter(val actorList: List<Actor>) :
         holder.bind(getItem(position));
     }
 
-    override fun getItemCount()
-            : Int = actorList.size
+    override fun getItemCount(): Int = actorList.size
 
     private fun getItem(position: Int): Actor = actorList[position]
 
     class ActorHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-
-        private val actorName: TextView =  itemView.findViewById(R.id.viewHolderActorName)
+        private val actorName: TextView = itemView.findViewById(R.id.viewHolderActorName)
         private val actorFoto: ImageView = itemView.findViewById(R.id.viewHolderActorFoto)
-
         fun bind(actor: Actor) {
             if (actor.actorFoto != null)
                 this.actorFoto.setImageResource(actor.actorFoto)
             this.actorName.text = actor.actorName
         }
     }
-
 }
 
 

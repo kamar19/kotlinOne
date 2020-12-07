@@ -3,7 +3,7 @@ package ru.firstSet.kotlinOne.DataSource
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.R
 
-class MoviesDataSource {
+object MoviesDataSource {
     fun getMoviesList(): List<Movie> {
         return listOf(
             Movie(

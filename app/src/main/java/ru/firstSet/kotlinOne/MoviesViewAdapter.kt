@@ -9,11 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.firstSet.kotlinOne.Data.Movie
 
-class MoviesViewAdapter(
-    private val someClickListener: SomeInterfaceClickListener,
-    var movieList: List<Movie>
-) :
+class MoviesViewAdapter( val someClickListener: (Int) -> Unit):
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
+    var movieList: List<Movie> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
         MoviesViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie, parent, false)
@@ -22,7 +20,7 @@ class MoviesViewAdapter(
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         holder.bind(getItem(position));
         holder.itemView.setOnClickListener {
-            someClickListener.onClick(position)
+            someClickListener(position)
         }
     }
 
@@ -59,10 +57,6 @@ class MoviesViewAdapter(
             this.textViewTag.text = movie.tag
             this.textViewReview.text = movie.review
         }
-    }
-
-    interface SomeInterfaceClickListener {
-        fun onClick(id: Int)
     }
 }
 

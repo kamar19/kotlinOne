@@ -11,16 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.DataSource.MoviesDataSource
 
-class FragmentMoviesList() : Fragment(), MoviesViewAdapter.SomeInterfaceClickListener {
+class FragmentMoviesList() : Fragment() {
     private var fmlConstraintLayoutList: ConstraintLayout? = null
     private var moviesList: List<Movie> = listOf()
     private var listRecyclerView: RecyclerView? = null
-    private val clickListener = object : MoviesViewAdapter.SomeInterfaceClickListener {
-        override fun onClick(id: Int) {
-            doOnClick(id)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -36,7 +30,7 @@ class FragmentMoviesList() : Fragment(), MoviesViewAdapter.SomeInterfaceClickLis
         super.onViewCreated(view, savedInstanceState)
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
-        listRecyclerView?.adapter = MoviesViewAdapter(clickListener, moviesList)
+        listRecyclerView?.adapter = MoviesViewAdapter { item -> doOnClick(item) }
         fmlConstraintLayoutList =
             view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
                 setOnClickListener {
@@ -45,16 +39,11 @@ class FragmentMoviesList() : Fragment(), MoviesViewAdapter.SomeInterfaceClickLis
             }
     }
 
-    override fun onClick(id: Int) {
-        doOnClick(id)
-    }
-
     fun callFragmentMovieDetails(id: Int) {
         val frarmentMoviesDetails: Fragment = FragmentMoviesDetails()
         val bundle = Bundle()
         bundle.putInt("ID", id)
         frarmentMoviesDetails.arguments = bundle
-
         activity?.let {
             it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
             it.supportFragmentManager.beginTransaction()
@@ -71,12 +60,11 @@ class FragmentMoviesList() : Fragment(), MoviesViewAdapter.SomeInterfaceClickLis
     override fun onStart() {
         super.onStart()
         updateData()
-
     }
 
     private fun updateData() {
         (listRecyclerView?.adapter as? MoviesViewAdapter)?.apply {
-            bindMovie(MoviesDataSource().getMoviesList())
+            bindMovie(ru.firstSet.kotlinOne.DataSource.MoviesDataSource.getMoviesList())
         }
     }
 }
