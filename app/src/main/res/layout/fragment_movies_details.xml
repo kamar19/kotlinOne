@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/posterBack"
+                android:id="@+id/fmdPosterBack"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/gradient_poster"
@@ -87,7 +87,7 @@
                 app:layout_constraintTop_toTopOf="@+id/fmdGuidelinePath10" />
 
             <TextView
-                android:id="@+id/fmdTextViewTeg"
+                android:id="@+id/fmdTeg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -159,10 +159,10 @@
                 android:transformPivotX="0dp"
                 android:transformPivotY="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fmdTextViewTeg" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdTeg" />
 
             <TextView
-                android:id="@+id/fmdTextViewReview"
+                android:id="@+id/fmdReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textViewReview"
@@ -171,10 +171,10 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineCenter2"
                 app:layout_constraintStart_toEndOf="@+id/fmdRatingBar"
-                app:layout_constraintTop_toBottomOf="@+id/fmdTextViewTeg" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdTeg" />
 
             <TextView
-                android:id="@+id/textViewStoryLine"
+                android:id="@+id/storyLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -185,14 +185,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/fmdRatingBar" />
 
             <TextView
-                android:id="@+id/StyleStoryLineContent"
+                android:id="@+id/fmdStoryLineContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/storyLineContent"
                 android:textAppearance="@style/afterTheD"
-                app:layout_constraintTop_toBottomOf="@+id/textViewStoryLine"
+                app:layout_constraintTop_toBottomOf="@+id/storyLine"
                 tools:layout_editor_absoluteX="16dp" />
 
             <TextView
@@ -206,7 +206,7 @@
                 android:text="@string/heading"
                 android:textAppearance="@style/heading"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/StyleStoryLineContent" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdStoryLineContent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fmdRecyclerActor"

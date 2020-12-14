@@ -17,7 +17,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/fmlNameImageViewOrig"
+        android:id="@+id/fmlImageOrig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -25,12 +25,13 @@
         android:layout_marginBottom="48dp"
         android:contentDescription="@string/todo"
         android:foreground="@drawable/mask"
-        android:scaleType="fitXY"
         android:src="@drawable/avengers_end_game"
         app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
         app:layout_constraintEnd_toEndOf="@+id/fmlBackGroundMovie"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
         app:layout_constraintTop_toTopOf="@+id/fmlBackGroundMovie"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints,UnusedAttribute" />
 
     <View
@@ -45,8 +46,8 @@
         android:layout_marginTop="8dp"
         android:alpha="0.9"
         android:background="@drawable/fml_rectangle"
-        app:layout_constraintStart_toStartOf="@+id/fmlNameImageViewOrig"
-        app:layout_constraintTop_toTopOf="@+id/fmlNameImageViewOrig"
+        app:layout_constraintStart_toStartOf="@+id/fmlImageOrig"
+        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="105dp" />
 
@@ -80,8 +81,8 @@
         android:background="@drawable/like"
         android:contentDescription="@string/todo"
         android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="@+id/fmlNameImageViewOrig"
-        app:layout_constraintTop_toTopOf="@+id/fmlNameImageViewOrig"
+        app:layout_constraintEnd_toEndOf="@+id/fmlImageOrig"
+        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="110dp" />
 
@@ -136,7 +137,7 @@
         android:theme="@style/fmlCustomRatingBar"
         android:transformPivotX="0dp"
         android:transformPivotY="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fmlNameImageViewOrig"
+        app:layout_constraintBottom_toBottomOf="@+id/fmlImageOrig"
         app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie" />
 
     <TextView
@@ -166,7 +167,7 @@
         android:text="@string/textViewReview"
         android:textAllCaps="true"
         android:theme="@style/fmlStyleReview"
-        app:layout_constraintBottom_toBottomOf="@+id/fmlNameImageViewOrig"
+        app:layout_constraintBottom_toBottomOf="@+id/fmlImageOrig"
         app:layout_constraintStart_toEndOf="@+id/fmlRatingBar"
         app:layout_constraintTop_toBottomOf="@+id/fmlTag"
         tools:ignore="UnknownIdInLayout" />

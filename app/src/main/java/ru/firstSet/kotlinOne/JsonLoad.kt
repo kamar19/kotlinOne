@@ -7,6 +7,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import ru.firstSet.kotlinOne.Data.Actor
+import ru.firstSet.kotlinOne.Data.Movie
 
 
 private val jsonFormat = Json { ignoreUnknownKeys = true }
@@ -37,7 +39,8 @@ private class JsonMovie(
     @SerialName("vote_average")
     val ratings: Float,
     val overview: String,
-    val adult: Boolean
+    val adult: Boolean,
+    val vote_count: Int
 )
 
 private suspend fun loadGenres(context: Context): List<Genre> = withContext(Dispatchers.IO) {
@@ -98,7 +101,9 @@ internal fun parseMovies(
             },
             actors = jsonMovie.actors.map {
                 actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
-            }
+            },
+            votCount = jsonMovie.vote_count,
+            minAge = if (jsonMovie.adult) 16 else 13,
         )
     }
 }

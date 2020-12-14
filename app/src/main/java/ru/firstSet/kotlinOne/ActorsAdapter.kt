@@ -29,9 +29,9 @@ class ActorsAdapter(val actorList: List<Actor>) :
         private val actorName: TextView = itemView.findViewById(R.id.viewHolderActorName)
         private val actorFoto: ImageView = itemView.findViewById(R.id.viewHolderActorFoto)
         fun bind(actor: Actor) {
-            if (actor.actorFoto != null)
-                this.actorFoto.setImageResource(actor.actorFoto)
-            this.actorName.text = actor.actorName
+            if (actor.picture != null)
+                this.actorFoto.setImageResource(actor.id)
+            this.actorName.text = actor.name
         }
     }
 }

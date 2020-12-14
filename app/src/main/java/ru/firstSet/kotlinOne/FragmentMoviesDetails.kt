@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.Data.Movie
-import ru.firstSet.kotlinOne.DataSource.MoviesDataSource
+import java.io.ObjectInputStream
 
 class FragmentMoviesDetails : Fragment() {
     private var imageViewBack: View? = null
@@ -35,7 +35,7 @@ class FragmentMoviesDetails : Fragment() {
         val bundle = arguments
         if (bundle != null)
             numId = bundle.getInt("ID")
-        idToDate(view, numId)
+//        idToDate(view, numId)
         val listRecyclerView = view.findViewById<RecyclerView>(R.id.fmdRecyclerActor)
         listRecyclerView.layoutManager =
             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
@@ -47,23 +47,45 @@ class FragmentMoviesDetails : Fragment() {
         }
     }
 
-    private fun idToDate(itemView: View, id: Int) {
-        val tempList: List<Movie> = ru.firstSet.kotlinOne.DataSource.MoviesDataSource.getMoviesList()
-        val movie: Movie = tempList[id]
-        val imageViewPoster: ImageView = itemView.findViewById(R.id.fmdPoster)
-        val textViewTag: TextView = itemView.findViewById(R.id.fmdTextViewTeg)
-        val textViewMovieName: TextView = itemView.findViewById(R.id.fmdMovieName)
-        val textViewSomeId: TextView = itemView.findViewById(R.id.fmdSomeId)
-        val ratingBarRating: RatingBar = itemView.findViewById(R.id.fmdRatingBar)
-        val textViewReview: TextView = itemView.findViewById(R.id.fmdTextViewReview)
-        if (movie.nameImageView != null)
-            imageViewPoster.setImageResource(movie.nameImageView)
-        if (movie.ratingBarRating != null)
-            ratingBarRating.rating = movie.ratingBarRating.toFloat()
-        textViewSomeId.text = movie.someId
-        textViewMovieName.text = movie.nameMovie
-        textViewTag.text = movie.tag
-        textViewReview.text = movie.review
+    private fun idToDate(itemView: View,id: Int) {
+
+//            val ois: ObjectInputStream = ObjectInputStream(activity?.openFileInput("out.bin"))
+//
+//            val tempList: List<Movie> = ois.readObject() as List<Movie>
+
+
+//            val movie: Movie = tempList[id]
+            val fmdPoster: ImageView = itemView.findViewById(R.id.fmdPoster)
+            val fmdPosterBack: View = itemView.findViewById(R.id.fmdPosterBack)
+            val fmdTextViewTeg: TextView = itemView.findViewById(R.id.fmdTeg)
+
+            val fmdMovieName: TextView = itemView.findViewById(R.id.fmdMovieName)
+            val fmdSomeId: TextView = itemView.findViewById(R.id.fmdSomeId)
+            val fmdRatingBar: RatingBar = itemView.findViewById(R.id.fmdRatingBar)
+            val fmdReview: TextView = itemView.findViewById(R.id.fmdReview)
+            val fmdStoryLineContent: TextView = itemView.findViewById(R.id.fmdStoryLineContent)
+//
+//
+//
+//        if (movie.poster != null)
+//            fmdPoster.setImageResource(movie.poster)
+//        if (movie.ratings != null)
+//            fmdRatingBar.rating = movie.ratings.toFloat()
+//        fmdSomeId.text = movie.someId
+//        fmdMovieName.text = movie.title
+//        fmdTextViewTeg.text = movie.tag
+//        fmdTextViewReview.text = movie.overview
+//
+//        var title: String,
+//        val overview: String,
+//        val poster: String,
+//        val backdrop: String,
+//        val ratings: Float,
+//        val adult: Boolean,
+//        val runtime: Int,
+//        val genres: List<Genre>,
+//        val actors: List<Actor>
+
     }
 }
 

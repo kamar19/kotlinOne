@@ -1,6 +1,7 @@
 package ru.firstSet.kotlinOne.Data
 
 data class Actor(
-    val actorFoto: Int,
-    val actorName: String
+    val id: Int,
+    val picture: String,
+    val name: String
 )
