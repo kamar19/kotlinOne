@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
+import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.Data.Movie
+import ru.firstSet.kotlinOne.DataSource.ActorsDataSource
 import ru.firstSet.kotlinOne.DataSource.GenresDataSource
 import ru.firstSet.kotlinOne.DataSource.MoviesDataSource
 import java.io.FileOutputStream
@@ -24,17 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         scope.launch {
             MoviesDataSource.setMoviesList(loadMovies(this@MainActivity))
-//            Log.v("MoviesDataSource", MoviesDataSource.getMoviesList().size.toString())
-        }
-        scope.launch {
-            GenresDataSource.setGenresList(loadGenres(this@MainActivity))
-//            Log.v("MoviesDataSource", MoviesDataSource.getMoviesList().size.toString())
         }
 //        scope.launch {
-//            MoviesDataSource.setMoviesList(loadMovies(this@MainActivity))
-////            Log.v("MoviesDataSource", MoviesDataSource.getMoviesList().size.toString())
+//            GenresDataSource.setGenresList(loadGenres(this@MainActivity))
 //        }
-
+//        scope.launch {
+//            ActorsDataSource.setActorsList(loadActors(this@MainActivity))
+//        }
 
         supportFragmentManager.beginTransaction()
             .add(R.id.frameLayoutContainer, FragmentMoviesList())
@@ -51,15 +49,20 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         scope.cancel()
     }
-
-    private suspend fun loadGenres(context: Context): List<Genre> = withContext(Dispatchers.IO) {
-        val data = readAssetFileToString(context, "genres.json")
-        parseGenres(data)
-
-    }
-
-    private fun readAssetFileToString(context: Context, fileName: String): String {
-        val stream = context.assets.open(fileName)
-        return stream.bufferedReader().readText()
-    }
+//
+//    private suspend fun loadGenres(context: Context): List<Genre> = withContext(Dispatchers.IO) {
+//        val data = readAssetFileToString(context, "genres.json")
+//        parseGenres(data)
+//    }
+//
+//
+//    private suspend fun loadActors(context: Context): List<Actor> = withContext(Dispatchers.IO) {
+//        val data = readAssetFileToString(context, "people.json")
+//        parseActors(data)
+//    }
+//
+//    private fun readAssetFileToString(context: Context, fileName: String): String {
+//        val stream = context.assets.open(fileName)
+//        return stream.bufferedReader().readText()
+//    }
 }

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.firstSet.kotlinOne.Data.Actor
 
 class ActorsAdapter(val actorList: List<Actor>) :
@@ -29,9 +30,11 @@ class ActorsAdapter(val actorList: List<Actor>) :
         private val actorName: TextView = itemView.findViewById(R.id.viewHolderActorName)
         private val actorFoto: ImageView = itemView.findViewById(R.id.viewHolderActorFoto)
         fun bind(actor: Actor) {
-            if (actor.picture != null)
-                this.actorFoto.setImageResource(actor.id)
-            this.actorName.text = actor.name
+                Glide
+                    .with(itemView)
+                    .load(actor.picture)
+                    .into(actorFoto)
+            actorName.text = actor.name
         }
     }
 }

@@ -90,12 +90,10 @@
         android:id="@+id/fmlTextViewMinuteTime"
         android:layout_width="0dp"
         android:layout_height="12dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
         android:lineSpacingExtra="3sp"
         android:text="@string/fmlTextViewMin"
         android:textAppearance="@style/fmlStyleTextViewMin"
@@ -108,16 +106,16 @@
         android:id="@+id/fmlNameMovie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_gravity="start|bottom"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:gravity="center_vertical"
+        android:layout_marginBottom="20dp"
         android:lineSpacingExtra="3sp"
         android:text="@string/fmlNameMovie"
         android:textAppearance="@style/fmlStyleNameMovie"
         android:textColor="@color/colorPath"
-        app:layout_constraintBottom_toTopOf="@+id/fmlTextViewMinuteTime"
+        app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
+        app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
         app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie"
         tools:ignore="MissingConstraints" />
 
@@ -137,23 +135,22 @@
         android:theme="@style/fmlCustomRatingBar"
         android:transformPivotX="0dp"
         android:transformPivotY="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fmlImageOrig"
+        app:layout_constraintBottom_toTopOf="@id/fmlNameMovie"
         app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie" />
 
     <TextView
         android:id="@+id/fmlTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_gravity="start|bottom"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
-        android:gravity="center_vertical"
         android:lineSpacingExtra="3sp"
         android:text="@string/fmlTag"
         android:textAppearance="@style/fmlStyleTag"
         app:layout_constraintBottom_toTopOf="@+id/fmlRatingBar"
+        app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
         app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
         tools:ignore="MissingConstraints" />
 
@@ -167,9 +164,8 @@
         android:text="@string/textViewReview"
         android:textAllCaps="true"
         android:theme="@style/fmlStyleReview"
-        app:layout_constraintBottom_toBottomOf="@+id/fmlImageOrig"
+        app:layout_constraintBottom_toTopOf="@id/fmlNameMovie"
         app:layout_constraintStart_toEndOf="@+id/fmlRatingBar"
-        app:layout_constraintTop_toBottomOf="@+id/fmlTag"
         tools:ignore="UnknownIdInLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package ru.firstSet.kotlinOne
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +11,20 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.Data.Movie
+import ru.firstSet.kotlinOne.DataSource.MoviesDataSource
 import java.io.ObjectInputStream
 
 class FragmentMoviesDetails : Fragment() {
     private var imageViewBack: View? = null
     private var actorsList: List<Actor> = listOf()
     private var numId: Int = 1
+    private var fmdPoster: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +42,7 @@ class FragmentMoviesDetails : Fragment() {
         val bundle = arguments
         if (bundle != null)
             numId = bundle.getInt("ID")
-//        idToDate(view, numId)
+        idToDate(view, numId)
         val listRecyclerView = view.findViewById<RecyclerView>(R.id.fmdRecyclerActor)
         listRecyclerView.layoutManager =
             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
@@ -47,45 +54,37 @@ class FragmentMoviesDetails : Fragment() {
         }
     }
 
-    private fun idToDate(itemView: View,id: Int) {
+    @SuppressLint("SetTextI18n")
+    private fun idToDate(itemView: View, id: Int) {
+        val movieList: List<Movie> = MoviesDataSource.getMoviesList()
+        val movie: Movie = movieList[id]
+        fmdPoster = itemView.findViewById(R.id.fmdPoster)
+        val fmdTextViewTeg: TextView = itemView.findViewById(R.id.fmdTeg)
 
-//            val ois: ObjectInputStream = ObjectInputStream(activity?.openFileInput("out.bin"))
-//
-//            val tempList: List<Movie> = ois.readObject() as List<Movie>
+        val fmdMovieName: TextView = itemView.findViewById(R.id.fmdMovieName)
+        val fmdSomeId: TextView = itemView.findViewById(R.id.fmdSomeId)
+        val fmdRatingBar: RatingBar = itemView.findViewById(R.id.fmdRatingBar)
+        val fmdReview: TextView = itemView.findViewById(R.id.fmdReview)
+        val fmdStoryLineContent: TextView = itemView.findViewById(R.id.fmdStoryLineContent)
 
+        fmdMovieName.text = movie.title
+        fmdRatingBar.rating = movie.ratings.toFloat() / 2
+        fmdSomeId.text = "${movie.minAge}+"
 
-//            val movie: Movie = tempList[id]
-            val fmdPoster: ImageView = itemView.findViewById(R.id.fmdPoster)
-            val fmdPosterBack: View = itemView.findViewById(R.id.fmdPosterBack)
-            val fmdTextViewTeg: TextView = itemView.findViewById(R.id.fmdTeg)
+        Glide
+            .with(itemView)
+            .load(movie.backdrop)
+            .into(fmdPoster)
 
-            val fmdMovieName: TextView = itemView.findViewById(R.id.fmdMovieName)
-            val fmdSomeId: TextView = itemView.findViewById(R.id.fmdSomeId)
-            val fmdRatingBar: RatingBar = itemView.findViewById(R.id.fmdRatingBar)
-            val fmdReview: TextView = itemView.findViewById(R.id.fmdReview)
-            val fmdStoryLineContent: TextView = itemView.findViewById(R.id.fmdStoryLineContent)
-//
-//
-//
-//        if (movie.poster != null)
-//            fmdPoster.setImageResource(movie.poster)
-//        if (movie.ratings != null)
-//            fmdRatingBar.rating = movie.ratings.toFloat()
-//        fmdSomeId.text = movie.someId
-//        fmdMovieName.text = movie.title
-//        fmdTextViewTeg.text = movie.tag
-//        fmdTextViewReview.text = movie.overview
-//
-//        var title: String,
-//        val overview: String,
-//        val poster: String,
-//        val backdrop: String,
-//        val ratings: Float,
-//        val adult: Boolean,
-//        val runtime: Int,
-//        val genres: List<Genre>,
-//        val actors: List<Actor>
+        fmdMovieName.text = movie.title
+        fmdTextViewTeg.text = movie.genres.map { it.name }.joinToString(separator = ", ")
+        fmdReview.text =
+            movie.votCount.toString() + " " + itemView.context.getString(R.string.textViewReview)
+        fmdStoryLineContent.text = movie.overview
+        actorsList=movie.actors
+
 
     }
+
 }
 

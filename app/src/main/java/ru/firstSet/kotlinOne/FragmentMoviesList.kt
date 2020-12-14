@@ -31,13 +31,7 @@ class FragmentMoviesList() : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
-
-//            var movieData: MoviesDataSource = movieList
-//            Json.toString() .encodeToString(Data(42))
-
-
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,11 +41,6 @@ class FragmentMoviesList() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        scope.launch {
-//            MoviesDataSource.setMoviesList(loadMovies(view.context))
-//            Log.v("MoviesDataSource", MoviesDataSource.getMoviesList().size.toString())
-//        }
-
 
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
@@ -93,10 +82,6 @@ class FragmentMoviesList() : Fragment() {
             scope.launch {
                 bindMovie(ru.firstSet.kotlinOne.DataSource.MoviesDataSource.getMoviesList())
             }
-
-
-
-
         }
     }
     override fun onDestroy() {

@@ -42,9 +42,6 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
     fun bindMovie(movieList: List<Movie>) {
         this.movieList = movieList
         notifyDataSetChanged()
-        Log.v("bindMovie", this.movieList.size.toString())
-
-
     }
 
     override fun getItemCount(): Int = movieList.size
@@ -73,32 +70,29 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
                 .with(itemView)
                 .load(movie.poster)
                 .into(this.imageViewMovieOrig);
-            if (movie.ratings != null)
-                ratingBarRating.rating = movie.ratings.toFloat()
-            textViewTag.text = getStringIntoGenres(movie.genres)
+            ratingBarRating.rating = movie.ratings / 2
+            textViewTag.text = movie.genres.map { it.name }.joinToString ( separator = ", " )
             if (movie.adult) imageViewLike.setImageResource(R.drawable.like_red)
             else imageViewLike.setImageResource(R.drawable.like)
             textViewReview.text =
                 movie.votCount.toString() + " " + itemView.context.getString(R.string.textViewReview)
         }
 
-        fun getStringIntoGenres(genres: List<Genre>): String {
-            var str: String = ""
-            for (idGenres in genres) {
-                for (idGenresDataSource in GenresDataSource.getGenresList()) {
-                    if (idGenres == idGenresDataSource)
-                        str += idGenresDataSource.name + ", "
-                }
-            }
-            return str.substring(0, str.length - 2)
+//        fun getStringIntoGenres(genres: List<Genre>): String {
+//            var str: String = ""
+//            for (idGenres in genres) {
+//                for (idGenresDataSource in GenresDataSource.getGenresList()) {
+//                    if (idGenres == idGenresDataSource)
+//                        str += idGenresDataSource.name + ", "
+//                }
+//            }
+//            return str.substring(0, str.length - 2)
         }
     }
 
 
-}
-
-private val RecyclerView.ViewHolder.context
-    get() = this.itemView.context
+//private val RecyclerView.ViewHolder.context
+//    get() = this.itemView.context
 
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroud">
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,6 +16,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".MovieDetailsActivity">
+            <View
+                android:id="@+id/fmdBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/todo"
+                android:scaleType="fitXY"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+
+                android:background="@drawable/bg_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/fmdPoster"
@@ -23,23 +37,15 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/todo"
                 android:scaleType="fitXY"
+                android:layout_margin="4dp"
                 android:src="@drawable/orig"
-                app:layout_constraintBottom_toTopOf="@id/fmdMovieName"
+                android:background="@drawable/mask"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/fmdGuidelineHorizontalCenter"
+                />
 
-            <View
-                android:id="@+id/fmdPosterBack"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/gradient_poster"
-                app:layout_constraintBottom_toBottomOf="@id/fmdPoster"
-                app:layout_constraintEnd_toEndOf="@id/fmdPoster"
-                app:layout_constraintStart_toStartOf="@id/fmdPoster"
-                app:layout_constraintTop_toTopOf="@id/fmdPoster"
-                app:srcCompat="@drawable/orig"
-                tools:layout_editor_absoluteY="170dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineCenter2"
@@ -56,7 +62,7 @@
                 app:layout_constraintGuide_percent="0.1" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/fmdGuidelineHorizontalCenter2"
+                android:id="@+id/fmdGuidelineHorizontalCenter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -113,8 +119,8 @@
                 android:text="@string/movieDetailsTextViewName"
                 android:textAppearance="@style/name"
                 android:textColor="@color/colorName"
-                app:layout_constraintBottom_toTopOf="@+id/fmdGuidelineHorizontalCenter2"
-                app:layout_constraintTop_toTopOf="@+id/fmdGuidelineHorizontalCenter2"
+                app:layout_constraintBottom_toTopOf="@+id/fmdGuidelineHorizontalCenter"
+                app:layout_constraintTop_toTopOf="@+id/fmdGuidelineHorizontalCenter"
                 tools:targetApi="p" />
 
             <TextView
