@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.Data.Movie
@@ -25,6 +26,9 @@ class FragmentMoviesDetails : Fragment() {
     private var actorsList: List<Actor> = listOf()
     private var numId: Int = 1
     private var fmdPoster: ImageView? = null
+    private var scope = CoroutineScope(
+        Dispatchers.Main
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,20 +74,25 @@ class FragmentMoviesDetails : Fragment() {
         fmdMovieName.text = movie.title
         fmdRatingBar.rating = movie.ratings.toFloat() / 2
         fmdSomeId.text = "${movie.minAge}+"
-
-        Glide
-            .with(itemView)
-            .load(movie.backdrop)
-            .into(fmdPoster)
+        scope.launch {
+            Glide
+                .with(itemView)
+                .load(movie.backdrop)
+                .into(fmdPoster)
+        }
 
         fmdMovieName.text = movie.title
         fmdTextViewTeg.text = movie.genres.map { it.name }.joinToString(separator = ", ")
         fmdReview.text =
             movie.votCount.toString() + " " + itemView.context.getString(R.string.textViewReview)
         fmdStoryLineContent.text = movie.overview
-        actorsList=movie.actors
+        actorsList = movie.actors
 
 
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
     }
 
 }

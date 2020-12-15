@@ -24,7 +24,6 @@
                 android:scaleType="fitXY"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-
                 android:background="@drawable/bg_details"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
