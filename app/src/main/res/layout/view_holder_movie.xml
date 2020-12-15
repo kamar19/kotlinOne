@@ -36,59 +36,44 @@
         android:id="@+id/fmlRectangle"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="6dp"
         android:layout_marginTop="8dp"
         android:alpha="0.9"
         android:background="@drawable/fml_rectangle"
         app:layout_constraintStart_toStartOf="@+id/fmlImageOrig"
-        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="105dp" />
+        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig"/>
 
     <TextView
         android:id="@+id/fmlSomeId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/fmlSomeId"
         android:textAppearance="@style/fmlStyleSomeId"
         app:layout_constraintBottom_toBottomOf="@+id/fmlRectangle"
         app:layout_constraintEnd_toEndOf="@+id/fmlRectangle"
         app:layout_constraintStart_toStartOf="@+id/fmlRectangle"
-        app:layout_constraintTop_toTopOf="@+id/fmlRectangle"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="@+id/fmlRectangle"        />
 
     <ImageView
         android:id="@+id/fmlIsLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="13dp"
+        android:gravity="center_vertical"
+       android:layout_marginTop="13dp"
         android:layout_marginEnd="6dp"
         android:alpha="0.75"
         android:background="@drawable/like"
         android:contentDescription="@string/todo"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="@+id/fmlImageOrig"
-        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="110dp" />
+        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig"        />
 
     <TextView
         android:id="@+id/fmlTextViewMinuteTime"
         android:layout_width="0dp"
         android:layout_height="12dp"
-        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -97,8 +82,7 @@
         android:textAppearance="@style/fmlStyleTextViewMin"
         app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
         app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
-        app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie" />
 
     <TextView
         android:id="@+id/fmlNameMovie"
@@ -111,7 +95,6 @@
         android:lineSpacingExtra="3sp"
         android:text="@string/fmlNameMovie"
         android:textAppearance="@style/fmlStyleNameMovie"
-        android:textColor="@color/colorPath"
         app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
         app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
         app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie"
@@ -126,12 +109,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="10dp"
         android:numStars="5"
-        android:rating="2.0"
-        android:scaleX=".7"
-        android:scaleY=".7"
+        android:rating="1.5"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
         android:stepSize="0.5"
         android:textAppearance="@style/tag"
-        android:theme="@style/fmlCustomRatingBar"
         android:transformPivotX="0dp"
         android:transformPivotY="4dp"
         app:layout_constraintBottom_toTopOf="@id/fmlNameMovie"
@@ -164,7 +146,6 @@
         android:textAllCaps="true"
         android:theme="@style/fmlStyleReview"
         app:layout_constraintBottom_toTopOf="@id/fmlNameMovie"
-        app:layout_constraintStart_toEndOf="@+id/fmlRatingBar"
-        tools:ignore="UnknownIdInLayout" />
+        app:layout_constraintStart_toEndOf="@+id/fmlRatingBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
