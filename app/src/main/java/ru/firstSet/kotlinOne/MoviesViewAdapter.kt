@@ -56,9 +56,9 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
             Glide
                 .with(itemView)
                 .load(movie.poster)
-                .into(this.imageViewMovieOrig);
-            ratingBarRating.rating = movie.ratings / 2
-            textViewTag.text = movie.genres.map { it.name }.joinToString(separator = ", ")
+                .into(this.imageViewMovieOrig)
+            ratingBarRating.rating = movie.ratings/2
+            textViewTag.text = movie.genres.joinToString(separator = ", ") { it.name }
             if (movie.adult) imageViewLike.setImageResource(R.drawable.like_red)
             else imageViewLike.setImageResource(R.drawable.like)
             textViewReview.text =
@@ -66,13 +66,5 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
         }
     }
 }
-
-
-//private val RecyclerView.ViewHolder.context
-//    get() = this.itemView.context
-
-
-
-
 
 

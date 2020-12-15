@@ -4,40 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="4dp"
-    android:background="@color/colorBackgroud">
+    android:layout_marginEnd="4dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/viewHolderActorFoto"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        android:contentDescription="@string/todo"
+        android:scaleType="fitXY"
+        android:src="@drawable/robert_downey"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/viewHolderActorFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/robert_downey"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ObsoleteLayoutParam" />
-
-        <TextView
-            android:id="@+id/viewHolderActorName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center_vertical"
-            android:lineSpacingExtra="2sp"
-            android:minLines="2"
-            android:text="@string/robertDown"
-            android:textAppearance="@style/robertDown"
-            app:layout_constraintEnd_toEndOf="@+id/viewHolderActorFoto"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewHolderActorFoto"
-            tools:ignore="ObsoleteLayoutParam" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/viewHolderActorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorBackgroud"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="2sp"
+        android:minLines="2"
+        android:text="@string/robertDown"
+        android:textAppearance="@style/robertDown"
+        app:layout_constraintEnd_toEndOf="@+id/viewHolderActorFoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHolderActorFoto"
+        tools:ignore="ObsoleteLayoutParam" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

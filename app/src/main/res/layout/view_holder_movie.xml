@@ -28,11 +28,9 @@
         android:src="@drawable/avengers_end_game"
         app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
         app:layout_constraintEnd_toEndOf="@+id/fmlBackGroundMovie"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/fmlBackGroundMovie"
         app:layout_constraintTop_toTopOf="@+id/fmlBackGroundMovie"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints,UnusedAttribute" />
+        tools:ignore="UnusedAttribute" />
 
     <View
         android:id="@+id/fmlRectangle"
@@ -90,10 +88,10 @@
         android:id="@+id/fmlTextViewMinuteTime"
         android:layout_width="0dp"
         android:layout_height="12dp"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_gravity="center_vertical"
         android:lineSpacingExtra="3sp"
         android:text="@string/fmlTextViewMin"
         android:textAppearance="@style/fmlStyleTextViewMin"
@@ -104,12 +102,12 @@
 
     <TextView
         android:id="@+id/fmlNameMovie"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|bottom"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="20dp"
+        android:gravity="start|bottom"
         android:lineSpacingExtra="3sp"
         android:text="@string/fmlNameMovie"
         android:textAppearance="@style/fmlStyleNameMovie"
@@ -117,6 +115,7 @@
         app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
         app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
         app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie"
+
         tools:ignore="MissingConstraints" />
 
     <RatingBar
@@ -127,10 +126,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="10dp"
         android:numStars="5"
-        android:rating="4"
+        android:rating="2.0"
         android:scaleX=".7"
         android:scaleY=".7"
-        android:stepSize="1"
+        android:stepSize="0.5"
         android:textAppearance="@style/tag"
         android:theme="@style/fmlCustomRatingBar"
         android:transformPivotX="0dp"
@@ -140,12 +139,12 @@
 
     <TextView
         android:id="@+id/fmlTag"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|bottom"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
+        android:gravity="start|bottom"
         android:lineSpacingExtra="3sp"
         android:text="@string/fmlTag"
         android:textAppearance="@style/fmlStyleTag"

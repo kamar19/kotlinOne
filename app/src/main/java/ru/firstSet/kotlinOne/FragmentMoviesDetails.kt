@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.DataSource.MoviesDataSource
-import java.io.ObjectInputStream
 
 class FragmentMoviesDetails : Fragment() {
     private var imageViewBack: View? = null
@@ -43,57 +42,58 @@ class FragmentMoviesDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle = arguments
-        if (bundle != null)
-            numId = bundle.getInt("ID")
-        idToDate(view, numId)
+        idToDate(view, arguments?.getInt("ID"))
         val listRecyclerView = view.findViewById<RecyclerView>(R.id.fmdRecyclerActor)
         listRecyclerView.layoutManager =
             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
         listRecyclerView.adapter = ActorsAdapter(actorsList)
         imageViewBack = view.findViewById<View>(R.id.fmdImageViewPath).apply {
             setOnClickListener {
-                activity?.onBackPressed()
+                activity?.supportFragmentManager?.popBackStack()
             }
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun idToDate(itemView: View, id: Int) {
+    private fun idToDate(itemView: View, id: Int?) {
         val movieList: List<Movie> = MoviesDataSource.getMoviesList()
-        val movie: Movie = movieList[id]
-        fmdPoster = itemView.findViewById(R.id.fmdPoster)
         val fmdTextViewTeg: TextView = itemView.findViewById(R.id.fmdTeg)
-
         val fmdMovieName: TextView = itemView.findViewById(R.id.fmdMovieName)
         val fmdSomeId: TextView = itemView.findViewById(R.id.fmdSomeId)
         val fmdRatingBar: RatingBar = itemView.findViewById(R.id.fmdRatingBar)
         val fmdReview: TextView = itemView.findViewById(R.id.fmdReview)
         val fmdStoryLineContent: TextView = itemView.findViewById(R.id.fmdStoryLineContent)
+        var movie: Movie? = null
 
-        fmdMovieName.text = movie.title
-        fmdRatingBar.rating = movie.ratings.toFloat() / 2
-        fmdSomeId.text = "${movie.minAge}+"
+        if (id != null) movie = movieList[id]
+        fmdPoster = itemView.findViewById(R.id.fmdPoster)
+        fmdMovieName.text = movie?.title
+        if (movie != null)
+            fmdRatingBar.rating = movie.ratings / 2
+        fmdSomeId.text = "${movie?.minAge}+"
         scope.launch {
             Glide
                 .with(itemView)
-                .load(movie.backdrop)
+                .load(movie?.backdrop)
                 .into(fmdPoster)
         }
-
-        fmdMovieName.text = movie.title
-        fmdTextViewTeg.text = movie.genres.map { it.name }.joinToString(separator = ", ")
+        fmdMovieName.text = movie?.title
+        fmdTextViewTeg.text = movie?.genres?.map { it.name }?.joinToString(separator = ", ")
         fmdReview.text =
-            movie.votCount.toString() + " " + itemView.context.getString(R.string.textViewReview)
-        fmdStoryLineContent.text = movie.overview
-        actorsList = movie.actors
-
-
+            movie?.votCount.toString() + " " + itemView.context.getString(R.string.textViewReview)
+        fmdStoryLineContent.text = movie?.overview
+        actorsList = movie?.actors!!
     }
+
     override fun onDestroy() {
         super.onDestroy()
         scope.cancel()
     }
 
+    companion object {
+        fun newInstance(id: Int) = FragmentMoviesDetails().apply {
+            arguments = Bundle().apply { putInt("ID", id) }
+        }
+    }
 }
 

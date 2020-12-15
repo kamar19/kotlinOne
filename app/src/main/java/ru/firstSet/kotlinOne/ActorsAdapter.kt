@@ -38,10 +38,8 @@ class ActorsAdapter(val actorList: List<Actor>) :
                 .load(actor.picture)
                 .into(actorFoto)
             actorName.text = actor.name
-            Log.v("fun bind: ",actor.name)
         }
     }
-
 }
 
 

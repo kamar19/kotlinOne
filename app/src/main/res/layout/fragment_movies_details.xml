@@ -158,7 +158,7 @@
                 android:rating="4"
                 android:scaleX=".5"
                 android:scaleY=".5"
-                android:stepSize="1"
+                android:stepSize="0.5"
                 android:textAppearance="@style/tag"
                 android:theme="@style/MyRatingBar"
                 android:transformPivotX="0dp"
