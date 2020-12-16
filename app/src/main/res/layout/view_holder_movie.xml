@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="11dp"
+    android:layout_marginBottom="5dp"
     android:background="@color/colorBackgroud">
 
     <View
         android:id="@+id/fmlBackGroundMovie"
-        android:layout_width="170dp"
-        android:layout_height="296dp"
+        android:layout_width="@dimen/fmlBackGroundMovieWidth"
+        android:layout_height="@dimen/fmlBackGroundMovieHeight"
         android:background="@drawable/fml_bg_move"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/fmlImageOrig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/fmlfmlImageOrigWidth"
+        android:layout_height="@dimen/fmlfmlImageOrigHeight"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="48dp"
@@ -34,14 +34,14 @@
 
     <View
         android:id="@+id/fmlRectangle"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/fmlRectangleWidth"
+        android:layout_height="@dimen/fmlRectangleHeight"
         android:layout_marginStart="6dp"
         android:layout_marginTop="8dp"
         android:alpha="0.9"
         android:background="@drawable/fml_rectangle"
         app:layout_constraintStart_toStartOf="@+id/fmlImageOrig"
-        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig"/>
+        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig" />
 
     <TextView
         android:id="@+id/fmlSomeId"
@@ -53,30 +53,30 @@
         app:layout_constraintBottom_toBottomOf="@+id/fmlRectangle"
         app:layout_constraintEnd_toEndOf="@+id/fmlRectangle"
         app:layout_constraintStart_toStartOf="@+id/fmlRectangle"
-        app:layout_constraintTop_toTopOf="@+id/fmlRectangle"        />
+        app:layout_constraintTop_toTopOf="@+id/fmlRectangle" />
 
     <ImageView
         android:id="@+id/fmlIsLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-       android:layout_marginTop="13dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="6dp"
         android:alpha="0.75"
         android:background="@drawable/like"
         android:contentDescription="@string/todo"
+        android:gravity="center_vertical"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="@+id/fmlImageOrig"
-        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig"        />
+        app:layout_constraintTop_toTopOf="@+id/fmlImageOrig" />
 
     <TextView
         android:id="@+id/fmlTextViewMinuteTime"
         android:layout_width="0dp"
         android:layout_height="12dp"
-        android:gravity="center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:gravity="center_vertical"
         android:lineSpacingExtra="3sp"
         android:text="@string/fmlTextViewMin"
         android:textAppearance="@style/fmlStyleTextViewMin"
@@ -98,7 +98,6 @@
         app:layout_constraintBottom_toBottomOf="@id/fmlBackGroundMovie"
         app:layout_constraintEnd_toEndOf="@id/fmlBackGroundMovie"
         app:layout_constraintStart_toStartOf="@id/fmlBackGroundMovie"
-
         tools:ignore="MissingConstraints" />
 
     <RatingBar
@@ -109,11 +108,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="10dp"
         android:numStars="5"
-        android:rating="1.5"
+        android:progress="3"
+        android:rating="1"
         android:scaleX="0.7"
         android:scaleY="0.7"
         android:stepSize="0.5"
-        android:textAppearance="@style/tag"
         android:transformPivotX="0dp"
         android:transformPivotY="4dp"
         app:layout_constraintBottom_toTopOf="@id/fmlNameMovie"

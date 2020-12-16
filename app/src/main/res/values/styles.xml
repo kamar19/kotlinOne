@@ -99,17 +99,12 @@
         <item name="android:textColor">#ECECEC</item>
     </style>
 
-    <style name="fmlRatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/colorTextGrey</item>
-        <item name="colorControlActivated">#FF3466</item>
-    </style>
-
     <style name="fmlStyleReview">
         <item name="android:textSize">8sp</item>
         <item name="android:textColor">#6D6D80</item>
     </style>
 
-    <style name="fmlCustomRatingBar">
+    <style name="fmlCustomRatingBar" parent="Widget.AppCompat.RatingBar">
         <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
         <item name="android:minHeight">8dp</item>
         <item name="minHeight">8dp</item>

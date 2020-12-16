@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fmlBackGroundMovieWidth">170dp</dimen>
+    <dimen name="fmlBackGroundMovieHeight">296dp</dimen>
+    <dimen name="fmlRectangleWidth">24dp</dimen>
+    <dimen name="fmlRectangleHeight">24dp</dimen>
+    <dimen name="fmlfmlImageOrigHeight">246dp</dimen>
+    <dimen name="fmlfmlImageOrigWidth">166dp</dimen>
+</resources>
