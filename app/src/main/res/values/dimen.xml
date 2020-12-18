@@ -4,6 +4,8 @@
     <dimen name="fmlBackGroundMovieHeight">296dp</dimen>
     <dimen name="fmlRectangleWidth">24dp</dimen>
     <dimen name="fmlRectangleHeight">24dp</dimen>
-    <dimen name="fmlfmlImageOrigHeight">246dp</dimen>
-    <dimen name="fmlfmlImageOrigWidth">166dp</dimen>
+    <dimen name="fmlImageOrigHeight">246dp</dimen>
+    <dimen name="fmlImageOrigWidth">166dp</dimen>
+    <dimen name="fmlImageActorWidth">80dp</dimen>
+    <dimen name="fmlImageActorHeight">80dp</dimen>
 </resources>

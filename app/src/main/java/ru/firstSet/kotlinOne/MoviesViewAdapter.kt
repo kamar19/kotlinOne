@@ -1,7 +1,6 @@
 package ru.firstSet.kotlinOne
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,7 +62,7 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
             else imageViewLike.setImageResource(R.drawable.like)
             textViewReview.text =
                 movie.votCount.toString() + " " + itemView.context.getString(R.string.textViewReview)
-            ratingBarRating.rating =movie.ratings/2
+            ratingBarRating.rating = movie.ratings / 2
         }
     }
 }
