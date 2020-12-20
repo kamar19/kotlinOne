@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ru.firstSet.kotlinOne">
 
     <application
@@ -9,9 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KotlinOne">
-        <activity android:name=".FragmentMoviesDetails"></activity>
-        <activity android:name=".MovieDetailsActivity" />
+
+        <activity
+            android:name=".FragmentMoviesDetails"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".MovieDetailsActivity"
+            tools:ignore="MissingClass" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,5 +29,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloadedFonts" />
     </application>
-
+    <uses-permission android:name= "android.permission.WRITE_INTERNAL_STORAGE"
+        tools:ignore="ManifestOrder" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

@@ -1,22 +1,26 @@
 package ru.firstSet.kotlinOne
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager.beginTransaction()
-            .add(R.id.frameLayoutContainer, FragmentMoviesList())
-            .addToBackStack(FRAGMENT_TAG_MOVIES_LIST)
-            .commit()
+        if (savedInstanceState==null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayoutContainer, FragmentMoviesList(), FRAGMENT_TAG_MOVIES_LIST)
+                .commit()
+        }
+        else{
+            supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MOVIES_LIST)
+        }
     }
 
     companion object {
         const val FRAGMENT_TAG_MOVIES_LIST = "MoviesList"
         const val FRAGMENT_TAG_MOVIES_DETAILS = "MoviesDetails"
     }
+
 }

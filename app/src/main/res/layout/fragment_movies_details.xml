@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroud">
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,6 +16,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".MovieDetailsActivity">
+            <View
+                android:id="@+id/fmdBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/todo"
+                android:scaleType="fitXY"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/bg_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/fmdPoster"
@@ -23,23 +36,15 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/todo"
                 android:scaleType="fitXY"
+                android:layout_margin="4dp"
                 android:src="@drawable/orig"
-                app:layout_constraintBottom_toTopOf="@id/fmdMovieName"
+                android:background="@drawable/mask"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/fmdGuidelineHorizontalCenter"
+                />
 
-            <View
-                android:id="@+id/posterBack"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/gradient_poster"
-                app:layout_constraintBottom_toBottomOf="@id/fmdPoster"
-                app:layout_constraintEnd_toEndOf="@id/fmdPoster"
-                app:layout_constraintStart_toStartOf="@id/fmdPoster"
-                app:layout_constraintTop_toTopOf="@id/fmdPoster"
-                app:srcCompat="@drawable/orig"
-                tools:layout_editor_absoluteY="170dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineCenter2"
@@ -56,7 +61,7 @@
                 app:layout_constraintGuide_percent="0.1" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/fmdGuidelineHorizontalCenter2"
+                android:id="@+id/fmdGuidelineHorizontalCenter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -87,7 +92,7 @@
                 app:layout_constraintTop_toTopOf="@+id/fmdGuidelinePath10" />
 
             <TextView
-                android:id="@+id/fmdTextViewTeg"
+                android:id="@+id/fmdTeg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -113,8 +118,8 @@
                 android:text="@string/movieDetailsTextViewName"
                 android:textAppearance="@style/name"
                 android:textColor="@color/colorName"
-                app:layout_constraintBottom_toTopOf="@+id/fmdGuidelineHorizontalCenter2"
-                app:layout_constraintTop_toTopOf="@+id/fmdGuidelineHorizontalCenter2"
+                app:layout_constraintBottom_toTopOf="@+id/fmdGuidelineHorizontalCenter"
+                app:layout_constraintTop_toTopOf="@+id/fmdGuidelineHorizontalCenter"
                 tools:targetApi="p" />
 
             <TextView
@@ -153,16 +158,16 @@
                 android:rating="4"
                 android:scaleX=".5"
                 android:scaleY=".5"
-                android:stepSize="1"
+                android:stepSize="0.5"
                 android:textAppearance="@style/tag"
                 android:theme="@style/MyRatingBar"
                 android:transformPivotX="0dp"
                 android:transformPivotY="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fmdTextViewTeg" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdTeg" />
 
             <TextView
-                android:id="@+id/fmdTextViewReview"
+                android:id="@+id/fmdReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textViewReview"
@@ -171,10 +176,10 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineCenter2"
                 app:layout_constraintStart_toEndOf="@+id/fmdRatingBar"
-                app:layout_constraintTop_toBottomOf="@+id/fmdTextViewTeg" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdTeg" />
 
             <TextView
-                android:id="@+id/textViewStoryLine"
+                android:id="@+id/storyLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -185,14 +190,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/fmdRatingBar" />
 
             <TextView
-                android:id="@+id/StyleStoryLineContent"
+                android:id="@+id/fmdStoryLineContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/storyLineContent"
                 android:textAppearance="@style/afterTheD"
-                app:layout_constraintTop_toBottomOf="@+id/textViewStoryLine"
+                app:layout_constraintTop_toBottomOf="@+id/storyLine"
                 tools:layout_editor_absoluteX="16dp" />
 
             <TextView
@@ -206,7 +211,7 @@
                 android:text="@string/heading"
                 android:textAppearance="@style/heading"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/StyleStoryLineContent" />
+                app:layout_constraintTop_toBottomOf="@+id/fmdStoryLineContent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fmdRecyclerActor"

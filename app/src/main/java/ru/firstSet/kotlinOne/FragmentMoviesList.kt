@@ -8,13 +8,17 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.*
 import ru.firstSet.kotlinOne.Data.Movie
-import ru.firstSet.kotlinOne.DataSource.MoviesDataSource
 
-class FragmentMoviesList() : Fragment() {
+class FragmentMoviesList : Fragment() {
     private var fmlConstraintLayoutList: ConstraintLayout? = null
     private var moviesList: List<Movie> = listOf()
     private var listRecyclerView: RecyclerView? = null
+    private var scope = CoroutineScope(
+        Dispatchers.Main
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -24,7 +28,13 @@ class FragmentMoviesList() : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_movies_list, container, false)
+    ): View {
+        scope.launch {
+            moviesList = loadMovies(inflater.context)
+            updateData()
+        }
+        return inflater.inflate(R.layout.fragment_movies_list, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,20 +44,16 @@ class FragmentMoviesList() : Fragment() {
         fmlConstraintLayoutList =
             view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
                 setOnClickListener {
-                    callFragmentMovieDetails(1)
+                    callFragmentMovieDetails(0)
                 }
             }
     }
 
     fun callFragmentMovieDetails(id: Int) {
-        val frarmentMoviesDetails: Fragment = FragmentMoviesDetails()
-        val bundle = Bundle()
-        bundle.putInt("ID", id)
-        frarmentMoviesDetails.arguments = bundle
         activity?.let {
             it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
             it.supportFragmentManager.beginTransaction()
-                .add(R.id.frameLayoutContainer, frarmentMoviesDetails)
+                .add(R.id.frameLayoutContainer, FragmentMoviesDetails.newInstance(moviesList[id]))
                 .addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
                 .commit()
         }
@@ -57,14 +63,9 @@ class FragmentMoviesList() : Fragment() {
         callFragmentMovieDetails(id)
     }
 
-    override fun onStart() {
-        super.onStart()
-        updateData()
-    }
-
     private fun updateData() {
         (listRecyclerView?.adapter as? MoviesViewAdapter)?.apply {
-            bindMovie(ru.firstSet.kotlinOne.DataSource.MoviesDataSource.getMoviesList())
+            bindMovie(moviesList)
         }
     }
 }

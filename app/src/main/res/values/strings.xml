@@ -5,7 +5,7 @@
     <string name="pathBack">Back</string>
     <string name="textViewTegLine">Action, Adventure, Fantasy</string>
     <string name="movieDetailsTextViewSomeId">13+</string>
-    <string name="textViewReview">125 Reviews</string>
+    <string name="textViewReview">Reviews</string>
     <string name="textViewStoryLine">Storyline</string>
     <string name="storyLineContent">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
     <string name="heading">Cast</string>
@@ -18,7 +18,7 @@
     <string name="fmlWarszawaPo">Movies list</string>
     <string name="fmlSomeId">13+</string>
     <string name="fmlTag">Action, Adventure, Drama</string>
-    <string name="fmlTextViewMin">137 min</string>
+    <string name="fmlTextViewMin">min</string>
     <string name="fmlNameMovie">Avengers: End Game</string>
     <string name="oveList">button</string>
     <string name="fragmentMovieChosenText">You chose: %1$s</string>
