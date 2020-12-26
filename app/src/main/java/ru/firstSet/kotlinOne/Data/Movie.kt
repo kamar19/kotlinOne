@@ -20,5 +20,3 @@ data class Movie(
     val votCount: Int,
     val minAge: Int
 ): Parcelable
-{
-}

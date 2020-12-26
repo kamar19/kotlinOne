@@ -1,6 +1,5 @@
-package ru.firstSet.kotlinOne
+package ru.firstSet.kotlinOne.View
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
 import ru.firstSet.kotlinOne.Data.Actor
+import ru.firstSet.kotlinOne.R
 
 class ActorsAdapter(val actorList: List<Actor>) :
     RecyclerView.Adapter<ActorsAdapter.ActorHolder>() {
