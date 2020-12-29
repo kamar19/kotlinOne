@@ -1,10 +1,9 @@
 package ru.firstSet.kotlinOne.View
 
-import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -12,10 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.R
-import ru.firstSet.kotlinOne.ViewModel.ViewModelMoviesList
+import ru.firstSet.kotlinOne.viewModel.ViewModelMoviesList
 
-class FragmentMoviesList(context: Context) : Fragment() {
-    private val viewModel: ViewModelMoviesList = ViewModelMoviesList(context)
+class FragmentMoviesList() : Fragment() {
+    private val viewModel: ViewModelMoviesList = ViewModelMoviesList()
     private var fmlConstraintLayoutList: ConstraintLayout? = null
     private var listRecyclerView: RecyclerView? = null
 
@@ -36,8 +35,7 @@ class FragmentMoviesList(context: Context) : Fragment() {
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
         listRecyclerView?.adapter =
-            MoviesViewAdapter { item -> doOnClick(item) } //callFragmentMovieDetails(id)
-        updateData()
+            MoviesViewAdapter { item -> doOnClick(item) }
         fmlConstraintLayoutList =
             view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
                 setOnClickListener {
@@ -47,35 +45,47 @@ class FragmentMoviesList(context: Context) : Fragment() {
     }
 
     private fun doOnClick(id: Int) {
-        viewModel.setId(id)
+        viewModel.stateLiveData.value?.let { getMovie(it, id)?.let { callFragmentMovieDetails(it) } }
     }
 
-    private fun updateData() {
+    private fun updateData(movieList: List<Movie>) {
         (listRecyclerView?.adapter as? MoviesViewAdapter)?.apply {
-            viewModel.moviesList.value?.let {
-                bindMovie(it)
-            }
+            bindMovie(movieList)
         }
     }
 
-    fun setState(state: ViewModelMoviesList.State) =
+    fun setState(state: ViewModelMoviesList.ViewModelListState) =
         when (state) {
-            ViewModelMoviesList.State.LoadingMoviewList ->
-                viewModel.loadMoviewList()
-            ViewModelMoviesList.State.ShowedMoviewList ->
-                updateData()
-            ViewModelMoviesList.State.ShowedMoviewDetails ->
-                callFragmentMovieDetails()
+            is ViewModelMoviesList.ViewModelListState.Loading ->
+                this.context?.let { viewModel.loadMoviewList(it) }
+            is ViewModelMoviesList.ViewModelListState.Success -> {
+                updateData(state.list)
+            }
+            is ViewModelMoviesList.ViewModelListState.Error ->
+                errorMessage()
         }
 
-    fun callFragmentMovieDetails() {
-        val movies: Movie? = viewModel.id.value?.let { viewModel.moviesList.value?.get(it) }
+    fun getMovie(state: ViewModelMoviesList.ViewModelListState, id: Int): Movie? {
+        when (state) {
+            is ViewModelMoviesList.ViewModelListState.Success -> {
+                updateData(state.list)
+                return state.list[id]
+            }
+            else -> return null
+        }
+    }
+
+    fun callFragmentMovieDetails(movie: Movie) {
         activity?.let {
             it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
             it.supportFragmentManager.beginTransaction()
-                .add(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(movies))
+                .add(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(movie))
                 .addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
                 .commit()
         }
+    }
+
+    fun errorMessage() {
+        Log.v("ViewModelMoviesList:", "errorMessage")
     }
 }
