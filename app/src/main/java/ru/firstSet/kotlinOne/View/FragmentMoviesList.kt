@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +19,7 @@ class FragmentMoviesList() : Fragment() {
     private val viewModel: ViewModelMoviesList = ViewModelMoviesList()
     private var fmlConstraintLayoutList: ConstraintLayout? = null
     private var listRecyclerView: RecyclerView? = null
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +36,8 @@ class FragmentMoviesList() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
+        progressBar = view.findViewById(R.id.progressBar)
+        this.context?.let { viewModel.loadMoviewList(it) }
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
         listRecyclerView?.adapter =
             MoviesViewAdapter { item -> doOnClick(item) }
@@ -52,17 +57,18 @@ class FragmentMoviesList() : Fragment() {
         (listRecyclerView?.adapter as? MoviesViewAdapter)?.apply {
             bindMovie(movieList)
         }
+        progressBar.visibility =ProgressBar.INVISIBLE
     }
 
     fun setState(state: ViewModelMoviesList.ViewModelListState) =
         when (state) {
             is ViewModelMoviesList.ViewModelListState.Loading ->
-                this.context?.let { viewModel.loadMoviewList(it) }
+            progressBar.visibility =ProgressBar.VISIBLE
             is ViewModelMoviesList.ViewModelListState.Success -> {
                 updateData(state.list)
             }
             is ViewModelMoviesList.ViewModelListState.Error ->
-                errorMessage()
+                errorMessage(state.error)
         }
 
     fun getMovie(state: ViewModelMoviesList.ViewModelListState, id: Int): Movie? {
@@ -85,7 +91,8 @@ class FragmentMoviesList() : Fragment() {
         }
     }
 
-    fun errorMessage() {
-        Log.v("ViewModelMoviesList:", "errorMessage")
+    fun errorMessage(string: String?) {
+        val toast = Toast.makeText(activity, string, Toast.LENGTH_SHORT)
+        toast.show()
     }
 }

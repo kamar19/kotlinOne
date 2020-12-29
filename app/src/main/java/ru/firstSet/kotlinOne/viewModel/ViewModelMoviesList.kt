@@ -13,9 +13,9 @@ class ViewModelMoviesList : ViewModel() {
     fun loadMoviewList(context: Context) {
         scope.launch {
             val newMoviesList = loadMovies(context)
-            if (newMoviesList.isEmpty()) mutableState.setValue(ViewModelListState.Error("Size error"))
+            if (newMoviesList.isEmpty()) { mutableState.setValue(ViewModelListState.Error("Size error"))}
             else
-                mutableState.setValue(ViewModelListState.Success(newMoviesList))
+            { mutableState.setValue(ViewModelListState.Success(newMoviesList))}
         }
     }
 

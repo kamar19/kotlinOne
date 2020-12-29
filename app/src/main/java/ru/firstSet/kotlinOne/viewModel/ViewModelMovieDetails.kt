@@ -14,11 +14,8 @@ class ViewModelMovieDetails() : ViewModel() {
 
     fun getMovie(bundle: Bundle) {
         val movie: Movie? = bundle.getParcelable<Movie>(FragmentMovieDetails.KEY_PARSE_DATA)
-        if (movie == null) movieDetailState.setValue(
-            ViewModelDetailState.Error("Movie not find")
-        )
-        else
-            movieDetailState.setValue(movie.let { ViewModelDetailState.Success(it) })
+        movie?.let {movieDetailState.setValue(ViewModelDetailState.Success(it))}?:movieDetailState.setValue(
+            ViewModelDetailState.Error("Movie not find"))
     }
 
     sealed class ViewModelDetailState {
