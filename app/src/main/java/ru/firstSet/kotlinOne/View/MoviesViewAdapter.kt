@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne
+package ru.firstSet.kotlinOne.View
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.firstSet.kotlinOne.Data.Movie
 import com.bumptech.glide.Glide
+import ru.firstSet.kotlinOne.R
 
 
 class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
