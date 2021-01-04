@@ -1,7 +1,6 @@
 package ru.firstSet.kotlinOne.View
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class FragmentMoviesList() : Fragment() {
         viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         progressBar = view.findViewById(R.id.progressBar)
-        this.context?.let { viewModel.loadMoviewList(it) }
+        viewModel.loadMoviewList(view.context)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
         listRecyclerView?.adapter =
             MoviesViewAdapter { item -> doOnClick(item) }
@@ -57,6 +56,9 @@ class FragmentMoviesList() : Fragment() {
         (listRecyclerView?.adapter as? MoviesViewAdapter)?.apply {
             bindMovie(movieList)
         }
+
+
+//        Toast.makeText(getActivity(),"No internet connection. Try again when internet is available.",Toast.LENGTH_LONG).show();
         progressBar.visibility =ProgressBar.INVISIBLE
     }
 

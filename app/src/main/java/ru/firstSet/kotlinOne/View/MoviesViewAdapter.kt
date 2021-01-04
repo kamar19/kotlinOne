@@ -12,6 +12,8 @@ import ru.firstSet.kotlinOne.Data.Movie
 import com.bumptech.glide.Glide
 import ru.firstSet.kotlinOne.R
 
+//        android:layout_width="288dp"
+//        android:layout_height="288dp"
 
 class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
@@ -50,19 +52,21 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
 
         @SuppressLint("SetTextI18n")
         fun bind(movie: Movie) {
-            textViewSomeId.text = "${movie.minAge}+"
+//            if (movie.adult) {
+                textViewSomeId.text = movie.adult.toString()+"+"
+//            } else {textViewSomeId.text = "12+"}
             textViewMinuteTime.text =
                 movie.runtime.toString() + " " + itemView.context.getString(R.string.fmlTextViewMin)
             textViewNameMovie.text = movie.title
             Glide
                 .with(itemView)
-                .load(movie.poster)
+                .load(movie.posterPicture)
                 .into(this.imageViewMovieOrig)
-            textViewTag.text = movie.genres.joinToString(separator = ", ") { it.name }
-            if (movie.adult) imageViewLike.setImageResource(R.drawable.like_red)
-            else imageViewLike.setImageResource(R.drawable.like)
+            textViewTag.text = movie.genreIds.joinToString(separator = ", ") { it.toString() }
+            if (movie.adult==16) { imageViewLike.setImageResource(R.drawable.like_red) }
+            else { imageViewLike.setImageResource(R.drawable.like) }
             textViewReview.text =
-                movie.votCount.toString() + " " + itemView.context.getString(R.string.textViewReview)
+                movie.vote_count.toString() + " " + itemView.context.getString(R.string.textViewReview)
             ratingBarRating.rating = movie.ratings / 2
         }
     }

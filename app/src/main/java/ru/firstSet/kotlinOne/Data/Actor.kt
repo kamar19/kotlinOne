@@ -2,6 +2,7 @@ package ru.firstSet.kotlinOne.Data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
 @Parcelize
 data class Actor(

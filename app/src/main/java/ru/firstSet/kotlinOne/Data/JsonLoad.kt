@@ -1,7 +1,6 @@
 package ru.firstSet.kotlinOne
 
 import android.content.Context
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
@@ -26,22 +25,22 @@ private class JsonActor(
 )
 
 @Serializable
-private class JsonMovie(
-    val id: Int,
-    val title: String,
-    @SerialName("poster_path")
-    val posterPicture: String,
-    @SerialName("backdrop_path")
+public class JsonMovie(
+    val id: Int,  // в Get Details есть
+    var title: String,  // есть
+    @SerialName("poster_path")  // есть
+    var posterPicture: String,
+    @SerialName("backdrop_path") // есть
     val backdropPicture: String,
     val runtime: Int,
-    @SerialName("genre_ids")
+    @SerialName("genre_ids") // есть
     val genreIds: List<Int>,
     val actors: List<Int>,
-    @SerialName("vote_average")
-    val ratings: Float,
-    val overview: String,
-    val adult: Boolean,
-    val vote_count: Int
+    @SerialName("vote_average") // есть
+    val ratings: Float, //НЕТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТт
+    val overview: String, // есть
+    val adult: Boolean, // есть
+    val vote_count: Int // есть
 )
 
 private suspend fun loadGenres(context: Context): List<Genre> = withContext(Dispatchers.IO) {
@@ -92,19 +91,18 @@ internal fun parseMovies(
             id = jsonMovie.id,
             title = jsonMovie.title,
             overview = jsonMovie.overview,
-            poster = jsonMovie.posterPicture,
-            backdrop = jsonMovie.backdropPicture,
+            posterPicture = jsonMovie.posterPicture,
+            backdropPicture = jsonMovie.backdropPicture,
             ratings = jsonMovie.ratings,
-            adult = jsonMovie.adult,
             runtime = jsonMovie.runtime,
-            genres = jsonMovie.genreIds.map {
+            genreIds = jsonMovie.genreIds.map {
                 genresMap[it] ?: throw IllegalArgumentException("Genre not found")
             },
             actors = jsonMovie.actors.map {
                 actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
             },
-            votCount = jsonMovie.vote_count,
-            minAge = if (jsonMovie.adult) 16 else 13,
+            vote_count = jsonMovie.vote_count,
+            adult = if (jsonMovie.adult) 16 else 13,
         )
     }
 }
