@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/fmlImageOrig"
-        android:layout_width="288dp"
-        android:layout_height="288dp"
+        android:layout_width="@dimen/fmlImageOrigWidth"
+        android:layout_height="@dimen/fmlImageOrigHeight"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="48dp"

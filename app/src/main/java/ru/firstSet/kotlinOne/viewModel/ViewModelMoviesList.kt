@@ -33,6 +33,7 @@ class ViewModelMoviesList : ViewModel() {
                 oldMovieList[i].adult = newMoviesList[i].adult
                 oldMovieList[i].genreIds = newMoviesList[i].genreIds
                 oldMovieList[i].vote_count= newMoviesList[i].vote_count
+                oldMovieList[i].runtime= newMoviesList[i].runtime
             }
 
 

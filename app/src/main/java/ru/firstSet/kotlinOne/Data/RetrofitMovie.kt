@@ -1,6 +1,5 @@
 package ru.firstSet.kotlinOne.Data
 
-import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.*
 import kotlinx.serialization.SerialName
@@ -21,6 +20,18 @@ import java.util.*
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class RetrofitMovie {
     var coroutineScope = CoroutineScope(Dispatchers.Main)
+    suspend fun loadGenre(): List<Genre> = withContext(Dispatchers.IO) {
+        moviesApi.getSearchGenre().genres.map { Genre(id = it.id, name = it.name) }
+    }
+
+
+    suspend fun loadRuntimes(id: Long):Int = withContext(Dispatchers.IO){
+//        return@withContext moviesApi.getSearchRuntimes(id).runtime
+        moviesApi.getSearchRuntimes(id).runtime
+//        { actor2 ->
+//
+//        }
+    }
 
     suspend fun loadActor(movieId: Long?): List<Actor> = withContext(Dispatchers.IO) {
         return@withContext moviesApi.getSearchActor(movieId).actor2.map { actor2 ->
@@ -41,11 +52,11 @@ class RetrofitMovie {
                 title = movie2.title,
                 posterPicture = BASE_URL_MOVIES + movie2.posterPicture,
                 backdropPicture = BASE_URL_MOVIES + movie2.backdropPicture,
-                runtime = 40,
+                runtime = loadRuntimes(movie2.id),
                 ratings = movie2.vote_average,
                 overview = movie2.overview,
                 vote_count = movie2.vote_count,
-                genreIds = movie2.genreIds!!.map {
+                genreIds = movie2.genreIds.map {
                     genresMap[it] ?: throw IllegalArgumentException("Genre not found")
                 },
                 actors = listOf(),
@@ -55,9 +66,6 @@ class RetrofitMovie {
 
     }
 
-    suspend fun loadGenre(): List<Genre> = withContext(Dispatchers.IO) {
-        moviesApi.getSearchGenre().genres.map { Genre(id = it.id, name = it.name) }
-    }
 
 
     @Serializable
@@ -70,24 +78,20 @@ class RetrofitMovie {
         val title: String,
         @SerialName("poster_path")
         val posterPicture: String?,
-//        убираю бакдроп, основная картинка на месте.
-
-//        val runtime: Int,
         @SerialName("genre_ids")
-        val genreIds: List<Int>?,
-//    val actors: List<Int>,
+        val genreIds: List<Int>,
         @SerialName("vote_average")
         val vote_average: Float,
         val overview: String,
         val adult: Boolean,
         val vote_count: Int
+//        val runtime: Int
+//        var actors: List<Actor>,
     )
 
 
     @Serializable
     private data class ResultAll(
-//        @SerialName("dates")
-//        val dates:Date,
         @SerialName("page")
         val page: Int,
         @SerialName("results")
@@ -117,19 +121,24 @@ class RetrofitMovie {
         @SerialName("profile_path")
         val profile_path: String?
     )
+    @Serializable
+    data class ResultDetails(
+        @SerialName("id")
+        val id: Int,
+        @SerialName("runtime")
+        val runtime: Int
+    )
+
 
     private interface MoviesApi {
-//        @GET("movie/now_playing?api_key=${apiKey}&language=ru-ru&query=2&include_adult=false")
         @GET("movie/now_playing?language=ru-ru&query=2&include_adult=false")
         suspend fun getSearchMovie(): ResultAll
-
-//        @GET("genre/movie/list?api_key=${apiKey}&language=ru-ru")
         @GET("genre/movie/list?&language=ru-ru")
         suspend fun getSearchGenre(): ResultGenre
-
         @GET("movie/{movie_id}/credits?&language=ru-ru")
         suspend fun getSearchActor(@Path("movie_id")movie_id: Long?): ResultActor
-
+        @GET("movie/{movie_id}&language=ru-ru")
+        suspend fun  getSearchRuntimes(@Path("movie_id")movie_id: Long?): ResultDetails
     }
 
     class MoviesApiHeaderInterceptor : Interceptor {
@@ -138,7 +147,6 @@ class RetrofitMovie {
             val originalHttpUrl = originalRequest.url
             val request = originalHttpUrl.newBuilder()
                 .addQueryParameter("api_key",apiKey)
-//                .addQueryParameter(API_KEY_HEADER, apiKey)
                 .build()
             val url = originalRequest.newBuilder().url(request).build()
             return chain.proceed(url)
@@ -147,7 +155,6 @@ class RetrofitMovie {
 
     private val client = OkHttpClient().newBuilder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-//        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
         .addInterceptor(MoviesApiHeaderInterceptor())
         .build()
 

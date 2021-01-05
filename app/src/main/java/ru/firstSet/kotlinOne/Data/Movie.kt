@@ -14,7 +14,7 @@ data class Movie(
         var posterPicture: String,
         @SerialName("backdrop_path")
         var backdropPicture: String,
-        val runtime: Int,
+        var runtime: Int,
         @SerialName("genre_ids")
         var genreIds: List<Genre>,
         var actors: List<Actor>,
