@@ -8,7 +8,7 @@ import kotlinx.serialization.SerialName
 
 @Parcelize
 data class Movie(
-        val id: Int,
+        val id: Long,
         var title: String,
         @SerialName("poster_path")
         var posterPicture: String,

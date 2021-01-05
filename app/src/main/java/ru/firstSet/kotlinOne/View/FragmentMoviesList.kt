@@ -49,7 +49,9 @@ class FragmentMoviesList() : Fragment() {
     }
 
     private fun doOnClick(id: Int) {
-        viewModel.stateLiveData.value?.let { getMovie(it, id)?.let { callFragmentMovieDetails(it) } }
+        viewModel.stateLiveData.value?.let {
+
+            getMovie(it, id)?.let { callFragmentMovieDetails(it) } }
     }
 
     private fun updateData(movieList: List<Movie>) {

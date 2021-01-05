@@ -88,7 +88,7 @@ internal fun parseMovies(
 
     return jsonMovies.map { jsonMovie ->
         Movie(
-            id = jsonMovie.id,
+            id = jsonMovie.id.toLong(),
             title = jsonMovie.title,
             overview = jsonMovie.overview,
             posterPicture = jsonMovie.posterPicture,
