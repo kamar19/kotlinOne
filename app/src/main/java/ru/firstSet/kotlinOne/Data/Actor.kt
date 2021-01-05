@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 @Parcelize
+@Serializable
 data class Actor(
     val id: Int,
     val picture: String,

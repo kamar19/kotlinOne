@@ -31,6 +31,7 @@ class ViewModelMoviesList : ViewModel() {
                 oldMovieList[i].overview = newMoviesList[i].overview
 //                oldMovieList[i].adult = if (newMoviesList[i].adult) 16 else 13
                 oldMovieList[i].adult = newMoviesList[i].adult
+                oldMovieList[i].genreIds = newMoviesList[i].genreIds
                 oldMovieList[i].vote_count= newMoviesList[i].vote_count
             }
 
