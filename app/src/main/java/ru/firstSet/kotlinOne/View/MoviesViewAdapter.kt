@@ -62,7 +62,7 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
                 .with(itemView)
                 .load(movie.posterPicture)
                 .into(this.imageViewMovieOrig)
-            textViewTag.text = movie.genreIds.joinToString(separator = ", ") { it.toString() }
+            textViewTag.text = movie.genreIds.joinToString(separator = ", ") { it.name }
             if (movie.adult==16) { imageViewLike.setImageResource(R.drawable.like_red) }
             else { imageViewLike.setImageResource(R.drawable.like) }
             textViewReview.text =

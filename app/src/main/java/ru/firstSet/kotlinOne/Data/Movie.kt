@@ -13,14 +13,14 @@ data class Movie(
         @SerialName("poster_path")
         var posterPicture: String,
         @SerialName("backdrop_path")
-        val backdropPicture: String,
+        var backdropPicture: String,
         val runtime: Int,
         @SerialName("genre_ids")
-        val genreIds: List<Genre>,
+        var genreIds: List<Genre>,
         var actors: List<Actor>,
         @SerialName("vote_average")
         var ratings: Float,
         var overview: String,
-        val adult: Int,
-        val vote_count: Int
+        var adult: Int,
+        var vote_count: Int
 ): Parcelable

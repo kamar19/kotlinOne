@@ -16,26 +16,31 @@ class ViewModelMoviesList : ViewModel() {
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
     var retrofitMovie:RetrofitMovie = RetrofitMovie()
     fun loadMoviewList(context: Context):List<Movie> {
-        var oldMoviesList = listOf<Movie>()
+        var newMoviesList: List<Movie> = listOf()
+        var oldMovieList: List<Movie>  = listOf()
 
         scope.launch {
-            oldMoviesList = loadMovies(context)
-
-            val newMoviesList = retrofitMovie.loadMovies()
-
-            for (i in 0..newMoviesList.size-1){
-                oldMoviesList[i].posterPicture  = BASE_URL_MOVIES+newMoviesList[i].posterPicture
-                oldMoviesList[i].title = newMoviesList[i].title
-//                oldMoviesList[i].overview = newMoviesList[i].overview
-//                oldMoviesList[i].ratings = newMoviesList[i].ratings
+            oldMovieList = loadMovies(context)
+            newMoviesList = retrofitMovie.loadMovies()
+            for ( i in 0..newMoviesList.size-1)
+            {
+                oldMovieList[i].title = newMoviesList[i].title
+                oldMovieList[i].posterPicture = newMoviesList[i].posterPicture
+                oldMovieList[i].backdropPicture = newMoviesList[i].backdropPicture
+                oldMovieList[i].ratings = newMoviesList[i].ratings
+                oldMovieList[i].overview = newMoviesList[i].overview
+//                oldMovieList[i].adult = if (newMoviesList[i].adult) 16 else 13
+                oldMovieList[i].adult = newMoviesList[i].adult
+                oldMovieList[i].vote_count= newMoviesList[i].vote_count
             }
 
-            if (oldMoviesList.isEmpty()) { mutableState.setValue(ViewModelListState.Error("Size error"))}
+
+            if (newMoviesList.isEmpty()) { mutableState.setValue(ViewModelListState.Error("Size error"))}
             else
-            { mutableState.setValue(ViewModelListState.Success(oldMoviesList))}
+            { mutableState.setValue(ViewModelListState.Success(oldMovieList))}
 
         }
-        return oldMoviesList
+        return oldMovieList
     }
 
     sealed class ViewModelListState {

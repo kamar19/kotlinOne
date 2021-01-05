@@ -1,5 +1,6 @@
 package ru.firstSet.kotlinOne.Data
 
+import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.*
 import kotlinx.serialization.SerialName
@@ -13,118 +14,108 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import ru.firstSet.kotlinOne.Genre
+import java.util.*
 
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class RetrofitMovie {
-    //    var coroutineScope = createCoroutineScope()
     var coroutineScope = CoroutineScope(Dispatchers.Main)
-//    var movieList: List<Movie2> = listOf()
-//    fun createCoroutineScope() = CoroutineScope(Job() + Dispatchers.IO)
 
 
-//    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-//        Log.e(TAG, "Coroutine exception, scope active:${coroutineScope.isActive}", throwable)
-//        coroutineScope = createCoroutineScope()
-//    }
+
+    suspend fun loadMovies(): List<Movie> = withContext(Dispatchers.IO) {
+//    suspend fun loadMovies(): List<Movie2> = withContext(Dispatchers.IO) {
 
 
-//
-//    private var catPhotoView: ImageView? = null
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? = inflater.inflate(R.layout.fragment_ws03, container, false)
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        catPhotoView = view.findViewById(R.id.catPhotoView)
-//
-//        view.findViewById<Button>(R.id.loadCatView).setOnClickListener {
-//            loadCats()
-//        }
-//    }
+//            data: String,
+        val genres: List<Genre> = loadGenre()
+//            actors: List<Actor>) {
+        val genresMap = genres.associateBy { it.id }
+//            val actorsMap = actors.associateBy { it.id }
+        return@withContext moviesApi.getSearchMovie().movie2.map { movie2 ->
+//            Movie(
+            Movie(
+                id = movie2.id,
+                title = movie2.title,
+                posterPicture =   BASE_URL_MOVIES+movie2.posterPicture,
+                backdropPicture =  BASE_URL_MOVIES+movie2.backdropPicture,
+                       runtime = 40,
+                ratings = movie2.vote_average,
+                overview = movie2.overview,
+                vote_count = movie2.vote_count,
 
+                    genreIds = movie2.genreIds!!.map {
+                        genresMap[it] ?: throw IllegalArgumentException("Genre not found")
+                    },
+//                    actors = movie2.actors.map {
+//                        actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
+//                    },
+                    actors = mutableListOf(Actor(1003, "https://image.tmdb.org/t/p/w342/q7dYamebioHRuvb9EWeSw8yTEfS.jpg","Jean Reno")),
+                    adult = if (movie2.adult) 16 else 13
+            )
 
-    suspend fun loadMovies(): List<Movie2> = withContext(Dispatchers.IO) {
-//        val genres: Map<Int, Genre> =
-//            MoviesApi.getSearchGenre().genres.map { Genre(id = it.id, name = it.name) }
-//                .associateBy { it.id }
+        }
 
-
-//        return@withContext moviesApi.getSearchMovie(). movie2.map {
-        return@withContext moviesApi.getSearchMovie().movie2
-//            .map {
-//было             Movie(
-//            Movie2(
-//                id = it.id,
-//                title = it.title,
-//                posterPicture = it.posterPicture
-//            )
-//                backdropPicture = it.backdropPicture,
-//                runtime = it.runtime,
-//                ratings = it.ratings,
-//                overview = it.overview,
-//                adult = it.adult,
-//                vote_count = it.vote_count
-//             genreIds = map {Genre("id": 12,  "name": "Adventure")}
-//            actors = map {
-//                "gender": 2,
-//                "id": 37919,
-//                "name": "Stanislas Merhar",
-//                "original_name": "Stanislas Merhar",
-//                "profile_path": "https://image.tmdb.org/t/p/w342/k5XQM1XXG71GLd41hFcx8yhkxRy.jpg"
-//            }),
-//            (
-//                "gender": 2,
-//                "id": 1407184,
-//                "name": "Kaaris",
-//                "original_name": "Kaaris",
-//                "profile_path": "https://image.tmdb.org/t/p/w342/zHxqojtMgk5aBqMQyTqcoPc4TRG.jpg"
-//            )
-//
-//        }
-//        }
     }
 
-
+suspend fun loadGenre(): List<Genre> = withContext(Dispatchers.IO) {
+        moviesApi.getSearchGenre().genres.map { Genre(id = it.id, name = it.name) }
+}
     @Serializable
     data class Movie2(
+        @SerialName("id")
         val id: Int,
+        @SerialName("backdrop_path")
+        val backdropPicture: String?,
+        @SerialName("title")
         val title: String,
         @SerialName("poster_path")
-        val posterPicture: String
-//        @SerialName("backdrop_path")
-//        val backdropPicture: String,
+        val posterPicture: String?,
+//        убираю бакдроп, основная картинка на месте.
+
 //        val runtime: Int,
-//////        @SerialName("genre_ids")
-//////        val genreIds: List<Int>,
-////        val actors: List<Int>,
-////        @SerialName("vote_average")
-//        val ratings: Float,
-//        val overview: String,
-//        val adult: Boolean,
-//        val vote_count: Int
+        @SerialName("genre_ids")
+        val genreIds: List<Int>?,
+//        val actors: List<Int>,
+        @SerialName("vote_average")
+        val vote_average: Float,
+        val overview: String,
+        val adult: Boolean,
+        val vote_count: Int
     )
+
+
+//        "genre_ids": [
+//        14,
+//        28,
+//        80
+//        ],
+//        "vote_average": 5.91
+
 
     @Serializable
     private data class ResultAll(
+//        @SerialName("dates")
+//        val dates:Date,
         @SerialName("page")
         val page: Int,
         @SerialName("results")
         val movie2: List<Movie2>
     )
+@Serializable
+private data class ResultGenre(
+    @SerialName("genres")
+    val genres: List<Genre>
+)
 
 
     private interface MoviesApi {
-        @GET("search/movie?api_key=${apiKey}&language=ru-ru&query=2&include_adult=false")
+//        @GET("search/movie?api_key=${apiKey}&language=ru-ru&query=2&include_adult=false")
+        @GET("movie/now_playing?api_key=${apiKey}&language=ru-ru&query=2&include_adult=false")
         suspend fun getSearchMovie(): ResultAll
 
-//        @GET("genre/movie/list")
-//        suspend fun getSearchGenre(): ResultGenre
+        @GET("genre/movie/list?api_key=${apiKey}&language=ru-ru")
+        suspend fun getSearchGenre(): ResultGenre
 //
 //        suspend fun getSearchActor(): ResultAll
 //
@@ -135,13 +126,9 @@ class RetrofitMovie {
             val originalRequest = chain.request()
             val originalHttpUrl = originalRequest.url
             val request = originalHttpUrl.newBuilder()
-//                .url(originalHttpUrl)
                 .addQueryParameter(API_KEY_HEADER, apiKey)
-
-//                .addHeader(API_KEY_HEADER, apiKey)
                 .build()
             val url = originalRequest.newBuilder().url(request).build()
-
             return chain.proceed(url)
         }
     }
