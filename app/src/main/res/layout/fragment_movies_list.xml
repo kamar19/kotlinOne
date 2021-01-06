@@ -21,7 +21,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fmlConstraintLayoutList"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="44dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,6 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/bg"
-                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
-                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
                     tools:ignore="MissingConstraints" />
 
                 <View
@@ -48,9 +46,9 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="16dp"
                     android:background="@drawable/combined_shape"
-                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
+                    app:layout_constraintBottom_toBottomOf="@+id/fmlBgMoveList"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
+                    app:layout_constraintTop_toTopOf="@+id/fmlBgMoveList"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
@@ -65,17 +63,32 @@
                     android:lineSpacingExtra="4sp"
                     android:text="@string/fmlWarszawaPo"
                     android:textAppearance="@style/fmlStyleWarszawaPo"
-                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
+                    app:layout_constraintBottom_toBottomOf="@+id/fmlBgMoveList"
                     app:layout_constraintStart_toEndOf="@+id/fmlCombinedShape"
-                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
+                    app:layout_constraintTop_toTopOf="@+id/fmlBgMoveList"
                     tools:ignore="MissingConstraints" />
+                <ImageView
+                    android:id="@+id/oval"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/search"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fmlBgMoveList"
+                    app:layout_constraintBottom_toBottomOf="@+id/fmlBgMoveList"
+                    tools:ignore="ContentDescription" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ProgressBar
                 android:id="@+id/progressBar"
+                android:layout_width="125dp"
+                android:layout_height="128dp"
                 android:visibility="invisible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fmlRecyclerViewMovies"
                 tools:ignore="MissingConstraints" />
 
             <androidx.recyclerview.widget.RecyclerView

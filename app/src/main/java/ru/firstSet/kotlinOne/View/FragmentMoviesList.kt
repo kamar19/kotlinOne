@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.R
 import ru.firstSet.kotlinOne.viewModel.ViewModelMoviesList
+import androidx.viewpager.widget.ViewPager
 
 class FragmentMoviesList() : Fragment() {
     private val viewModel: ViewModelMoviesList = ViewModelMoviesList()
     private var fmlConstraintLayoutList: ConstraintLayout? = null
     private var listRecyclerView: RecyclerView? = null
     private lateinit var progressBar: ProgressBar
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

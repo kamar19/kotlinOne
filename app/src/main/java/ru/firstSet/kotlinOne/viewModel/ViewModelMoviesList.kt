@@ -6,6 +6,7 @@ import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.Data.RetrofitMovie
 import ru.firstSet.kotlinOne.Data.RetrofitMovie.Companion.BASE_URL_MOVIES
+import ru.firstSet.kotlinOne.Data.SeachMovie
 import ru.firstSet.kotlinOne.JsonMovie
 import ru.firstSet.kotlinOne.loadMovies
 
@@ -21,7 +22,7 @@ class ViewModelMoviesList : ViewModel() {
 
         scope.launch {
             oldMovieList = loadMovies(context)
-            newMoviesList = retrofitMovie.loadMovies()
+            newMoviesList = retrofitMovie.loadMovies(SeachMovie.MovieUpComing.seachMovie)
             for ( i in 0..newMoviesList.size-1)
             {
                 oldMovieList[i].title = newMoviesList[i].title
@@ -50,8 +51,5 @@ class ViewModelMoviesList : ViewModel() {
         data class Success(val list: List<Movie>) : ViewModelListState()
         data class Error(val error: String) : ViewModelListState()
     }
-
-
-
 
 }

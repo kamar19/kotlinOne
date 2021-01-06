@@ -25,7 +25,7 @@ class RetrofitMovie {
     }
 
 
-    suspend fun loadRuntimes(id: Long):Int = withContext(Dispatchers.IO){
+    suspend fun loadRuntimes(id: Long): Int = withContext(Dispatchers.IO) {
 //        return@withContext moviesApi.getSearchRuntimes(id).runtime
         moviesApi.getSearchRuntimes(id).runtime
 //        { actor2 ->
@@ -43,10 +43,10 @@ class RetrofitMovie {
         }
     }
 
-    suspend fun loadMovies(): List<Movie> = withContext(Dispatchers.IO) {
+    suspend fun loadMovies(seachMovie: String): List<Movie> = withContext(Dispatchers.IO) {
         val genres: List<Genre> = loadGenre()
         val genresMap = genres.associateBy { it.id }
-        return@withContext moviesApi.getSearchMovie().movie2.map { movie2 ->
+        return@withContext moviesApi.getMovie(seachMovie).movie2.map { movie2 ->
             Movie(
                 id = movie2.id,
                 title = movie2.title,
@@ -65,7 +65,6 @@ class RetrofitMovie {
         }
 
     }
-
 
 
     @Serializable
@@ -87,11 +86,13 @@ class RetrofitMovie {
         val vote_count: Int
 //        val runtime: Int
 //        var actors: List<Actor>,
+
+
     )
 
 
     @Serializable
-    private data class ResultAll(
+    data class ResultMovie(
         @SerialName("page")
         val page: Int,
         @SerialName("results")
@@ -121,6 +122,7 @@ class RetrofitMovie {
         @SerialName("profile_path")
         val profile_path: String?
     )
+
     @Serializable
     data class ResultDetails(
         @SerialName("id")
@@ -131,14 +133,41 @@ class RetrofitMovie {
 
 
     private interface MoviesApi {
-        @GET("movie/now_playing?language=ru-ru&query=2&include_adult=false")
-        suspend fun getSearchMovie(): ResultAll
         @GET("genre/movie/list?&language=ru-ru")
         suspend fun getSearchGenre(): ResultGenre
+
         @GET("movie/{movie_id}/credits?&language=ru-ru")
-        suspend fun getSearchActor(@Path("movie_id")movie_id: Long?): ResultActor
+        suspend fun getSearchActor(@Path("movie_id") movie_id: Long?): ResultActor
+
         @GET("movie/{movie_id}&language=ru-ru")
-        suspend fun  getSearchRuntimes(@Path("movie_id")movie_id: Long?): ResultDetails
+        suspend fun getSearchRuntimes(@Path("movie_id") movie_id: Long?): ResultDetails
+
+        @GET("movie/now_playing?language=ru-ru&query=2&include_adult=false")
+        suspend fun getMovieNowPlaying(): ResultMovie
+
+
+        @GET("movie/popular?language=ru-ru&query=2&include_adult=false")
+        suspend fun getMoviePopular(): ResultMovie
+
+        @GET("movie/top_rated?language=ru-ru&query=2&include_adult=false")
+        suspend fun getMovieTopRated(): ResultMovie
+
+        @GET("movie/upcoming?language=ru-ru&query=2&include_adult=false")
+        suspend fun getMovieUpComing(): ResultMovie
+
+        @GET("movie/{seachMovie}?language=ru-ru&query=2&include_adult=false")
+        suspend fun getMovie(@Path("seachMovie") seachMovie: String):ResultMovie
+//        {
+//            val resultMovie:ResultMovie =
+//            when (seachMovie) {
+//                is SeachMovie.MovieNowPlaying -> getMovieNowPlaying()
+//                is SeachMovie.MoviePopular -> getMoviePopular()
+//                is SeachMovie.MovieTopRated -> getMovieTopRated()
+//                is SeachMovie.MovieUpComing -> getMovieUpComing()
+//            }
+//            return resultMovie
+//        }
+
     }
 
     class MoviesApiHeaderInterceptor : Interceptor {
@@ -146,7 +175,7 @@ class RetrofitMovie {
             val originalRequest = chain.request()
             val originalHttpUrl = originalRequest.url
             val request = originalHttpUrl.newBuilder()
-                .addQueryParameter("api_key",apiKey)
+                .addQueryParameter("api_key", apiKey)
                 .build()
             val url = originalRequest.newBuilder().url(request).build()
             return chain.proceed(url)
@@ -177,4 +206,8 @@ class RetrofitMovie {
         val BASE_URL = "https://api.themoviedb.org/3/"
         val BASE_URL_MOVIES = "https://image.tmdb.org/t/p/original"
     }
+
+
+
+
 }
