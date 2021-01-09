@@ -10,7 +10,6 @@ import androidx.viewpager.widget.PagerTabStrip
 import androidx.viewpager.widget.ViewPager
 import ru.firstSet.kotlinOne.R
 
-
 class FragmentMoviesList() : Fragment() {
     private var fmlConstraintLayoutList: ConstraintLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,7 @@ class FragmentMoviesList() : Fragment() {
         val viewPager: ViewPager = view.findViewById(R.id.viewpager)
         viewPager.adapter = FragmentPageAdapterTab(getChildFragmentManager())
         viewPager.currentItem=0
-        var pagerTabStrip: PagerTabStrip = view.findViewById(R.id.pagerTabStrip)
+        val pagerTabStrip: PagerTabStrip = view.findViewById(R.id.pagerTabStrip)
         pagerTabStrip.drawFullUnderline=false
         pagerTabStrip.setTabIndicatorColorResource( R.color.colorLinePager )
         fmlConstraintLayoutList =

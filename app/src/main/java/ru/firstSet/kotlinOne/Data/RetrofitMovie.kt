@@ -15,7 +15,6 @@ import ru.firstSet.kotlinOne.Genre
 import ru.firstSet.kotlinOne.ResultGenre
 import java.util.*
 
-
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class RetrofitMovie {
     var coroutineScope = CoroutineScope(Dispatchers.Main)
