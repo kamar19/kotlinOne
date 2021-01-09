@@ -12,9 +12,6 @@ import ru.firstSet.kotlinOne.Data.Movie
 import com.bumptech.glide.Glide
 import ru.firstSet.kotlinOne.R
 
-//        android:layout_width="288dp"
-//        android:layout_height="288dp"
-
 class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
     var movieList: List<Movie> = listOf()
@@ -52,9 +49,7 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
 
         @SuppressLint("SetTextI18n")
         fun bind(movie: Movie) {
-//            if (movie.adult) {
                 textViewSomeId.text = movie.adult.toString()+"+"
-//            } else {textViewSomeId.text = "12+"}
             textViewMinuteTime.text =
                 movie.runtime.toString() + " " + itemView.context.getString(R.string.fmlTextViewMin)
             textViewNameMovie.text = movie.title

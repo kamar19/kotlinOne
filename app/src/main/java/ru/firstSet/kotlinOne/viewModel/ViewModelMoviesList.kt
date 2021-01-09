@@ -16,34 +16,36 @@ class ViewModelMoviesList : ViewModel() {
     private val mutableState = MutableLiveData<ViewModelListState>(ViewModelListState.Loading)
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
     var retrofitMovie:RetrofitMovie = RetrofitMovie()
-    fun loadMoviewList(context: Context):List<Movie> {
+
+//    fun loadMoviewList(context: Context):List<Movie> {
+    fun loadMoviewList(seachMovie: SeachMovie):List<Movie> {
         var newMoviesList: List<Movie> = listOf()
-        var oldMovieList: List<Movie>  = listOf()
+//        var oldMovieList: List<Movie>  = listOf()
 
         scope.launch {
-            oldMovieList = loadMovies(context)
-            newMoviesList = retrofitMovie.loadMovies(SeachMovie.MovieUpComing.seachMovie)
-            for ( i in 0..newMoviesList.size-1)
-            {
-                oldMovieList[i].title = newMoviesList[i].title
-                oldMovieList[i].posterPicture = newMoviesList[i].posterPicture
-                oldMovieList[i].backdropPicture = newMoviesList[i].backdropPicture
-                oldMovieList[i].ratings = newMoviesList[i].ratings
-                oldMovieList[i].overview = newMoviesList[i].overview
-//                oldMovieList[i].adult = if (newMoviesList[i].adult) 16 else 13
-                oldMovieList[i].adult = newMoviesList[i].adult
-                oldMovieList[i].genreIds = newMoviesList[i].genreIds
-                oldMovieList[i].vote_count= newMoviesList[i].vote_count
-                oldMovieList[i].runtime= newMoviesList[i].runtime
-            }
+//            oldMovieList = loadMovies(context)
+            newMoviesList = retrofitMovie.loadMovies(seachMovie.seachMovie)
+//            for ( i in 0..newMoviesList.size-1)
+//            {
+//                oldMovieList[i].title = newMoviesList[i].title
+//                oldMovieList[i].posterPicture = newMoviesList[i].posterPicture
+//                oldMovieList[i].backdropPicture = newMoviesList[i].backdropPicture
+//                oldMovieList[i].ratings = newMoviesList[i].ratings
+//                oldMovieList[i].overview = newMoviesList[i].overview
+////                oldMovieList[i].adult = if (newMoviesList[i].adult) 16 else 13
+//                oldMovieList[i].adult = newMoviesList[i].adult
+//                oldMovieList[i].genreIds = newMoviesList[i].genreIds
+//                oldMovieList[i].vote_count= newMoviesList[i].vote_count
+//                oldMovieList[i].runtime= newMoviesList[i].runtime
+//            }
 
 
             if (newMoviesList.isEmpty()) { mutableState.setValue(ViewModelListState.Error("Size error"))}
             else
-            { mutableState.setValue(ViewModelListState.Success(oldMovieList))}
+            { mutableState.setValue(ViewModelListState.Success(newMoviesList))}
 
         }
-        return oldMovieList
+        return newMoviesList
     }
 
     sealed class ViewModelListState {

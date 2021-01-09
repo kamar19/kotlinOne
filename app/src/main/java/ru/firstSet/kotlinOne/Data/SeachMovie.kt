@@ -1,14 +1,12 @@
 package ru.firstSet.kotlinOne.Data
 
-enum class SeachMovie(val seachMovie:String) {
-    MovieNowPlaying("now_playing"),
-    MoviePopular("popular"),
-    MovieTopRated("top_rated"),
-    MovieUpComing("upcoming")
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+enum class SeachMovie(val seachMovie:String,val text:String) : Parcelable {
+    MovieNowPlaying("now_playing","Now playing"),
+    MoviePopular("popular","Popular"),
+    MovieTopRated("top_rated","Top rated"),
+    MovieUpComing("upcoming","Upcoming")
 }
-//enum class SeachMovie(val seachMovie:String) {
-//    MovieNowPlaying("now_playing"),
-//    MoviePopular("popular"),
-//    MovieTopRated("top_rated"),
-//    MovieUpComing("upcoming")
-//}

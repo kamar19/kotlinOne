@@ -2,8 +2,6 @@ package ru.firstSet.kotlinOne.Data
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.*
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -14,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
 import ru.firstSet.kotlinOne.Genre
+import ru.firstSet.kotlinOne.ResultGenre
 import java.util.*
 
 
@@ -24,13 +23,8 @@ class RetrofitMovie {
         moviesApi.getSearchGenre().genres.map { Genre(id = it.id, name = it.name) }
     }
 
-
     suspend fun loadRuntimes(id: Long): Int = withContext(Dispatchers.IO) {
-//        return@withContext moviesApi.getSearchRuntimes(id).runtime
         moviesApi.getSearchRuntimes(id).runtime
-//        { actor2 ->
-//
-//        }
     }
 
     suspend fun loadActor(movieId: Long?): List<Actor> = withContext(Dispatchers.IO) {
@@ -46,7 +40,7 @@ class RetrofitMovie {
     suspend fun loadMovies(seachMovie: String): List<Movie> = withContext(Dispatchers.IO) {
         val genres: List<Genre> = loadGenre()
         val genresMap = genres.associateBy { it.id }
-        return@withContext moviesApi.getMovie(seachMovie).movie2.map { movie2 ->
+        return@withContext moviesApi.getMovie(seachMovie).movieForSeach.map { movie2 ->
             Movie(
                 id = movie2.id,
                 title = movie2.title,
@@ -63,74 +57,7 @@ class RetrofitMovie {
                 adult = if (movie2.adult) 16 else 13
             )
         }
-
     }
-
-
-    @Serializable
-    data class Movie2(
-        @SerialName("id")
-        val id: Long,
-        @SerialName("backdrop_path")
-        val backdropPicture: String?,
-        @SerialName("title")
-        val title: String,
-        @SerialName("poster_path")
-        val posterPicture: String?,
-        @SerialName("genre_ids")
-        val genreIds: List<Int>,
-        @SerialName("vote_average")
-        val vote_average: Float,
-        val overview: String,
-        val adult: Boolean,
-        val vote_count: Int
-//        val runtime: Int
-//        var actors: List<Actor>,
-
-
-    )
-
-
-    @Serializable
-    data class ResultMovie(
-        @SerialName("page")
-        val page: Int,
-        @SerialName("results")
-        val movie2: List<Movie2>
-    )
-
-    @Serializable
-    private data class ResultGenre(
-        @SerialName("genres")
-        val genres: List<Genre>
-    )
-
-    @Serializable
-    private data class ResultActor(
-        @SerialName("id")
-        val page: Int,
-        @SerialName("cast")
-        val actor2: List<Actor2>
-    )
-
-    @Serializable
-    data class Actor2(
-        @SerialName("id")
-        val id: Int,
-        @SerialName("name")
-        val name: String,
-        @SerialName("profile_path")
-        val profile_path: String?
-    )
-
-    @Serializable
-    data class ResultDetails(
-        @SerialName("id")
-        val id: Int,
-        @SerialName("runtime")
-        val runtime: Int
-    )
-
 
     private interface MoviesApi {
         @GET("genre/movie/list?&language=ru-ru")
@@ -142,32 +69,8 @@ class RetrofitMovie {
         @GET("movie/{movie_id}&language=ru-ru")
         suspend fun getSearchRuntimes(@Path("movie_id") movie_id: Long?): ResultDetails
 
-        @GET("movie/now_playing?language=ru-ru&query=2&include_adult=false")
-        suspend fun getMovieNowPlaying(): ResultMovie
-
-
-        @GET("movie/popular?language=ru-ru&query=2&include_adult=false")
-        suspend fun getMoviePopular(): ResultMovie
-
-        @GET("movie/top_rated?language=ru-ru&query=2&include_adult=false")
-        suspend fun getMovieTopRated(): ResultMovie
-
-        @GET("movie/upcoming?language=ru-ru&query=2&include_adult=false")
-        suspend fun getMovieUpComing(): ResultMovie
-
         @GET("movie/{seachMovie}?language=ru-ru&query=2&include_adult=false")
-        suspend fun getMovie(@Path("seachMovie") seachMovie: String):ResultMovie
-//        {
-//            val resultMovie:ResultMovie =
-//            when (seachMovie) {
-//                is SeachMovie.MovieNowPlaying -> getMovieNowPlaying()
-//                is SeachMovie.MoviePopular -> getMoviePopular()
-//                is SeachMovie.MovieTopRated -> getMovieTopRated()
-//                is SeachMovie.MovieUpComing -> getMovieUpComing()
-//            }
-//            return resultMovie
-//        }
-
+        suspend fun getMovie(@Path("seachMovie") seachMovie: String): ResultMovie
     }
 
     class MoviesApiHeaderInterceptor : Interceptor {
@@ -206,8 +109,4 @@ class RetrofitMovie {
         val BASE_URL = "https://api.themoviedb.org/3/"
         val BASE_URL_MOVIES = "https://image.tmdb.org/t/p/original"
     }
-
-
-
-
 }
