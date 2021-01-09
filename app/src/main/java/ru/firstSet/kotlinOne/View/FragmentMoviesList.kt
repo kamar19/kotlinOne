@@ -34,6 +34,8 @@ class FragmentMoviesList() : Fragment() {
         fmlConstraintLayoutList =
             view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
                 setOnClickListener {
+                    // В будующем буду использовать этот лиссенер, возможно для поиска городов или стран
+                    // что бы в зависимости от выбора показывались локализованные данные для региона.
                 }
             }
     }
