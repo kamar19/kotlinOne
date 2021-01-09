@@ -2,7 +2,7 @@ package ru.firstSet.kotlinOne.View
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ru.firstSet.kotlinOne.Data.RetrofitMovie
+import ru.firstSet.kotlinOne.Data.MovieRepository
 import ru.firstSet.kotlinOne.R
 import ru.firstSet.kotlinOne.viewModel.ViewModelMoviesList
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val FRAGMENT_TAG_MOVIES_LIST = "MoviesList"
         const val FRAGMENT_TAG_MOVIES_DETAILS = "MoviesDetails"
-        val retrofitMovie: RetrofitMovie = ru.firstSet.kotlinOne.Data.RetrofitMovie
+        val retrofitMovie: MovieRepository = ru.firstSet.kotlinOne.Data.MovieRepository
         val viewModel:ViewModelMoviesList= ViewModelMoviesList
     }
 

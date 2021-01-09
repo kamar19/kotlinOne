@@ -10,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.Data.Movie
-import ru.firstSet.kotlinOne.Data.RetrofitMovie
 import ru.firstSet.kotlinOne.View.FragmentMovieDetails
 import ru.firstSet.kotlinOne.View.MainActivity
 

@@ -3,7 +3,7 @@ package ru.firstSet.kotlinOne.viewModel
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Movie
-import ru.firstSet.kotlinOne.Data.RetrofitMovie
+import ru.firstSet.kotlinOne.Data.MovieRepository
 import ru.firstSet.kotlinOne.Data.SeachMovie
 import ru.firstSet.kotlinOne.View.MainActivity
 
@@ -11,7 +11,7 @@ object ViewModelMoviesList : ViewModel() {
     private var scope = viewModelScope
     private val mutableState = MutableLiveData<ViewModelListState>(ViewModelListState.Loading)
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
-    var retrofitMovie: RetrofitMovie = MainActivity.retrofitMovie
+    var retrofitMovie: MovieRepository = MainActivity.retrofitMovie
     fun loadMoviewList(seachMovie: SeachMovie): List<Movie> {
         var newMoviesList: List<Movie> = listOf()
         scope.launch {

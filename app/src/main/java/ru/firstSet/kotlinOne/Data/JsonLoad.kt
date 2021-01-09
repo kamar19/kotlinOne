@@ -26,21 +26,21 @@ private class JsonActor(
 
 @Serializable
 public class JsonMovie(
-    val id: Int,  // в Get Details есть
-    var title: String,  // есть
-    @SerialName("poster_path")  // есть
+    val id: Int,
+    var title: String,
+    @SerialName("poster_path")
     var posterPicture: String,
-    @SerialName("backdrop_path") // есть
+    @SerialName("backdrop_path")
     val backdropPicture: String,
     val runtime: Int,
-    @SerialName("genre_ids") // есть
+    @SerialName("genre_ids")
     val genreIds: List<Int>,
     val actors: List<Int>,
-    @SerialName("vote_average") // есть
-    val ratings: Float, //НЕТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТТт
-    val overview: String, // есть
-    val adult: Boolean, // есть
-    val vote_count: Int // есть
+    @SerialName("vote_average")
+    val ratings: Float,
+    val overview: String,
+    val adult: Boolean,
+    val vote_count: Int
 )
 
 private suspend fun loadGenres(context: Context): List<Genre> = withContext(Dispatchers.IO) {

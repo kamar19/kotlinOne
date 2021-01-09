@@ -16,4 +16,5 @@
     <color name="colorRedText">#FF3466</color>
     <color name="colorTextGrey">#6D6D80</color>
     <color name="colorLinePager">#8036E7</color>
+    <color name="colorPagerTabStrip">#fff</color>
 </resources>

@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:padding="8dp"
-                android:textColor="#fff"
+                android:textColor="@color/colorPagerTabStrip"
                 app:tabGravity="center" />
 
         </androidx.viewpager.widget.ViewPager>
