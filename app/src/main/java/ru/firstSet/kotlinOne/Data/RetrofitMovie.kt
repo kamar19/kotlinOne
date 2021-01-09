@@ -16,7 +16,12 @@ import ru.firstSet.kotlinOne.ResultGenre
 import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class RetrofitMovie {
+object RetrofitMovie {
+    private val TAG = "RetrofitMovie"
+    const val apiKey = "f1eaa713b8b88ceef63a9cd8be1f7920"
+    val BASE_URL = "https://api.themoviedb.org/3/"
+    val BASE_URL_MOVIES = "https://image.tmdb.org/t/p/original"
+
     var coroutineScope = CoroutineScope(Dispatchers.Main)
     suspend fun loadGenre(): List<Genre> = withContext(Dispatchers.IO) {
         moviesApi.getSearchGenre().genres.map { Genre(id = it.id, name = it.name) }
@@ -96,16 +101,11 @@ class RetrofitMovie {
     @Suppress("EXPERIMENTAL_API_USAGE")
     private val retrofit: Retrofit = Retrofit.Builder()
         .client(client)
-        .baseUrl(BASE_URL)
+        .baseUrl(this.BASE_URL)
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .build()
 
     private val moviesApi: MoviesApi = retrofit.create(MoviesApi::class.java)
 
-    companion object {
-        private val TAG = "RetrofitMovie"
-        const val apiKey = "f1eaa713b8b88ceef63a9cd8be1f7920"
-        val BASE_URL = "https://api.themoviedb.org/3/"
-        val BASE_URL_MOVIES = "https://image.tmdb.org/t/p/original"
-    }
+
 }

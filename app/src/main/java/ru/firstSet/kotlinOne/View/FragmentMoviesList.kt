@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerTabStrip
 import androidx.viewpager.widget.ViewPager
 import ru.firstSet.kotlinOne.R
+import ru.firstSet.kotlinOne.viewModel.ViewModelMoviesList
 
 class FragmentMoviesList() : Fragment() {
     private var fmlConstraintLayoutList: ConstraintLayout? = null
+    val viewModel: ViewModelMoviesList = MainActivity.viewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true

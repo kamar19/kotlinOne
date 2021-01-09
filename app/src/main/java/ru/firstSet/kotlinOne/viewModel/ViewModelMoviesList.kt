@@ -5,12 +5,13 @@ import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.Data.RetrofitMovie
 import ru.firstSet.kotlinOne.Data.SeachMovie
+import ru.firstSet.kotlinOne.View.MainActivity
 
-class ViewModelMoviesList : ViewModel() {
+object ViewModelMoviesList : ViewModel() {
     private var scope = viewModelScope
     private val mutableState = MutableLiveData<ViewModelListState>(ViewModelListState.Loading)
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
-    var retrofitMovie: RetrofitMovie = RetrofitMovie()
+    var retrofitMovie: RetrofitMovie = MainActivity.retrofitMovie
     fun loadMoviewList(seachMovie: SeachMovie): List<Movie> {
         var newMoviesList: List<Movie> = listOf()
         scope.launch {

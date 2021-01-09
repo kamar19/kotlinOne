@@ -17,7 +17,6 @@ import ru.firstSet.kotlinOne.viewModel.ViewModelMoviesList
 
 
 class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
-    private val viewModel: ViewModelMoviesList = ViewModelMoviesList()
     private var listRecyclerView: RecyclerView? = null
     private lateinit var progressBar: ProgressBar
     private lateinit var pagerTabStrip: PagerTabStrip
@@ -34,8 +33,8 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
-        viewModel.loadMoviewList(seachMovie)
+        MainActivity.viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
+        MainActivity.viewModel.loadMoviewList(seachMovie)
         progressBar = view.findViewById(R.id.progressBarTab)
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
@@ -44,7 +43,7 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
     }
 
     fun doOnClick(id: Int) {
-        viewModel.stateLiveData.value?.let {
+        MainActivity.viewModel.stateLiveData.value?.let {
             getMovie(it, id)?.let { callFragmentMovieDetails(it) }
         }
     }

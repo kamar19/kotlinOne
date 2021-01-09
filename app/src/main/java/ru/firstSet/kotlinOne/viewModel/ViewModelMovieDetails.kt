@@ -12,9 +12,9 @@ import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.Data.RetrofitMovie
 import ru.firstSet.kotlinOne.View.FragmentMovieDetails
+import ru.firstSet.kotlinOne.View.MainActivity
 
 class ViewModelMovieDetails() : ViewModel() {
-    var retrofitMovie:RetrofitMovie = RetrofitMovie()
     var coroutineScope = CoroutineScope(Dispatchers.Main)
 
     private val movieDetailState =
@@ -26,11 +26,9 @@ class ViewModelMovieDetails() : ViewModel() {
         var actors: List<Actor> = listOf()
         val id_movie: Long? = movie?.id
         coroutineScope.launch {
-            actors = retrofitMovie.loadActor(id_movie)
+            actors = MainActivity.retrofitMovie.loadActor(id_movie)
             Log.v("actors", "${actors.size}")
             movie?.actors = actors
-
-//        cat?.name ?: "empty"
             movie?.let { movieDetailState.setValue(ViewModelDetailState.Success(it)) }
                 ?: movieDetailState.setValue(
                     ViewModelDetailState.Error("Movie not find")
