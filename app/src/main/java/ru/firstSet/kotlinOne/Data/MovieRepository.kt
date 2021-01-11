@@ -9,7 +9,6 @@ class MovieRepository {
     private val BASE_URL_MOVIES = "https://image.tmdb.org/t/p/original"
     private val remoteDataStore = ru.firstSet.kotlinOne.Data.RemoteDataStore
 
-    var coroutineScope = CoroutineScope(Dispatchers.Main)
     suspend fun loadGenre(): List<Genre> = withContext(Dispatchers.IO) {
         remoteDataStore.getSearchGenre().genres.map { Genre(id = it.id, name = it.name) }
     }
