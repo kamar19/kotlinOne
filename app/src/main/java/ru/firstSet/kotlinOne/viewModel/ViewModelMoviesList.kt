@@ -11,11 +11,12 @@ object ViewModelMoviesList : ViewModel() {
     private var scope = viewModelScope
     private val mutableState = MutableLiveData<ViewModelListState>(ViewModelListState.Loading)
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
-    var retrofitMovie: MovieRepository = MainActivity.retrofitMovie
+    val movieRepository: MovieRepository = MovieRepository()
+
     fun loadMoviewList(seachMovie: SeachMovie): List<Movie> {
         var newMoviesList: List<Movie> = listOf()
         scope.launch {
-            newMoviesList = retrofitMovie.loadMovies(seachMovie.seachMovie)
+            newMoviesList = movieRepository.loadMovies(seachMovie.seachMovie)
             if (newMoviesList.isEmpty()) {
                 mutableState.setValue(ViewModelListState.Error("Size error"))
             } else {

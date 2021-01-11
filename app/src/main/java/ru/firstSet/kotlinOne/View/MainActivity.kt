@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val FRAGMENT_TAG_MOVIES_LIST = "MoviesList"
         const val FRAGMENT_TAG_MOVIES_DETAILS = "MoviesDetails"
-        val retrofitMovie: MovieRepository = ru.firstSet.kotlinOne.Data.MovieRepository
         val viewModel:ViewModelMoviesList= ViewModelMoviesList
     }
 

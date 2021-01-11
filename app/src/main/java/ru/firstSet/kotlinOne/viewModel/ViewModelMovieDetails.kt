@@ -10,11 +10,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.Data.Movie
+import ru.firstSet.kotlinOne.Data.MovieRepository
 import ru.firstSet.kotlinOne.View.FragmentMovieDetails
 import ru.firstSet.kotlinOne.View.MainActivity
 
 class ViewModelMovieDetails() : ViewModel() {
     var coroutineScope = CoroutineScope(Dispatchers.Main)
+    val movieRepository: MovieRepository = MovieRepository()
 
     private val movieDetailState =
         MutableLiveData<ViewModelDetailState>(ViewModelDetailState.Loading)
@@ -25,7 +27,7 @@ class ViewModelMovieDetails() : ViewModel() {
         var actors: List<Actor> = listOf()
         val id_movie: Long? = movie?.id
         coroutineScope.launch {
-            actors = MainActivity.retrofitMovie.loadActor(id_movie)
+            actors = movieRepository.loadActor(id_movie)
             Log.v("actors", "${actors.size}")
             movie?.actors = actors
             movie?.let { movieDetailState.setValue(ViewModelDetailState.Success(it)) }
