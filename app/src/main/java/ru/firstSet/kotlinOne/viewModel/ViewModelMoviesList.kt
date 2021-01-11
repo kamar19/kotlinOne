@@ -1,22 +1,29 @@
 package ru.firstSet.kotlinOne.viewModel
 
-import android.content.Context
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.Data.Movie
-import ru.firstSet.kotlinOne.loadMovies
+import ru.firstSet.kotlinOne.Data.MovieRepository
+import ru.firstSet.kotlinOne.Data.SeachMovie
+import ru.firstSet.kotlinOne.View.MainActivity
 
-class ViewModelMoviesList : ViewModel() {
+object ViewModelMoviesList : ViewModel() {
     private var scope = viewModelScope
     private val mutableState = MutableLiveData<ViewModelListState>(ViewModelListState.Loading)
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
-    fun loadMoviewList(context: Context) {
+    val movieRepository: MovieRepository = MovieRepository()
+
+    fun loadMoviewList(seachMovie: SeachMovie): List<Movie> {
+        var newMoviesList: List<Movie> = listOf()
         scope.launch {
-            val newMoviesList = loadMovies(context)
-            if (newMoviesList.isEmpty()) { mutableState.setValue(ViewModelListState.Error("Size error"))}
-            else
-            { mutableState.setValue(ViewModelListState.Success(newMoviesList))}
+            newMoviesList = movieRepository.loadMovies(seachMovie.seachMovie)
+            if (newMoviesList.isEmpty()) {
+                mutableState.setValue(ViewModelListState.Error("Size error"))
+            } else {
+                mutableState.setValue(ViewModelListState.Success(newMoviesList))
+            }
         }
+        return newMoviesList
     }
 
     sealed class ViewModelListState {
@@ -24,4 +31,5 @@ class ViewModelMoviesList : ViewModel() {
         data class Success(val list: List<Movie>) : ViewModelListState()
         data class Error(val error: String) : ViewModelListState()
     }
+
 }

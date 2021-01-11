@@ -6,90 +6,97 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackgroud">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="204dp"
-        tools:layout_editor_absoluteY="184dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fmlConstraintLayoutList"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".MovieDetailsActivity"
+        tools:ignore="MissingConstraints">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <View
+            android:id="@+id/fmlBgMoveList"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:id="@+id/fmlCombinedShape"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/combined_shape"
+            app:layout_constraintBottom_toBottomOf="@+id/fmlBgMoveList"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fmlBgMoveList"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/fmlTextViewList"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            tools:context=".MovieDetailsActivity">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/fmlWarszawaPo"
+            android:textAppearance="@style/fmlStyleWarszawaPo"
+            app:layout_constraintBottom_toBottomOf="@+id/fmlBgMoveList"
+            app:layout_constraintStart_toEndOf="@+id/fmlCombinedShape"
+            app:layout_constraintTop_toTopOf="@+id/fmlBgMoveList"
+            tools:ignore="MissingConstraints" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fmlConstraintLayoutList"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="44dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:context=".MovieDetailsActivity"
-                tools:ignore="MissingConstraints">
+        <ImageView
+            android:id="@+id/oval"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/search"
+            app:layout_constraintBottom_toBottomOf="@+id/fmlBgMoveList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fmlBgMoveList"
+            tools:ignore="ContentDescription" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <View
-                    android:id="@+id/fmlBgMoveList"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/bg"
-                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
-                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
-                    tools:ignore="MissingConstraints" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fmlConstraintLayoutList">
 
-                <View
-                    android:id="@+id/fmlCombinedShape"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="16dp"
-                    android:background="@drawable/combined_shape"
-                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
-                    tools:ignore="MissingConstraints" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/colorBackgroud"
+            android:textAppearance="@style/fmlStyleWarszawaPo">
 
-                <TextView
-                    android:id="@+id/fmlTextViewList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="4sp"
-                    android:text="@string/fmlWarszawaPo"
-                    android:textAppearance="@style/fmlStyleWarszawaPo"
-                    app:layout_constraintBottom_toBottomOf="@+id/fmlConstraintLayoutList"
-                    app:layout_constraintStart_toEndOf="@+id/fmlCombinedShape"
-                    app:layout_constraintTop_toTopOf="@+id/fmlConstraintLayoutList"
-                    tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:visibility="invisible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fmlRecyclerViewMovies"
+            <androidx.viewpager.widget.PagerTabStrip
+                android:id="@+id/pagerTabStrip"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="18dp"
-                android:layout_marginStart="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fmlConstraintLayoutList" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:padding="8dp"
+                android:textColor="@color/colorPagerTabStrip"
+                app:tabGravity="center" />
+
+        </androidx.viewpager.widget.ViewPager>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

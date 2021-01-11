@@ -1,7 +1,6 @@
 package ru.firstSet.kotlinOne
 
 import android.content.Context
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
@@ -26,11 +25,11 @@ private class JsonActor(
 )
 
 @Serializable
-private class JsonMovie(
+public class JsonMovie(
     val id: Int,
-    val title: String,
+    var title: String,
     @SerialName("poster_path")
-    val posterPicture: String,
+    var posterPicture: String,
     @SerialName("backdrop_path")
     val backdropPicture: String,
     val runtime: Int,
@@ -89,22 +88,21 @@ internal fun parseMovies(
 
     return jsonMovies.map { jsonMovie ->
         Movie(
-            id = jsonMovie.id,
+            id = jsonMovie.id.toLong(),
             title = jsonMovie.title,
             overview = jsonMovie.overview,
-            poster = jsonMovie.posterPicture,
-            backdrop = jsonMovie.backdropPicture,
+            posterPicture = jsonMovie.posterPicture,
+            backdropPicture = jsonMovie.backdropPicture,
             ratings = jsonMovie.ratings,
-            adult = jsonMovie.adult,
             runtime = jsonMovie.runtime,
-            genres = jsonMovie.genreIds.map {
+            genreIds = jsonMovie.genreIds.map {
                 genresMap[it] ?: throw IllegalArgumentException("Genre not found")
             },
             actors = jsonMovie.actors.map {
                 actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
             },
-            votCount = jsonMovie.vote_count,
-            minAge = if (jsonMovie.adult) 16 else 13,
+            vote_count = jsonMovie.vote_count,
+            adult = if (jsonMovie.adult) 16 else 13,
         )
     }
 }

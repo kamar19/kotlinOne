@@ -68,17 +68,17 @@ class FragmentMovieDetails : Fragment() {
         listRecyclerView.adapter = ActorsAdapter(movie.actors)
         fmdMovieName.text = movie.title
         fmdRatingBar.rating = movie.ratings.div(2)
-        fmdSomeId.text = "${movie.minAge}+"
+        fmdSomeId.text = movie.adult.toString()+"+"
         scope.launch {
             Glide
                 .with(context)
-                .load(movie.backdrop)
+                .load(movie.backdropPicture)
                 .into(fmdPoster)
         }
         fmdMovieName.text = movie.title
-        fmdTextViewTeg.text = movie.genres.joinToString(separator = ", ") { it.name }
+        fmdTextViewTeg.text = movie.genreIds.joinToString(separator = ", ") { it.name }
         fmdReview.text =
-            movie.votCount.toString() + " " + getString(R.string.textViewReview)
+            movie.vote_count.toString() + " " + getString(R.string.textViewReview)
         fmdStoryLineContent.text = movie.overview
         progressBar.visibility =ProgressBar.INVISIBLE
 
