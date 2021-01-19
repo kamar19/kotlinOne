@@ -22,4 +22,6 @@
     <string name="fmlNameMovie">Avengers: End Game</string>
     <string name="oveList">button</string>
     <string name="fragmentMovieChosenText">You chose: %1$s</string>
+    <string name="frg_name_text">Robert \nDowney Jr.</string>
+
 </resources>

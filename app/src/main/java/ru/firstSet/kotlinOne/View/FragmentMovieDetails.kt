@@ -58,6 +58,9 @@ class FragmentMovieDetails : Fragment() {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
+//        нажатие на картинку
+
+
         arguments?.let { viewModel.getMovie(it) }
     }
 

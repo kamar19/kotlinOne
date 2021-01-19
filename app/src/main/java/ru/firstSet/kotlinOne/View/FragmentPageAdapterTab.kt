@@ -11,9 +11,9 @@ class FragmentPageAdapterTab(val childFragmentManager: FragmentManager) : Fragme
     override fun getItem(position: Int): FragmentMoviesListPage =
         when (position) {
             0 -> FragmentMoviesListPage(SeachMovie.MovieNowPlaying)
-            1 -> FragmentMoviesListPage(SeachMovie.MovieNowPlaying)
-            2 -> FragmentMoviesListPage(SeachMovie.MoviePopular)
-            3 -> FragmentMoviesListPage(SeachMovie.MovieTopRated)
+            1 -> FragmentMoviesListPage(SeachMovie.MoviePopular)
+            2 -> FragmentMoviesListPage(SeachMovie.MovieTopRated)
+            3 -> FragmentMoviesListPage(SeachMovie.MovieUpComing)
             else -> FragmentMoviesListPage(SeachMovie.MovieUpComing)
         }
 
