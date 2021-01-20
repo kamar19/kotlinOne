@@ -3,10 +3,4 @@
     <array name="preloadedFonts" translatable="false">
         <item>@font/roboto_condensed_light</item>
     </array>
-    <array>
-        <item>@font/roboto_thin</item>
-    </array>
-    <array>
-        <item>@font/roboto_black</item>
-    </array>
 </resources>

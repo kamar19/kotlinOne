@@ -27,7 +27,7 @@
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+            android:resource="@array/preloadedFonts" />
     </application>
     <uses-permission android:name= "android.permission.WRITE_INTERNAL_STORAGE"
         tools:ignore="ManifestOrder" />
