@@ -9,6 +9,7 @@
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".MyApplication"
         android:theme="@style/Theme.KotlinOne">
 
         <activity

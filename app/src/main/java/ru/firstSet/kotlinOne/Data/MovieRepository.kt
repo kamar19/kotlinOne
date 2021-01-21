@@ -5,9 +5,8 @@ import ru.firstSet.kotlinOne.Genre
 import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class MovieRepository {
+class MovieRepository(val remoteDataStore: RemoteDataStore) {
     private val BASE_URL_MOVIES = "https://image.tmdb.org/t/p/original"
-    private val remoteDataStore = ru.firstSet.kotlinOne.Data.RemoteDataStore
 
     suspend fun loadGenre(): List<Genre> = withContext(Dispatchers.IO) {
         remoteDataStore.getSearchGenre().genres.map { Genre(id = it.id, name = it.name) }

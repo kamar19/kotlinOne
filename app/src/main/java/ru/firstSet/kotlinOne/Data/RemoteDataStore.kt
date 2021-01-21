@@ -10,9 +10,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import ru.firstSet.kotlinOne.ResultGenre
 
-object RemoteDataStore {
-    private const val BASE_URL = "https://api.themoviedb.org/3/"
-    private const val apiKey = "f1eaa713b8b88ceef63a9cd8be1f7920"
+private const val BASE_URL = "https://api.themoviedb.org/3/"
+private const val apiKey = "f1eaa713b8b88ceef63a9cd8be1f7920"
+
+class RemoteDataStore {
 
     private val client = OkHttpClient().newBuilder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
