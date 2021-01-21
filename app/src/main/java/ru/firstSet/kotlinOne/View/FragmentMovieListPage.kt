@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerTabStrip
+import org.koin.android.viewmodel.ext.android.viewModel
 import ru.firstSet.kotlinOne.Data.Movie
 import ru.firstSet.kotlinOne.Data.SeachMovie
 import ru.firstSet.kotlinOne.R
@@ -20,6 +21,9 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
     private var listRecyclerView: RecyclerView? = null
     private lateinit var progressBar: ProgressBar
     private lateinit var pagerTabStrip: PagerTabStrip
+
+    val viewModel: ViewModelMoviesList by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -33,9 +37,12 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MainActivity.viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
-        MainActivity.viewModel.loadMoviewList(seachMovie)
+
+        viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
+        viewModel.loadMoviewList(seachMovie)
+
         progressBar = view.findViewById(R.id.progressBarTab)
+
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
         listRecyclerView?.adapter =
@@ -43,7 +50,7 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
     }
 
     fun doOnClick(id: Int) {
-        MainActivity.viewModel.stateLiveData.value?.let {
+        viewModel.stateLiveData.value?.let {
             getMovie(it, id)?.let { callFragmentMovieDetails(it) }
         }
     }

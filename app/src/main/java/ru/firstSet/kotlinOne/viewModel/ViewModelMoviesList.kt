@@ -7,11 +7,10 @@ import ru.firstSet.kotlinOne.Data.MovieRepository
 import ru.firstSet.kotlinOne.Data.SeachMovie
 import ru.firstSet.kotlinOne.View.MainActivity
 
-object ViewModelMoviesList : ViewModel() {
+class ViewModelMoviesList(private val movieRepository: MovieRepository) : ViewModel() {
     private var scope = viewModelScope
     private val mutableState = MutableLiveData<ViewModelListState>(ViewModelListState.Loading)
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
-    val movieRepository: MovieRepository = MovieRepository()
 
     fun loadMoviewList(seachMovie: SeachMovie): List<Movie> {
         var newMoviesList: List<Movie> = listOf()
