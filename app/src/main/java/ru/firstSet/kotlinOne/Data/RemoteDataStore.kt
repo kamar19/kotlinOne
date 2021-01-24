@@ -1,5 +1,6 @@
 package ru.firstSet.kotlinOne.Data
 
+import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -44,7 +45,7 @@ object RemoteDataStore {
         }
     }
 
-    suspend fun getSearchGenre(): ResultGenre {
+    suspend fun getGenreFromNet(): ResultGenre {
         return moviesApi.getSearchGenre()
     }
 
@@ -59,4 +60,5 @@ object RemoteDataStore {
     suspend fun getSearchRuntimes(movie_id: Long?): ResultDetails {
         return moviesApi.getSearchRuntimes(movie_id)
     }
+
 }

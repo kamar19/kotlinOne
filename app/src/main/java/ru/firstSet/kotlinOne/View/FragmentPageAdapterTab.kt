@@ -6,7 +6,7 @@ import ru.firstSet.kotlinOne.Data.SeachMovie
 
 class FragmentPageAdapterTab(val childFragmentManager: FragmentManager) : FragmentPagerAdapter(
     childFragmentManager,
-    FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 ) {
     override fun getItem(position: Int): FragmentMoviesListPage =
         when (position) {

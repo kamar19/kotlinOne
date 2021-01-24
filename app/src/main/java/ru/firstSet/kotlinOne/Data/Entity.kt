@@ -1,72 +1,94 @@
 package ru.firstSet.kotlinOne.Data
 
+import android.os.Parcelable
 import androidx.room.*
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Entity(
     tableName = DBContract.MovieColumns.TABLE_NAME,
     indices = [Index(DBContract.MovieColumns.COLUMN_NAME_ID)]
 )
-data class MovieEntity(
+public data class MovieEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ID)
-    val id: Long = 0,
+    var id: Long = 0,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_TITLE)
-    val title: String,
+    var title: String="",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_POSTERPICTURE)
-    var posterPicture: String,
+    var posterPicture: String="",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_BACKDROPPICTURE)
-    var backdropPicture: String,
+    var backdropPicture: String="",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_RUNTIME)
-    var runtime: Int,
-//        @ColumnInfo(name = MovieDBContract.MovieColumns.COLUMN_NAME_GENREIDS)
-//        var genreIds: List<Genre>,
-//        @ColumnInfo(name = MovieDBContract.MovieColumns.COLUMN_NAME_ACTORS)
-//        var actors: List<Actor>,
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_RATINGS)
-    var ratings: Float,
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_OVERVIEW)
-    var overview: String,
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ADULT)
-    var adult: Int,
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_VOTE_COUNT)
-    var vote_count: Int
+    var runtime: Int= 0,
+//    @Ignore
+//    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENREIDS)
+//    public var genres: List<Genre> = listOf(),
+    // withContext(Dispatchers.IO) { movieRepository.loadGenre(id) }
+//    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTORS)
+//    var actors: List<ActorEntity>,
+//    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_RATINGS)
+    var ratings: Float = 0F,
 
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_OVERVIEW)
+    var overview: String="",
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ADULT)
+    var adult: Int= 0,
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_VOTE_COUNT)
+    var vote_count: Int= 0
 )
 
 @Entity(
     tableName = DBContract.MovieColumns.TABLE_NAME_ACTOR,
     foreignKeys = [ForeignKey(
-        entity = Movie::class,
+        entity = MovieEntity::class,
         parentColumns = arrayOf("id"),
-        childColumns = arrayOf("movieId"),
+        childColumns = arrayOf("actorMovieId"),
         onDelete = ForeignKey.CASCADE
     )]
 )
 data class ActorEntity(
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_ID)
-    val id: Int,
+    var actorId: Int,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_PICTURE)
-    val picture: String,
+    var picture: String,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_NAME)
-    val name: String,
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ID)
-    val movieId: Int,
+    var actorName: String,
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_MOVIEID)
+    var actorMovieId: Int,
 )
 
 @Entity(
     tableName = DBContract.MovieColumns.TABLE_NAME_GENRE,
     foreignKeys = [ForeignKey(
-        entity = Movie::class,
+        entity = MovieEntity::class,
         parentColumns = arrayOf("id"),
-        childColumns = arrayOf("movieId"),
+        childColumns = arrayOf("genreMovieId"),
         onDelete = ForeignKey.CASCADE
     )]
 )
+@Parcelize
+@Serializable
+@SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
 data class GenreEntity(
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_ID)
-    val id: Int,
+    @SerialName("id")
+    var idGenre: Int,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_NAME)
-    val name: String,
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ID)
-    val movieId: Int
-)
+    var name: String="",
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_MOVIEID)
+    var genreMovieId: Long
+): Parcelable
+
+//data class MovieAndActorAndGenre(
+//    @Embedded
+//    val movieEntity: Movie,
+//    @Relation(parentColumn = "id", entityColumn = "genreMovieId", entity = Genre::class)
+//    var genres: List<Genre>? = null,
+//    @Relation(parentColumn = "id", entityColumn = "actorMovieId", entity = ActorEntity::class)
+//    var actors: List<ActorEntity>? = null
+
+//)

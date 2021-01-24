@@ -7,10 +7,10 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
-data class Genre(val id: Int, val name: String) : Parcelable
+data class GenreFromNET(val id: Int, val name: String) : Parcelable
 
 @Serializable
 data class ResultGenre(
     @SerialName("genres")
-    val genres: List<Genre>
+    val genres: List<GenreFromNET>
 )

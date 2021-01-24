@@ -13,7 +13,7 @@ import ru.firstSet.kotlinOne.viewModel.ViewModelMoviesList
 
 class FragmentMoviesList() : Fragment() {
     private var fmlConstraintLayoutList: ConstraintLayout? = null
-    val viewModel: ViewModelMoviesList = MainActivity.viewModel
+//    val viewModel: ViewModelMoviesList = MainActivity.viewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

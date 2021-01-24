@@ -5,18 +5,26 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [MovieEntity::class], version = 1)
+//@Database(entities = [MovieEntity::class,ActorEntity::class,GenreEntity::class], version = 1)
+@Database(entities = [MovieEntity::class, GenreEntity::class], version = 2, exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
     abstract val movieDAO: MovieDAO
-    abstract val actorDAO: ActorDAO
+//    abstract val actorDAO: ActorDAO
 
     companion object {
-        fun create(applicationContext: Context): MovieDatabase = Room.databaseBuilder(
-            applicationContext,
-            MovieDatabase::class.java,
-            DBContract.DATABASE_NAME
-        )
-            .fallbackToDestructiveMigration()
-            .build()
+        var instance: MovieDatabase? =null
+
+        fun createMovieDatabaseInstance(applicationContext: Context): MovieDatabase {
+            if (this.instance == null) {
+                instance = Room.databaseBuilder(
+                    applicationContext,
+                    MovieDatabase::class.java,
+                    DBContract.DATABASE_NAME
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+            }
+            return instance as MovieDatabase
+        }
+        }
     }
-}

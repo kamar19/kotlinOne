@@ -68,7 +68,7 @@ class FragmentMovieDetails : Fragment() {
     private fun updateMovie(movie: Movie) {
         listRecyclerView.layoutManager =
             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-        listRecyclerView.adapter = ActorsAdapter(movie.actors)
+//        listRecyclerView.adapter = ActorsAdapter(movie.actors)
         fmdMovieName.text = movie.title
         fmdRatingBar.rating = movie.ratings.div(2)
         fmdSomeId.text = movie.adult.toString()+"+"
@@ -79,7 +79,7 @@ class FragmentMovieDetails : Fragment() {
                 .into(fmdPoster)
         }
         fmdMovieName.text = movie.title
-        fmdTextViewTeg.text = movie.genreIds.joinToString(separator = ", ") { it.name }
+        fmdTextViewTeg.text = movie.genres.joinToString(separator = ", ") { it.name }
         fmdReview.text =
             movie.vote_count.toString() + " " + getString(R.string.textViewReview)
         fmdStoryLineContent.text = movie.overview

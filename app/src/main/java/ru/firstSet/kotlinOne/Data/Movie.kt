@@ -1,17 +1,13 @@
 package ru.firstSet.kotlinOne.Data
 
-import android.os.Parcel
 import android.os.Parcelable
-import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
-import ru.firstSet.kotlinOne.Genre
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Parcelize
 data class Movie(
-    val id: Long,
+    var id: Long,
     var title: String,
     @SerialName("poster_path")
     var posterPicture: String,
@@ -19,7 +15,7 @@ data class Movie(
     var backdropPicture: String,
     var runtime: Int,
     @SerialName("genre_ids")
-    var genreIds: List<Genre>,
+    var genres: List<GenreEntity>,
     var actors: List<Actor>,
     @SerialName("vote_average")
     var ratings: Float,
@@ -28,8 +24,27 @@ data class Movie(
     var vote_count: Int
 ) : Parcelable
 
+//@Parcelize
+//data class Movie2(
+//    val id: Long,
+//    var title: String,
+//    @SerialName("poster_path")
+//    var posterPicture: String,
+//    @SerialName("backdrop_path")
+//    var backdropPicture: String,
+//    var runtime: Int,
+////    @SerialName("genre_ids")
+////    var genreIds: List<Genre>,
+////    var actors: List<Actor>,
+//    @SerialName("vote_average")
+//    var ratings: Float,
+//    var overview: String,
+//    var adult: Int,
+//    var vote_count: Int
+//) : Parcelable
+
 @Serializable
-data class MovieForSeach(
+data class MovieForNET(
     @SerialName("id")
     val id: Long,
     @SerialName("backdrop_path")
@@ -52,7 +67,7 @@ data class ResultMovie(
     @SerialName("page")
     val page: Int,
     @SerialName("results")
-    val movieForSeach: List<MovieForSeach>
+    val movieForNETS: List<MovieForNET>
 )
 
 @Serializable
