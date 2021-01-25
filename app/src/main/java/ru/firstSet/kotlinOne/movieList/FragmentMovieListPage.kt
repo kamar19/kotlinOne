@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,16 +10,19 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerTabStrip
-import ru.firstSet.kotlinOne.Data.Movie
-import ru.firstSet.kotlinOne.Data.SeachMovie
+import org.koin.android.viewmodel.ext.android.viewModel
+import ru.firstSet.kotlinOne.MainActivity
+import ru.firstSet.kotlinOne.data.Movie
+import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.R
-import ru.firstSet.kotlinOne.viewModel.ViewModelMoviesList
-
+import ru.firstSet.kotlinOne.movieDetails.FragmentMovieDetails
 
 class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
     private var listRecyclerView: RecyclerView? = null
     private lateinit var progressBar: ProgressBar
     private lateinit var pagerTabStrip: PagerTabStrip
+    val viewModel: ViewModelMoviesList  by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -33,8 +36,8 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MainActivity.viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
-        MainActivity.viewModel.loadMoviewList(seachMovie)
+        viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
+        viewModel.loadMovieList(seachMovie)
         progressBar = view.findViewById(R.id.progressBarTab)
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
@@ -43,7 +46,7 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
     }
 
     fun doOnClick(id: Int) {
-        MainActivity.viewModel.stateLiveData.value?.let {
+        viewModel.stateLiveData.value?.let {
             getMovie(it, id)?.let { callFragmentMovieDetails(it) }
         }
     }

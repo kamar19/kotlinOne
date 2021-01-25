@@ -1,21 +1,27 @@
-package ru.firstSet.kotlinOne.Data
+package ru.firstSet.kotlinOne.repository
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ru.firstSet.kotlinOne.GenreEntity
+import ru.firstSet.kotlinOne.data.ActorEntity
+import ru.firstSet.kotlinOne.data.DBContract
+import ru.firstSet.kotlinOne.data.MovieDAO
+import ru.firstSet.kotlinOne.data.MovieEntity
 
-//@Database(entities = [MovieEntity::class,ActorEntity::class,GenreEntity::class], version = 1)
-@Database(entities = [MovieEntity::class, GenreEntity::class,ActorEntity::class], version = 12, exportSchema = false)
+@Database(
+    entities = [MovieEntity::class, GenreEntity::class, ActorEntity::class],
+    version = 12,
+    exportSchema = false
+)
 abstract class MovieDatabase : RoomDatabase() {
     abstract val movieDAO: MovieDAO
-//    abstract val actorDAO: ActorDAO
 
     companion object {
-        var instance: MovieDatabase? =null
-
+        var instance: MovieDatabase? = null
         fun createMovieDatabaseInstance(applicationContext: Context): MovieDatabase {
-            if (this.instance == null) {
+            if (instance == null) {
                 instance = Room.databaseBuilder(
                     applicationContext,
                     MovieDatabase::class.java,
@@ -26,5 +32,5 @@ abstract class MovieDatabase : RoomDatabase() {
             }
             return instance as MovieDatabase
         }
-        }
     }
+}

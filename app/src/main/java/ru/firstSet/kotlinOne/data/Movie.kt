@@ -1,9 +1,40 @@
-package ru.firstSet.kotlinOne.Data
+package ru.firstSet.kotlinOne.data
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import ru.firstSet.kotlinOne.GenreEntity
+
+@Entity(
+    tableName = DBContract.MovieColumns.TABLE_NAME,
+    indices = [Index(DBContract.MovieColumns.COLUMN_NAME_ID)]
+)
+public data class MovieEntity(
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ID)
+    var id: Long = 0,
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_TITLE)
+    var title: String="",
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_POSTERPICTURE)
+    var posterPicture: String="",
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_BACKDROPPICTURE)
+    var backdropPicture: String="",
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_RUNTIME)
+    var runtime: Int= 0,
+    var ratings: Float = 0F,
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_OVERVIEW)
+    var overview: String="",
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ADULT)
+    var adult: Int= 0,
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_VOTE_COUNT)
+    var vote_count: Int= 0,
+    var seachMovie: String=""
+)
 
 @Parcelize
 data class Movie(
@@ -23,25 +54,6 @@ data class Movie(
     var adult: Int,
     var vote_count: Int
 ) : Parcelable
-
-//@Parcelize
-//data class Movie2(
-//    val id: Long,
-//    var title: String,
-//    @SerialName("poster_path")
-//    var posterPicture: String,
-//    @SerialName("backdrop_path")
-//    var backdropPicture: String,
-//    var runtime: Int,
-////    @SerialName("genre_ids")
-////    var genreIds: List<Genre>,
-////    var actors: List<Actor>,
-//    @SerialName("vote_average")
-//    var ratings: Float,
-//    var overview: String,
-//    var adult: Int,
-//    var vote_count: Int
-//) : Parcelable
 
 @Serializable
 data class MovieForNET(

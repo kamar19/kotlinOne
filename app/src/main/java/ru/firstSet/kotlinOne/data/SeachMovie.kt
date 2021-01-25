@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.Data
+package ru.firstSet.kotlinOne.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

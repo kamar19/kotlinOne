@@ -1,6 +1,5 @@
-package ru.firstSet.kotlinOne.Data
+package ru.firstSet.kotlinOne.repository
 
-import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -10,10 +9,12 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import ru.firstSet.kotlinOne.ResultGenre
+import ru.firstSet.kotlinOne.data.MoviesApi
+import ru.firstSet.kotlinOne.data.ResultActor
+import ru.firstSet.kotlinOne.data.ResultDetails
+import ru.firstSet.kotlinOne.data.ResultMovie
 
-object RemoteDataStore {
-    private const val BASE_URL = "https://api.themoviedb.org/3/"
-    private const val apiKey = "f1eaa713b8b88ceef63a9cd8be1f7920"
+class RemoteDataStore {
 
     private val client = OkHttpClient().newBuilder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -61,4 +62,9 @@ object RemoteDataStore {
         return moviesApi.getSearchRuntimes(movie_id)
     }
 
+    companion object {
+        val BASE_URL = "https://api.themoviedb.org/3/"
+        val apiKey = "f1eaa713b8b88ceef63a9cd8be1f7920"
+        val BASE_URL_MOVIES = "https://image.tmdb.org/t/p/original"
+    }
 }

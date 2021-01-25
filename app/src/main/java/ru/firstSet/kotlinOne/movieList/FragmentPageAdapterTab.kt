@@ -1,8 +1,8 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieList
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import ru.firstSet.kotlinOne.Data.SeachMovie
+import ru.firstSet.kotlinOne.data.SeachMovie
 
 class FragmentPageAdapterTab(val childFragmentManager: FragmentManager) : FragmentPagerAdapter(
     childFragmentManager,

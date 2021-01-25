@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieList
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ru.firstSet.kotlinOne.Data.Movie
+import ru.firstSet.kotlinOne.data.Movie
 import com.bumptech.glide.Glide
 import ru.firstSet.kotlinOne.R
 

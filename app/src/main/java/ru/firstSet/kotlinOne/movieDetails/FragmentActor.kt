@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieDetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

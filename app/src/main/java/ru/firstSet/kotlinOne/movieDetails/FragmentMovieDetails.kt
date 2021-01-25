@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieDetails
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
-import ru.firstSet.kotlinOne.Data.Movie
+import org.koin.android.viewmodel.ext.android.viewModel
+import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.R
-import ru.firstSet.kotlinOne.viewModel.ViewModelMovieDetails
 
 class FragmentMovieDetails : Fragment() {
     private lateinit var imageViewBack: View
@@ -27,7 +27,7 @@ class FragmentMovieDetails : Fragment() {
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var progressBar:ProgressBar
     private var scope = CoroutineScope(Dispatchers.Main)
-    val viewModel: ViewModelMovieDetails = ViewModelMovieDetails()
+    val viewModel: ViewModelMovieDetails by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +58,6 @@ class FragmentMovieDetails : Fragment() {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
-//        нажатие на картинку
-
-
         arguments?.let { viewModel.getMovie(it) }
     }
 
@@ -84,7 +81,6 @@ class FragmentMovieDetails : Fragment() {
             movie.vote_count.toString() + " " + getString(R.string.textViewReview)
         fmdStoryLineContent.text = movie.overview
         progressBar.visibility =ProgressBar.INVISIBLE
-
     }
 
     fun setState(state: ViewModelMovieDetails.ViewModelDetailState) =
