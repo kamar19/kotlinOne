@@ -68,7 +68,7 @@ class FragmentMovieDetails : Fragment() {
     private fun updateMovie(movie: Movie) {
         listRecyclerView.layoutManager =
             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-//        listRecyclerView.adapter = ActorsAdapter(movie.actors)
+        listRecyclerView.adapter = ActorsAdapter(movie.actors)
         fmdMovieName.text = movie.title
         fmdRatingBar.rating = movie.ratings.div(2)
         fmdSomeId.text = movie.adult.toString()+"+"

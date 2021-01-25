@@ -19,20 +19,25 @@ interface MovieDAO {
 //    @Query("SELECT id, title, backdropPicture,posterPicture,runtime,ratings, " +
 //            "overview, adult,vote_count FROM moviesTable")
     @Transaction
-    @Query("SELECT * FROM moviesTable")
-    suspend fun getAllMovies(): List<MovieEntity>
-
-
-
+    @Query("SELECT * FROM moviesTable WHERE seachMovie= :seachMovie ORDER BY ratings DESC")
+    suspend fun getAllMovies(seachMovie: String): List<MovieEntity>
 
 
 //    @Transaction
 //    @Query("SELECT * FROM moviesTable, genreTable WHERE  moviesTable.id==genreTable.genreMovieId")
 //    suspend fun getMovieAndGenre(): List<Movie>
 
-    @Transaction
-    @Query("SELECT genreId, genreName, genreMovieId FROM genreTable WHERE genreTable.genreId ==:id")
-    suspend fun getGenresFromSQL(id:Int): List<GenreEntity>
+    @Query("SELECT * FROM genreTable WHERE genreMovieId = :idMovie")
+    suspend fun getGenresFromSQL(idMovie:Long): List<GenreEntity>
+
+    @Query("SELECT * FROM genreTable")
+    suspend fun getAllGenres(): List<GenreEntity>
+
+    @Query("SELECT * FROM actorTable WHERE actorMovieId ==:idMovie")
+    suspend fun getActorFromSQL(idMovie:Long): List<ActorEntity>
+
+
+
 
 //    @Query("SELECT genreId, genreName, genreMovieId FROM genreTable ")
 //    suspend fun getGenres(): List<Genre>
@@ -64,16 +69,23 @@ interface MovieDAO {
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertMovies(movies: List<MovieEntity>)
+    suspend fun saveMovies(movies: List<MovieEntity>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertGenres(genreEntity: List<GenreEntity>)//:List<GenreEntity>
+    suspend fun saveGenres(genres: List<GenreEntity>)//:List<GenreEntity>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun saveActors(actors: List<ActorEntity>)//:List<GenreEntity>
 
 
-//    @Transaction
-//    @Query("DELETE FROM moviesTable")
-//    suspend fun deleteAllMovies()
-//
+    @Transaction
+    @Query("DELETE FROM moviesTable")
+    suspend fun deleteAllMovies()
+
+    @Transaction
+    @Query("DELETE FROM actorTable")
+    suspend fun deleteActors()
+
 //    @Insert(onConflict = OnConflictStrategy.IGNORE)
 //    suspend fun insert(actorEntity: ActorEntity)
 }

@@ -16,47 +16,31 @@ object ViewModelMoviesList : ViewModel() {
         var newMoviesList: List<Movie> = listOf()
         var newMoviesEntryList: List<Movie> = listOf()
         scope.launch {
-            movieRepository.readMovieFromDb().also {
+            movieRepository.readMovieFromDb(seachMovie).also {
 //                if (it != null) {
-                    newMoviesEntryList = it
+                newMoviesEntryList = it
                 Log.v("readMovieFromDb", " ${it.size}")
 //            }
 
-
-                }
-            Log.v("readMovieFromDb", " ${movieRepository.movieDataBase}")
-
-//
-//                val localFilms = withContext(Dispatchers.IO) {
-//                    readFilmsFromDb()
-//                }
-//                if (localFilms.isNotEmpty()) {
-//                    filmsMutableData.value = localFilms
-//                }
-//                val remoteFilmsResult = withContext(Dispatchers.IO) {
-//                    NetworkManager.getFilms()
-//
-//
-//                }
-            if (newMoviesEntryList.size>0)
-            {
+                if (newMoviesEntryList.size > 0) {
 //                Log.v("newMoviesEntryList","$newMoviesEntryList size>0")
-                newMoviesList = newMoviesEntryList
-
+                    newMoviesList = newMoviesEntryList
+                    mutableState.setValue(ViewModelListState.Success(newMoviesList))
+                }
             }
+        }
 
-                newMoviesList = movieRepository.loadMoviesFromNET(seachMovie.seachMovie)
-//                Log.v("newMoviesList"," ${newMoviesList.size}")
-
-
+        scope.launch {
+            newMoviesList = movieRepository.loadMoviesFromNET(seachMovie.seachMovie)
             if (newMoviesList.isEmpty()) {
                 mutableState.setValue(ViewModelListState.Error("Size error"))
             } else {
                 mutableState.setValue(ViewModelListState.Success(newMoviesList))
-                Log.v("newMoviesList"," setValue")
+                Log.v("newMoviesList", " setValue")
 
-                movieRepository.saveMovieToDB(newMoviesList)
+                movieRepository.saveMovieToDB(newMoviesList,seachMovie)
             }
+
         }
         return newMoviesList
     }

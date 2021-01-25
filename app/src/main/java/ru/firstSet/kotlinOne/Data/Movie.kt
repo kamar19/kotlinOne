@@ -16,7 +16,7 @@ data class Movie(
     var runtime: Int,
     @SerialName("genre_ids")
     var genres: List<GenreEntity>,
-    var actors: List<Actor>,
+    var actors: List<ActorEntity>,
     @SerialName("vote_average")
     var ratings: Float,
     var overview: String,

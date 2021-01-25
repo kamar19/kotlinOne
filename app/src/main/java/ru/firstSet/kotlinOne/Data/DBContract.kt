@@ -3,7 +3,12 @@ package ru.firstSet.kotlinOne.Data
 object DBContract {
     const val DATABASE_NAME = "moviesDB2.db"
     public object MovieColumns {
+        const val TABLE_NAME_NOWPLAYING = "now_playing"
+        const val TABLE_NAME_Popular = "popular"
+        const val TABLE_NAME_TopRated = "top_rated"
+        const val TABLE_NAME_UpComing= "upcoming"
         const val TABLE_NAME = "moviesTable"
+
         const val COLUMN_NAME_ID = "id"
         const val COLUMN_NAME_TITLE = "title"
         const val COLUMN_NAME_POSTERPICTURE = "posterPicture"

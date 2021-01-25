@@ -8,9 +8,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.firstSet.kotlinOne.Data.Actor
+import ru.firstSet.kotlinOne.Data.ActorEntity
 import ru.firstSet.kotlinOne.Data.Movie
-import ru.firstSet.kotlinOne.Data.MovieRepository
 import ru.firstSet.kotlinOne.MyAplication.Companion.movieRepository
 import ru.firstSet.kotlinOne.View.FragmentMovieDetails
 
@@ -23,16 +22,31 @@ class ViewModelMovieDetails() : ViewModel() {
 
     fun getMovie(bundle: Bundle) {
         val movie: Movie? = bundle.getParcelable<Movie>(FragmentMovieDetails.KEY_PARSE_DATA)
-        var actors: List<Actor> = listOf()
+        val actors: List<ActorEntity> = listOf()
+        var actors2: List<ActorEntity> = listOf()
         val id_movie: Long? = movie?.id
-        coroutineScope.launch {
-            actors = movieRepository.loadActor(id_movie)
-            Log.v("actors", "${actors.size}")
-//            movie?.actors = actors
-            movie?.let { movieDetailState.setValue(ViewModelDetailState.Success(it)) }
-                ?: movieDetailState.setValue(
-                    ViewModelDetailState.Error("Movie not find")
-                )
+        if (id_movie != null) {
+            coroutineScope.launch {
+                movie.actors = movieRepository.readActorFromDb(id_movie)
+                movie?.let { movieDetailState.setValue(ViewModelDetailState.Success(it)) }
+                    ?: movieDetailState.setValue(
+                        ViewModelDetailState.Error("Actors not find")
+                    )
+            }
+            coroutineScope.launch {
+                actors2 = movieRepository.loadActorFromNET(id_movie)
+                Log.v("loadActorFromNET", " ${actors2.size}")
+
+                if (actors2.size > 0)
+                    movie.actors = actors2
+                movie?.let { movieDetailState.setValue(ViewModelDetailState.Success(it)) }
+                    ?: movieDetailState.setValue(
+                        ViewModelDetailState.Error("Actors not find")
+                    )
+                Log.v("loadActorFromNET", " ${movie.actors.size}")
+
+                movieRepository.saveActorToDB(movie.actors)
+            }
         }
     }
 

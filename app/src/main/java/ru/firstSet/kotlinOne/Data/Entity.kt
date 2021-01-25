@@ -36,7 +36,8 @@ public data class MovieEntity(
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ADULT)
     var adult: Int= 0,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_VOTE_COUNT)
-    var vote_count: Int= 0
+    var vote_count: Int= 0,
+    var seachMovie: String=""
 )
 
 @Entity(
@@ -45,20 +46,45 @@ public data class MovieEntity(
         entity = MovieEntity::class,
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("actorMovieId"),
-        onDelete = ForeignKey.CASCADE
+        onDelete = ForeignKey.NO_ACTION
     )]
 )
+@Serializable
+@Parcelize
 data class ActorEntity(
     @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_MOVIEID)
+    var actorMovieId: Long,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_ID)
     var actorId: Int,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_PICTURE)
     var picture: String,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_NAME)
-    var actorName: String,
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_MOVIEID)
-    var actorMovieId: Int,
-)
+    var actorName: String
+):Parcelable
+
+//@Entity(
+//    tableName = DBContract.MovieColumns.TABLE_NAME_ACTOR,
+//    foreignKeys = [ForeignKey(
+//        entity = MovieEntity::class,
+//        parentColumns = arrayOf("id"),
+//        childColumns = arrayOf("actorMovieId"),
+//        onDelete = ForeignKey.NO_ACTION
+//    )]
+//)
+//@Serializable
+//@Parcelize
+//data class ActorEntity(
+//    @PrimaryKey(autoGenerate = false)
+//    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_ID)
+//    var actorId: Int,
+//    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_PICTURE)
+//    var picture: String,
+//    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_NAME)
+//    var actorName: String,
+//    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_MOVIEID)
+//    var actorMovieId: Long,
+//):Parcelable
 
 @Entity(
     tableName = DBContract.MovieColumns.TABLE_NAME_GENRE,
@@ -71,16 +97,16 @@ data class ActorEntity(
 )
 @Parcelize
 @Serializable
-@SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+//@SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
 data class GenreEntity(
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_MOVIEID)
     @PrimaryKey(autoGenerate = false)
+    var genreMovieId: Long,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_ID)
     @SerialName("id")
     var idGenre: Int,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_NAME)
-    var name: String="",
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_MOVIEID)
-    var genreMovieId: Long
+    var name: String=""
 ): Parcelable
 
 //data class MovieAndActorAndGenre(
