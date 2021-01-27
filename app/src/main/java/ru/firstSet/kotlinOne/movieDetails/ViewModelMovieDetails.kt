@@ -1,6 +1,7 @@
 package ru.firstSet.kotlinOne.movieDetails
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.data.ActorEntity
 import ru.firstSet.kotlinOne.data.Movie
-import ru.firstSet.kotlinOne.repository.Repositorys
+import ru.firstSet.kotlinOne.repository.RepositoryData
 
-class ViewModelMovieDetails(val repositorys: Repositorys) :
+class ViewModelMovieDetails(val repositoryData: RepositoryData) :
     ViewModel() {
     var coroutineScope = CoroutineScope(Dispatchers.Main)
 
@@ -20,25 +21,29 @@ class ViewModelMovieDetails(val repositorys: Repositorys) :
     val movieDetailStateLiveData: LiveData<ViewModelDetailState> get() = movieDetailState
 
     fun getMovie(bundle: Bundle) {
-        val movie: Movie? = bundle.getParcelable<Movie>(FragmentMovieDetails.KEY_PARSE_DATA)
-        var actors: List<ActorEntity> = listOf()
-
-        movie?.let {
-            coroutineScope.launch {
-                movie.actors = repositorys.readActorFromDb(movie.id)
-                movieDetailState.setValue(ViewModelDetailState.Success(it))
+        val id: Long = bundle.getLong(FragmentMovieDetails.KEY_PARSE_DATA)
+        var movie: Movie
+        coroutineScope.launch {
+            movie = repositoryData.readMovieFromDb(id)
+            movie.actors = repositoryData.readActorFromDb(id)
+            movieDetailState.setValue(ViewModelDetailState.Success(movie))
+        }
+        coroutineScope.launch {
+            movie = repositoryData.loadMovieFromNET(id)
+            movie.actors = repositoryData.loadActorFromNET(id)
+            if (movie.actors.size > 0) {
+                repositoryData.saveActorToDB(movie.actors)
+            } else {
+                movieDetailState.setValue(ViewModelDetailState.Error("Actors not find"))
             }
-            coroutineScope.launch {
-                actors = repositorys.loadActorFromNET(movie.id)
-                if (actors.size > 0) {
-                    movie.actors = actors
-                    movieDetailState.setValue(ViewModelDetailState.Success(it))
-                    repositorys.saveActorToDB(movie.actors)
-                }
+            if (movie.id > 0) {
+                movieDetailState.setValue(ViewModelDetailState.Success(movie))
+            } else {
+                movieDetailState.setValue(
+                    ViewModelDetailState.Error("Movie not find")
+                )
             }
-        } ?: movieDetailState.setValue(
-            ViewModelDetailState.Error("Actors not find")
-        )
+        }
     }
 
     sealed class ViewModelDetailState {

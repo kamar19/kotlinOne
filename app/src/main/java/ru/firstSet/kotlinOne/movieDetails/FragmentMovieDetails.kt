@@ -27,7 +27,7 @@ class FragmentMovieDetails : Fragment() {
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var progressBar:ProgressBar
     private var scope = CoroutineScope(Dispatchers.Main)
-    val viewModel: ViewModelMovieDetails by viewModel()
+    val viewModelDetail: ViewModelMovieDetails by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,13 +52,13 @@ class FragmentMovieDetails : Fragment() {
         fmdReview = view.findViewById(R.id.fmdReview)
         fmdStoryLineContent = view.findViewById(R.id.fmdStoryLineContent)
         progressBar = view.findViewById(R.id.progressBarMovieDetails)
-        viewModel.movieDetailStateLiveData.observe(viewLifecycleOwner, this::setState)
+        viewModelDetail.movieDetailStateLiveData.observe(viewLifecycleOwner, this::setState)
         imageViewBack = view.findViewById<View>(R.id.fmdImageViewPath).apply {
             setOnClickListener {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
-        arguments?.let { viewModel.getMovie(it) }
+        arguments?.let { viewModelDetail.getMovie(it) }
     }
 
     @SuppressLint("SetTextI18n")
@@ -105,9 +105,9 @@ class FragmentMovieDetails : Fragment() {
 
     companion object {
         const val KEY_PARSE_DATA = "movieDetails"
-        fun newInstance(movie: Movie) = FragmentMovieDetails().apply {
+        fun newInstance(id: Long) = FragmentMovieDetails().apply {
             arguments = Bundle().apply {
-                putParcelable(KEY_PARSE_DATA, movie)
+                putLong(KEY_PARSE_DATA, id.toLong())
             }
         }
     }

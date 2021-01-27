@@ -3,10 +3,10 @@ package ru.firstSet.kotlinOne.movieList
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.data.Movie
-import ru.firstSet.kotlinOne.repository.Repositorys
+import ru.firstSet.kotlinOne.repository.RepositoryData
 import ru.firstSet.kotlinOne.data.SeachMovie
 
-class ViewModelMoviesList(private val repositorys: Repositorys) : ViewModel() {
+class ViewModelMoviesList(private val repositoryData: RepositoryData) : ViewModel() {
     private var scope = viewModelScope
     private val mutableState = MutableLiveData<ViewModelListState>(ViewModelListState.Loading)
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
@@ -15,7 +15,7 @@ class ViewModelMoviesList(private val repositorys: Repositorys) : ViewModel() {
         var movies: List<Movie> = listOf()
         var moviesFromDb: List<Movie> = listOf()
         scope.launch {
-            repositorys.readMovieFromDb(seachMovie).also {
+            repositoryData.readMoviesFromDb(seachMovie).also {
                 moviesFromDb = it
             }
                 if (moviesFromDb.size > 0) {
@@ -24,10 +24,10 @@ class ViewModelMoviesList(private val repositorys: Repositorys) : ViewModel() {
                 }
         }
         scope.launch {
-            movies = repositorys.loadMoviesFromNET(seachMovie.seachMovie)
+            movies = repositoryData.loadMoviesFromNET(seachMovie.seachMovie)
             movies.let {
                 mutableState.setValue(ViewModelListState.Success(movies))
-                repositorys.saveMovieToDB(movies, seachMovie)
+                repositoryData.saveMovieToDB(movies, seachMovie)
             } ?: mutableState.setValue(ViewModelListState.Error("Size error"))
         }
         return movies

@@ -12,7 +12,7 @@ import ru.firstSet.kotlinOne.data.Movie
 import com.bumptech.glide.Glide
 import ru.firstSet.kotlinOne.R
 
-class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
+class MoviesViewAdapter(val someClickListener: (Long) -> Unit) :
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
     var movieList: List<Movie> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
@@ -21,9 +21,9 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
         )
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        holder.bind(getItem(position));
+        holder.bind(getItem(position.toInt()));
         holder.itemView.setOnClickListener {
-            someClickListener(position)
+            someClickListener(position.toLong())
         }
     }
 

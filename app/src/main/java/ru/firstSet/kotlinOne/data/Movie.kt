@@ -1,6 +1,7 @@
 package ru.firstSet.kotlinOne.data
 
 import android.os.Parcelable
+import android.provider.MediaStore
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
@@ -9,12 +10,13 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.firstSet.kotlinOne.GenreEntity
+import ru.firstSet.kotlinOne.GenreFromNET
 
 @Entity(
     tableName = DBContract.MovieColumns.TABLE_NAME,
     indices = [Index(DBContract.MovieColumns.COLUMN_NAME_ID)]
 )
-public data class MovieEntity(
+public data class MovieEntity( // класс для работы с БД
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ID)
     var id: Long = 0,
@@ -37,7 +39,8 @@ public data class MovieEntity(
 )
 
 @Parcelize
-data class Movie(
+@Serializable
+data class Movie( // Итоговый класс для работы
     var id: Long,
     var title: String,
     @SerialName("poster_path")
@@ -56,17 +59,36 @@ data class Movie(
 ) : Parcelable
 
 @Serializable
-data class MovieForNET(
+data class MovieForNET( // класс для работы с некоторыми запросами API
     @SerialName("id")
     val id: Long,
     @SerialName("backdrop_path")
-    val backdropPicture: String?,
+    val backdropPicture: String,
     @SerialName("title")
     val title: String,
     @SerialName("poster_path")
-    val posterPicture: String?,
+    val posterPicture: String,
     @SerialName("genre_ids")
     val genreIds: List<Int>,
+    @SerialName("vote_average")
+    val vote_average: Float,
+    val overview: String,
+    val adult: Boolean,
+    val vote_count: Int
+)
+
+@Serializable
+data class MovieDetail( // класс для получения запросов Detail из API
+    @SerialName("id")
+    val id: Long,
+    @SerialName("backdrop_path")
+    val backdropPicture: String,
+    @SerialName("title")
+    val title: String,
+    @SerialName("poster_path")
+    val posterPicture: String,
+    @SerialName("genres")
+    val genreIds: List<GenreFromNET>,
     @SerialName("vote_average")
     val vote_average: Float,
     val overview: String,

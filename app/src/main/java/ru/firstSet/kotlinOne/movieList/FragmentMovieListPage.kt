@@ -45,9 +45,9 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
             MoviesViewAdapter { item -> doOnClick(item) }
     }
 
-    fun doOnClick(id: Int) {
+    fun doOnClick(id: Long) {
         viewModel.stateLiveData.value?.let {
-            getMovie(it, id)?.let { callFragmentMovieDetails(it) }
+            getMovie(it, id)?.let { callFragmentMovieDetails(it.id) }
         }
     }
 
@@ -69,21 +69,21 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
                 errorMessage(state.error)
         }
 
-    fun getMovie(state: ViewModelMoviesList.ViewModelListState, id: Int): Movie? {
+    fun getMovie(state: ViewModelMoviesList.ViewModelListState, id: Long): Movie? {
         when (state) {
             is ViewModelMoviesList.ViewModelListState.Success -> {
                 updateData(state.list)
-                return state.list[id]
+                return state.list[id.toInt()]
             }
             else -> return null
         }
     }
 
-    fun callFragmentMovieDetails(movie: Movie) {
+    fun callFragmentMovieDetails(id: Long) {
         activity?.let {
             it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
             it.supportFragmentManager.beginTransaction()
-                .add(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(movie))
+                .add(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(id))
                 .addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
                 .commit()
         }

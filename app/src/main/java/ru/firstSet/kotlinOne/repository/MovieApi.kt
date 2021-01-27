@@ -15,5 +15,9 @@ import ru.firstSet.kotlinOne.ResultGenre
         suspend fun getSearchRuntimes(@Path("movie_id") movie_id: Long?): ResultDetails
 
         @GET("movie/{seachMovie}?language=ru-ru&query=2&include_adult=false")
-        suspend fun getMovie(@Path("seachMovie") seachMovie: String): ResultMovie
+        suspend fun getMovies(@Path("seachMovie") seachMovie: String): ResultMovie
+
+        @GET("movie/{movie_id}?language=ru-ru&query=2&include_adult=false")
+        suspend fun getMovie(@Path("movie_id") movie_id: Long?): MovieDetail
+
 }

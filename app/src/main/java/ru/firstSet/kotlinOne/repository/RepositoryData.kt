@@ -2,15 +2,12 @@ package ru.firstSet.kotlinOne.repository
 
 import kotlinx.coroutines.*
 import ru.firstSet.kotlinOne.GenreEntity
-import ru.firstSet.kotlinOne.data.ActorEntity
-import ru.firstSet.kotlinOne.data.Movie
-import ru.firstSet.kotlinOne.data.MovieEntity
-import ru.firstSet.kotlinOne.data.SeachMovie
+import ru.firstSet.kotlinOne.data.*
 import ru.firstSet.kotlinOne.repository.RemoteDataStore.Companion.BASE_URL_MOVIES
 import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class Repositorys(val remoteDataStore : RemoteDataStore, val movieDataBase : MovieDatabase) {
+class RepositoryData(val remoteDataStore: RemoteDataStore, val movieDataBase: MovieDatabase) {
 
     suspend fun loadGenreFromNET(idMovie: Long): List<GenreEntity> =
         remoteDataStore.getGenreFromNet().genres.map {
@@ -36,8 +33,22 @@ class Repositorys(val remoteDataStore : RemoteDataStore, val movieDataBase : Mov
         }
     }
 
+    suspend fun loadMovieFromNET(movieId: Long): Movie {
+        var movie: Movie
+        withContext(Dispatchers.IO) {
+            remoteDataStore.getMovie(movieId).apply {
+                movie = Movie(
+                    id, title, BASE_URL_MOVIES + posterPicture, BASE_URL_MOVIES + backdropPicture,
+                    loadRuntimesFromNET(id), loadGenreFromNET(id), actors = listOf(),
+                    vote_average, overview, adult = if (adult) 16 else 13, vote_count
+                )
+            }
+        }
+        return movie
+    }
+
     suspend fun loadMoviesFromNET(seachMovie: String): List<Movie> = withContext(Dispatchers.IO) {
-        return@withContext remoteDataStore.getMovie(seachMovie).movieForNETS.map { movie2 ->
+        return@withContext remoteDataStore.getMovies(seachMovie).movieForNETS.map { movie2 ->
             val genres: List<GenreEntity> = loadGenreFromNET(movie2.id)
             val genresMap = genres.associateBy { it.idGenre }
             Movie(
@@ -63,12 +74,21 @@ class Repositorys(val remoteDataStore : RemoteDataStore, val movieDataBase : Mov
             movieDataBase.movieDAO.getActorFromSQL(idMovie)
         }
 
-    suspend fun readMovieFromDb(seachMovie: SeachMovie): List<Movie> =
+
+    suspend fun readMoviesFromDb(seachMovie: SeachMovie): List<Movie> =
         withContext(Dispatchers.IO) {
             val moviesEntity: List<MovieEntity> =
                 movieDataBase.movieDAO.getAllMovies(seachMovie.seachMovie)
             convertMovieEntityToMovie(moviesEntity)
         }
+
+    suspend fun readMovieFromDb(idMovie: Long): Movie =
+        withContext(Dispatchers.IO) {
+            val moviesEntity: MovieEntity =
+                movieDataBase.movieDAO.getMovie(idMovie)
+            convertMovieEntityToMovie(listOf(moviesEntity)).get(0)
+        }
+
 
     suspend fun readGenreFromDb(idMovie: Long): List<GenreEntity> =
         withContext(Dispatchers.IO) {

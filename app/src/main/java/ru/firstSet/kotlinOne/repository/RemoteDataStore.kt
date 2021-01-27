@@ -9,10 +9,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import ru.firstSet.kotlinOne.ResultGenre
-import ru.firstSet.kotlinOne.data.MoviesApi
-import ru.firstSet.kotlinOne.data.ResultActor
-import ru.firstSet.kotlinOne.data.ResultDetails
-import ru.firstSet.kotlinOne.data.ResultMovie
+import ru.firstSet.kotlinOne.data.*
 
 class RemoteDataStore {
 
@@ -54,9 +51,14 @@ class RemoteDataStore {
         return moviesApi.getSearchActor(movie_id)
     }
 
-    suspend fun getMovie(seachMovie: String): ResultMovie {
-        return moviesApi.getMovie(seachMovie)
+    suspend fun getMovies(seachMovie: String): ResultMovie {
+        return moviesApi.getMovies(seachMovie)
     }
+
+    suspend fun getMovie(movie_id: Long): MovieDetail {
+        return moviesApi.getMovie(movie_id)
+    }
+
 
     suspend fun getSearchRuntimes(movie_id: Long?): ResultDetails {
         return moviesApi.getSearchRuntimes(movie_id)

@@ -8,6 +8,9 @@ interface MovieDAO {
     @Query("SELECT * FROM moviesTable WHERE seachMovie= :seachMovie ORDER BY ratings DESC")
     suspend fun getAllMovies(seachMovie: String): List<MovieEntity>
 
+    @Query("SELECT * FROM moviesTable WHERE id= :idMovie")
+    suspend fun getMovie(idMovie: Long): MovieEntity
+
     @Query("SELECT * FROM genreTable WHERE genreMovieId = :idMovie")
     suspend fun getGenresFromSQL(idMovie: Long): List<GenreEntity>
 
