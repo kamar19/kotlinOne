@@ -1,16 +1,12 @@
 package ru.firstSet.kotlinOne.data
 
 import android.os.Parcelable
-import android.provider.MediaStore
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.firstSet.kotlinOne.GenreEntity
-import ru.firstSet.kotlinOne.GenreFromNET
+import ru.firstSet.kotlinOne.Genre
 
 @Entity(
     tableName = DBContract.MovieColumns.TABLE_NAME,
@@ -19,7 +15,7 @@ import ru.firstSet.kotlinOne.GenreFromNET
 public data class MovieEntity( // класс для работы с БД
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ID)
-    var id: Long = 0,
+    var id: Long=0 ,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_TITLE)
     var title: String="",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_POSTERPICTURE)
@@ -38,6 +34,20 @@ public data class MovieEntity( // класс для работы с БД
     var seachMovie: String=""
 )
 
+data class MovieRelation(
+    @Embedded val movie: MovieEntity,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "genreMovieId",
+    )
+    val genreList: List<GenreEntity>,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "actorMovieId",
+    )
+    val actorList: List<ActorEntity>
+)
+
 @Parcelize
 @Serializable
 data class Movie( // Итоговый класс для работы
@@ -49,8 +59,8 @@ data class Movie( // Итоговый класс для работы
     var backdropPicture: String,
     var runtime: Int,
     @SerialName("genre_ids")
-    var genres: List<GenreEntity>,
-    var actors: List<ActorEntity>,
+    var genres: List<Genre>,
+    var actors: List<Actor>,
     @SerialName("vote_average")
     var ratings: Float,
     var overview: String,
@@ -88,7 +98,7 @@ data class MovieDetail( // класс для получения запросов
     @SerialName("poster_path")
     val posterPicture: String,
     @SerialName("genres")
-    val genreIds: List<GenreFromNET>,
+    val genreIds: List<Genre>,
     @SerialName("vote_average")
     val vote_average: Float,
     val overview: String,

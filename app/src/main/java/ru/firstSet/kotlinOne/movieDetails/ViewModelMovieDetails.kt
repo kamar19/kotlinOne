@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.firstSet.kotlinOne.data.ActorEntity
 import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.repository.RepositoryData
 
@@ -24,26 +23,29 @@ class ViewModelMovieDetails(val repositoryData: RepositoryData) :
         val id: Long = bundle.getLong(FragmentMovieDetails.KEY_PARSE_DATA)
         var movie: Movie
         coroutineScope.launch {
+
             movie = repositoryData.readMovieFromDb(id)
-            movie.actors = repositoryData.readActorFromDb(id)
-            movieDetailState.setValue(ViewModelDetailState.Success(movie))
-        }
-        coroutineScope.launch {
-            movie = repositoryData.loadMovieFromNET(id)
-            movie.actors = repositoryData.loadActorFromNET(id)
-            if (movie.actors.size > 0) {
-                repositoryData.saveActorToDB(movie.actors)
-            } else {
-                movieDetailState.setValue(ViewModelDetailState.Error("Actors not find"))
-            }
-            if (movie.id > 0) {
+//            movie.actors = repositoryData.readActorFromDb(id)
+            Log.v("actor.size", "${movie.actors.size}")
+
                 movieDetailState.setValue(ViewModelDetailState.Success(movie))
-            } else {
-                movieDetailState.setValue(
-                    ViewModelDetailState.Error("Movie not find")
-                )
-            }
         }
+//        coroutineScope.launch {
+//            movie = repositoryData.loadMovieFromNET(id)
+//            movie.actors = repositoryData.loadActorFromNET(id)
+//            if (movie.actors.size > 0) {
+//                repositoryData.saveActorToDB(movie.actors)
+//            } else {
+//                movieDetailState.setValue(ViewModelDetailState.Error("Actors not find"))
+//            }
+//            if (movie.id > 0) {
+//                movieDetailState.setValue(ViewModelDetailState.Success(movie))
+//            } else {
+//                movieDetailState.setValue(
+//                    ViewModelDetailState.Error("Movie not find")
+//                )
+//            }
+//        }
     }
 
     sealed class ViewModelDetailState {

@@ -1,10 +1,7 @@
 package ru.firstSet.kotlinOne.data
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -15,21 +12,28 @@ import kotlinx.serialization.Serializable
         entity = MovieEntity::class,
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("actorMovieId"),
-        onDelete = ForeignKey.NO_ACTION
-    )]
+        onDelete = ForeignKey.CASCADE
+    )],
+    indices = arrayOf(Index(value = ["actorMovieId"]))
+
 )
 @Serializable
 @Parcelize
 data class ActorEntity(
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_MOVIEID)
-    var actorMovieId: Long,
+//    @Ignore
+    var index: Int=0,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_ID)
-    var actorId: Int,
+    @SerialName("id")
+    var actorId: Int=0,
+    @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_MOVIEID)
+    var actorMovieId: Long=0,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_PICTURE)
-    var picture: String,
+    @SerialName("profile_path")
+    var picture: String="",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ACTOR_NAME)
-    var actorName: String
+    @SerialName("name")
+    var actorName: String=""
 ):Parcelable
 
 @Serializable
@@ -37,17 +41,33 @@ data class ResultActor(
     @SerialName("id")
     val page: Int,
     @SerialName("cast")
-    val actor2: List<Actor2>
+    val actors: List<Actor>
 )
-
+@Parcelize
 @Serializable
-data class Actor2(
+data class Actor(
     @SerialName("id")
-    val id: Int,
+    val id: Int=0,
     @SerialName("name")
-    val name: String,
+    val name: String="",
     @SerialName("profile_path")
-    val profile_path: String?
-)
+    var profile_path: String?=""
+):Parcelable
 
-
+//
+//@Entity(
+//    tableName = DBContract.MovieColumns.TABLE_NAME_ACTOR,
+//    foreignKeys = [ForeignKey(
+//        entity = MovieEntity::class,
+//        parentColumns = arrayOf("id"),
+//        childColumns = arrayOf("actorMovieId"),
+//        onDelete = ForeignKey.CASCADE
+//    )],
+//)
+//@Parcelize
+//@Serializable
+//data class ActorIdEntity(
+//    @SerialName("id")
+//    val id: Int=0,
+//):Parcelable
+//
