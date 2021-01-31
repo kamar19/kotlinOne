@@ -28,10 +28,10 @@ class FragmentMoviesList() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val viewPager: ViewPager = view.findViewById(R.id.viewpager)
         viewPager.adapter = FragmentPageAdapterTab(getChildFragmentManager())
-        viewPager.currentItem=0
+        viewPager.currentItem = 0
         val pagerTabStrip: PagerTabStrip = view.findViewById(R.id.pagerTabStrip)
-        pagerTabStrip.drawFullUnderline=false
-        pagerTabStrip.setTabIndicatorColorResource( R.color.colorLinePager )
+        pagerTabStrip.drawFullUnderline = false
+        pagerTabStrip.setTabIndicatorColorResource(R.color.colorLinePager)
         fmlConstraintLayoutList =
             view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
                 setOnClickListener {

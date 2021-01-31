@@ -1,9 +1,10 @@
 package ru.firstSet.kotlinOne.repository
 
 import kotlinx.coroutines.*
+import ru.firstSet.kotlinOne.Data.RemoteDataStore
+import ru.firstSet.kotlinOne.Data.RemoteDataStore.Companion.BASE_URL_MOVIES
 import ru.firstSet.kotlinOne.Genre
 import ru.firstSet.kotlinOne.data.*
-import ru.firstSet.kotlinOne.repository.RemoteDataStore.Companion.BASE_URL_MOVIES
 import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")

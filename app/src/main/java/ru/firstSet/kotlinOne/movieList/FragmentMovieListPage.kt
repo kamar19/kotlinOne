@@ -17,6 +17,7 @@ import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.R
 import ru.firstSet.kotlinOne.movieDetails.FragmentMovieDetails
 
+
 class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
     private var listRecyclerView: RecyclerView? = null
     private lateinit var progressBar: ProgressBar
