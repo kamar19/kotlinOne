@@ -15,34 +15,22 @@ import ru.firstSet.kotlinOne.data.MovieEntity
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("genreMovieId"),
         onDelete = ForeignKey.CASCADE,
-//        deferred = false
+        deferred = true
     )],
-    indices = arrayOf(Index(value = ["genreMovieId"]))
-//    primaryKeys = [ "index", "genreMovieId" ],
+    primaryKeys = arrayOf("genreMovieId", "genreId")
 )
-@Parcelize
 @Serializable
-data class GenreEntity(
-    @PrimaryKey(autoGenerate = true)
-//    @Ignore
-    var index: Int=0,
+@Parcelize
+data class Genre(
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_ID)
     @SerialName("id")
-    var genreId: Int=0,
+    var genreId: Int = 0,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_MOVIEID)
-    var genreMovieId: Long=0,
+    var genreMovieId: Long = 0,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_GENRE_NAME)
+    @SerialName("name")
     var name: String = ""
 ) : Parcelable
-
-@Parcelize
-@Serializable
-data class Genre(
-    val id: Int,
-//    var genreMovieId: Long,
-    val name: String,
-
-    ) : Parcelable
 
 @Serializable
 data class ResultGenre(

@@ -34,9 +34,9 @@ class ActorsAdapter(val actorList: List<Actor>) :
         fun bind(actor: Actor) {
             Glide
                 .with(itemView)
-                .load(actor.profile_path)
+                .load(actor.picture)
                 .into(actorFoto)
-            actorName.text = actor.name
+            actorName.text = actor.actorName
         }
     }
 }

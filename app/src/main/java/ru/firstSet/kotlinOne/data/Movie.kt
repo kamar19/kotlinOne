@@ -5,33 +5,32 @@ import androidx.room.*
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import ru.firstSet.kotlinOne.GenreEntity
 import ru.firstSet.kotlinOne.Genre
 
 @Entity(
     tableName = DBContract.MovieColumns.TABLE_NAME,
     indices = [Index(DBContract.MovieColumns.COLUMN_NAME_ID)]
 )
-public data class MovieEntity( // класс для работы с БД
+public data class MovieEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ID)
-    var id: Long=0 ,
+    var id: Long = 0,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_TITLE)
-    var title: String="",
+    var title: String = "",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_POSTERPICTURE)
-    var posterPicture: String="",
+    var posterPicture: String = "",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_BACKDROPPICTURE)
-    var backdropPicture: String="",
+    var backdropPicture: String = "",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_RUNTIME)
-    var runtime: Int= 0,
+    var runtime: Int = 0,
     var ratings: Float = 0F,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_OVERVIEW)
-    var overview: String="",
+    var overview: String = "",
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_ADULT)
-    var adult: Int= 0,
+    var adult: Int = 0,
     @ColumnInfo(name = DBContract.MovieColumns.COLUMN_NAME_VOTE_COUNT)
-    var vote_count: Int= 0,
-    var seachMovie: String=""
+    var vote_count: Int = 0,
+    var seachMovie: String = ""
 )
 
 data class MovieRelation(
@@ -39,18 +38,20 @@ data class MovieRelation(
     @Relation(
         parentColumn = "id",
         entityColumn = "genreMovieId",
+        entity = Genre::class
     )
-    val genreList: List<GenreEntity>,
+    val genreList: List<Genre>,
     @Relation(
         parentColumn = "id",
         entityColumn = "actorMovieId",
+        entity = Actor::class
     )
-    val actorList: List<ActorEntity>
+    val actorList: List<Actor>
 )
 
 @Parcelize
 @Serializable
-data class Movie( // Итоговый класс для работы
+data class Movie(
     var id: Long,
     var title: String,
     @SerialName("poster_path")

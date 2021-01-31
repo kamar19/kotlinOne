@@ -4,16 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.firstSet.kotlinOne.GenreEntity
+import ru.firstSet.kotlinOne.Genre
 import ru.firstSet.kotlinOne.data.*
 
 @Database(
-    entities = [MovieEntity::class, GenreEntity::class, ActorEntity::class],
-    version = 29,
+    entities = [MovieEntity::class, Genre::class, Actor::class],
+    version = 38,
     exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase() {
-    abstract val movieDAO: MovieDAO
+    public abstract val movieDAO: MovieDAO
 
     companion object {
         var instance: MovieDatabase? = null
