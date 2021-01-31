@@ -1,18 +1,17 @@
 package ru.firstSet.kotlinOne.movieDetails
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.firstSet.kotlinOne.data.ActorEntity
 import ru.firstSet.kotlinOne.data.Movie
-import ru.firstSet.kotlinOne.repository.RepositoryData
+import ru.firstSet.kotlinOne.repository.RepositoryDB
+import ru.firstSet.kotlinOne.repository.RepositoryNet
 
-class ViewModelMovieDetails(val repositoryData: RepositoryData) :
+class ViewModelMovieDetails(val repositoryNet: RepositoryNet,val repositoryDB: RepositoryDB) :
     ViewModel() {
     var coroutineScope = CoroutineScope(Dispatchers.Main)
 
@@ -24,16 +23,13 @@ class ViewModelMovieDetails(val repositoryData: RepositoryData) :
         val id: Long = bundle.getLong(FragmentMovieDetails.KEY_PARSE_DATA)
         var movie: Movie
         coroutineScope.launch {
-            movie = repositoryData.readMovieFromDb(id)
-            movie.actors = repositoryData.readActorFromDb(id)
+            movie = repositoryDB.readMovieFromDb(id)
             movieDetailState.setValue(ViewModelDetailState.Success(movie))
         }
         coroutineScope.launch {
-            movie = repositoryData.loadMovieFromNET(id)
-            movie.actors = repositoryData.loadActorFromNET(id)
-            if (movie.actors.size > 0) {
-                repositoryData.saveActorToDB(movie.actors)
-            } else {
+            movie = repositoryNet.loadMovieFromNET(id)
+            movie.actors = repositoryNet.loadActorFromNET(id)
+            if (movie.actors.size == 0) {
                 movieDetailState.setValue(ViewModelDetailState.Error("Actors not find"))
             }
             if (movie.id > 0) {

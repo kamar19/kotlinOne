@@ -1,34 +1,39 @@
 package ru.firstSet.kotlinOne.data
 
 import androidx.room.*
-import ru.firstSet.kotlinOne.GenreEntity
+import ru.firstSet.kotlinOne.Genre
 
 @Dao
 interface MovieDAO {
+    @Transaction
     @Query("SELECT * FROM moviesTable WHERE seachMovie= :seachMovie ORDER BY ratings DESC")
-    suspend fun getAllMovies(seachMovie: String): List<MovieEntity>
+    suspend fun getMoviesSeach(seachMovie: String): List<MovieRelation>
 
-    @Query("SELECT * FROM moviesTable WHERE id= :idMovie")
-    suspend fun getMovie(idMovie: Long): MovieEntity
+    @Transaction
+    @Query("SELECT * FROM moviesTable  WHERE id= :idMovie")
+    suspend fun getMovie(idMovie: Long): MovieRelation
 
-    @Query("SELECT * FROM genreTable WHERE genreMovieId = :idMovie")
-    suspend fun getGenresFromSQL(idMovie: Long): List<GenreEntity>
-
-    @Query("SELECT * FROM actorTable WHERE actorMovieId ==:idMovie")
-    suspend fun getActorFromSQL(idMovie: Long): List<ActorEntity>
+    @Query("SELECT * FROM actorTable WHERE actorId ==:actorId")
+    suspend fun getActor(actorId: Int): Actor
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveMovies(movies: List<MovieEntity>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveGenres(genres: List<GenreEntity>)
+    suspend fun saveActors(actors: List<Actor>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveActors(actors: List<ActorEntity>)
+    fun insertGenres(genres: List<Genre>): List<Long>
 
-    @Query("DELETE FROM moviesTable")
-    suspend fun deleteAllMovies()
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateGenres(genre: Genre)
 
-    @Query("DELETE FROM actorTable")
-    suspend fun deleteActors()
+    @Transaction
+    fun upsertGenres(genres: List<Genre>) {
+        val rowId = insertGenres(genres)
+        val genresToUpdate = rowId.mapIndexedNotNull { index, rowId ->
+            if (rowId == -1L) null else genres[index]
+        }
+        genresToUpdate.forEach { updateGenres(it) }
+    }
 }

@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.firstSet.kotlinOne.data.ActorEntity
 import ru.firstSet.kotlinOne.R
+import ru.firstSet.kotlinOne.data.Actor
 
-class ActorsAdapter(val actorList: List<ActorEntity>) :
+class ActorsAdapter(val actorList: List<Actor>) :
     RecyclerView.Adapter<ActorsAdapter.ActorHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorHolder =
@@ -24,14 +24,14 @@ class ActorsAdapter(val actorList: List<ActorEntity>) :
 
     override fun getItemCount(): Int = actorList.size
 
-    private fun getItem(position: Int): ActorEntity = actorList[position]
+    private fun getItem(position: Int): Actor = actorList[position]
 
     class ActorHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         private val actorName: TextView = itemView.findViewById(R.id.viewHolderActorName)
         private val actorFoto: ImageView = itemView.findViewById(R.id.viewHolderActorFoto)
 
-        fun bind(actor: ActorEntity) {
+        fun bind(actor: Actor) {
             Glide
                 .with(itemView)
                 .load(actor.picture)

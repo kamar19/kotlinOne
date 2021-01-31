@@ -59,7 +59,6 @@ class RemoteDataStore {
         return moviesApi.getMovie(movie_id)
     }
 
-
     suspend fun getSearchRuntimes(movie_id: Long?): ResultDetails {
         return moviesApi.getSearchRuntimes(movie_id)
     }

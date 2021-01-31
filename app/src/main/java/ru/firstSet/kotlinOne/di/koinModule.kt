@@ -4,16 +4,16 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import ru.firstSet.kotlinOne.movieDetails.ViewModelMovieDetails
 import ru.firstSet.kotlinOne.movieList.ViewModelMoviesList
-import ru.firstSet.kotlinOne.repository.MovieDatabase
-import ru.firstSet.kotlinOne.repository.RemoteDataStore
-import ru.firstSet.kotlinOne.repository.RepositoryData
+import ru.firstSet.kotlinOne.repository.*
 
 object koinModule {
-    val  movieListModul  =  module {
+    val movieListModul = module {
         single { RemoteDataStore() }
-        viewModel { ViewModelMoviesList(get() ) }
-        viewModel { ViewModelMovieDetails(get() ) }
         single { MovieDatabase.createMovieDatabaseInstance(get()) }
-        single { RepositoryData(get (),get()) }
+        single { RepositoryDB(get()) }
+        single { RepositoryNet(get()) }
+        viewModel { ViewModelMoviesList(get(),get()) }
+        viewModel { ViewModelMovieDetails(get(),get()) }
+
     }
 }
