@@ -1,5 +1,6 @@
 package ru.firstSet.kotlinOne.movieList
 
+import android.util.Log
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.data.Movie
@@ -13,22 +14,23 @@ class ViewModelMoviesList(private val repositoryNet: RepositoryNet,val repositor
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
 
     fun loadMovieList(seachMovie: SeachMovie): List<Movie> {
-        var movies: List<Movie> = listOf()
+        var movies: MutableList<Movie> = mutableListOf()
         var moviesFromDb: List<Movie> = listOf()
+        var moviesFromNet: List<Movie> = listOf()
         scope.launch {
-            repositoryDB.readMoviesFromDb(seachMovie).also {
-                moviesFromDb = it
-            }
+                moviesFromDb =repositoryDB.readMoviesFromDb(seachMovie)
                 if (moviesFromDb.size > 0) {
-                    movies = moviesFromDb
+                    movies.addAll(moviesFromDb.sortedBy { it.ratings })
                     mutableState.setValue(ViewModelListState.Success(movies))
                 }
         }
         scope.launch {
-            movies = repositoryNet.loadMoviesFromNET(seachMovie.seachMovie)
-            movies.let {
+            moviesFromNet = repositoryNet.loadMoviesFromNET(seachMovie.seachMovie)
+            moviesFromNet.let {
+                movies.clear()
+                movies.addAll(moviesFromNet.sortedBy { it.ratings })
                 mutableState.setValue(ViewModelListState.Success(movies))
-                repositoryDB.saveMovieToDB(movies, seachMovie)
+                repositoryDB.saveMoviesToDB(movies, seachMovie)
             } ?: mutableState.setValue(ViewModelListState.Error("Size error"))
         }
         return movies

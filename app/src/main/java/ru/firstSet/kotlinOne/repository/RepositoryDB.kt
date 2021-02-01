@@ -1,5 +1,6 @@
 package ru.firstSet.kotlinOne.repository
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.firstSet.kotlinOne.Genre
@@ -72,12 +73,13 @@ class RepositoryDB (val movieDatabase: MovieDatabase){
         return newMovie
     }
 
-    suspend fun saveMovieToDB(movies: List<Movie>, seachMovie: SeachMovie) {
+    suspend fun saveMoviesToDB(movies: List<Movie>, seachMovie: SeachMovie) {
         withContext(Dispatchers.IO) {
             localDataStore.saveMovies(convertMovieToMovieEntity(movies, seachMovie))
             movies.forEach() {
                 localDataStore.upsertGenres(saveMoviesId(it.id, it.genres))
                 localDataStore.saveActors(saveActorsId(it.id, it.actors))
+                Log.v("saveMovie","${it.ratings} , ${it.title}")
             }
         }
     }

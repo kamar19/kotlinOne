@@ -9,7 +9,7 @@ import ru.firstSet.kotlinOne.data.*
 
 @Database(
     entities = [MovieEntity::class, Genre::class, Actor::class],
-    version = 38,
+    version = 39,
     exportSchema = false
 )
 abstract class MovieDatabase : RoomDatabase() {
