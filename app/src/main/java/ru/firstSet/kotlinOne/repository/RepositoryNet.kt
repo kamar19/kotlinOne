@@ -1,8 +1,8 @@
 package ru.firstSet.kotlinOne.repository
 
 import kotlinx.coroutines.*
-import ru.firstSet.kotlinOne.Data.RemoteDataStore
-import ru.firstSet.kotlinOne.Data.RemoteDataStore.Companion.BASE_URL_MOVIES
+import ru.firstSet.kotlinOne.data.RemoteDataStore
+import ru.firstSet.kotlinOne.data.RemoteDataStore.Companion.BASE_URL_MOVIES
 import ru.firstSet.kotlinOne.Genre
 import ru.firstSet.kotlinOne.data.*
 import java.util.*

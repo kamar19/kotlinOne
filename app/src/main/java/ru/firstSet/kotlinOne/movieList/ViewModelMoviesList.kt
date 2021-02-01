@@ -24,15 +24,15 @@ class ViewModelMoviesList(private val repositoryNet: RepositoryNet,val repositor
                     mutableState.setValue(ViewModelListState.Success(movies))
                 }
         }
-        scope.launch {
-            moviesFromNet = repositoryNet.loadMoviesFromNET(seachMovie.seachMovie)
-            moviesFromNet.let {
-                movies.clear()
-                movies.addAll(moviesFromNet.sortedBy { it.ratings })
-                mutableState.setValue(ViewModelListState.Success(movies))
-                repositoryDB.saveMoviesToDB(movies, seachMovie)
-            } ?: mutableState.setValue(ViewModelListState.Error("Size error"))
-        }
+//        scope.launch {
+//            moviesFromNet = repositoryNet.loadMoviesFromNET(seachMovie.seachMovie)
+//            moviesFromNet.let {
+//                movies.clear()
+//                movies.addAll(moviesFromNet.sortedBy { it.ratings })
+//                mutableState.setValue(ViewModelListState.Success(movies))
+//                repositoryDB.saveMoviesToDB(movies, seachMovie)
+//            } ?: mutableState.setValue(ViewModelListState.Error("Size error"))
+//        }
         return movies
     }
 

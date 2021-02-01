@@ -35,6 +35,8 @@ android {
 
 dependencies {
     def room_version = "2.2.6"
+    def work_version = "2.4.0"
+
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
@@ -71,4 +73,5 @@ dependencies {
     implementation "org.koin:koin-android-scope:2.2.2"
     implementation "org.koin:koin-android-viewmodel:2.2.2"
     implementation "androidx.work:work-runtime-ktx:2.4.0"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 }

@@ -5,18 +5,21 @@
 
     <application
         android:allowBackup="true"
-        android:name=".MyAplication"
+        android:name=".MyApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/Theme.KotlinOne">
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            tools:node="remove" />
 
         <activity
             android:name=".movieDetails.FragmentMovieDetails"
             tools:ignore="Instantiatable" />
-        <activity android:name=".MovieDetailsActivity"
-            tools:ignore="MissingClass" />
         <activity android:name=".MainActivity">
 
             <intent-filter>

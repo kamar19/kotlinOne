@@ -9,8 +9,10 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.PeriodicWorkRequest
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
+import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.viewModel
 import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.R

@@ -16,6 +16,7 @@ import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.R
 import ru.firstSet.kotlinOne.movieDetails.FragmentMovieDetails
+import ru.firstSet.kotlinOne.repository.RepositoryNet
 
 
 class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
@@ -23,6 +24,7 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var pagerTabStrip: PagerTabStrip
     val viewModel: ViewModelMoviesList  by viewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

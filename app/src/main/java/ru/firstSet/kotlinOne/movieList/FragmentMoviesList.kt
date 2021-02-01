@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerTabStrip
 import androidx.viewpager.widget.ViewPager
+import androidx.work.WorkManager
 import ru.firstSet.kotlinOne.R
 
 class FragmentMoviesList() : Fragment() {
@@ -26,6 +27,8 @@ class FragmentMoviesList() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         val viewPager: ViewPager = view.findViewById(R.id.viewpager)
         viewPager.adapter = FragmentPageAdapterTab(getChildFragmentManager())
         viewPager.currentItem = 0

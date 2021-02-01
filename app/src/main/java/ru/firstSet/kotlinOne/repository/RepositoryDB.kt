@@ -79,7 +79,7 @@ class RepositoryDB (val movieDatabase: MovieDatabase){
             movies.forEach() {
                 localDataStore.upsertGenres(saveMoviesId(it.id, it.genres))
                 localDataStore.saveActors(saveActorsId(it.id, it.actors))
-                Log.v("saveMovie","${it.ratings} , ${it.title}")
+//                Log.v("saveMovie","${it.ratings} , ${it.title}")
             }
         }
     }
