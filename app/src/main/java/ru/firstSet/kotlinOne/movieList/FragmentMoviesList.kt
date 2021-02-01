@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieList
 
 import android.os.Bundle
 import android.view.LayoutInflater

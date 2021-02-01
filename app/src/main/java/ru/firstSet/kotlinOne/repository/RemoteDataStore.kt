@@ -9,9 +9,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import ru.firstSet.kotlinOne.ResultGenre
-
-private const val BASE_URL = "https://api.themoviedb.org/3/"
-private const val apiKey = "f1eaa713b8b88ceef63a9cd8be1f7920"
+import ru.firstSet.kotlinOne.data.*
 
 class RemoteDataStore {
 
@@ -45,7 +43,7 @@ class RemoteDataStore {
         }
     }
 
-    suspend fun getSearchGenre(): ResultGenre {
+    suspend fun getGenreFromNet(): ResultGenre {
         return moviesApi.getSearchGenre()
     }
 
@@ -53,11 +51,21 @@ class RemoteDataStore {
         return moviesApi.getSearchActor(movie_id)
     }
 
-    suspend fun getMovie(seachMovie: String): ResultMovie {
-        return moviesApi.getMovie(seachMovie)
+    suspend fun getMovies(seachMovie: String): ResultMovie {
+        return moviesApi.getMovies(seachMovie)
+    }
+
+    suspend fun getMovie(movie_id: Long): MovieDetail {
+        return moviesApi.getMovie(movie_id)
     }
 
     suspend fun getSearchRuntimes(movie_id: Long?): ResultDetails {
         return moviesApi.getSearchRuntimes(movie_id)
+    }
+
+    companion object {
+        val BASE_URL = "https://api.themoviedb.org/3/"
+        val apiKey = "f1eaa713b8b88ceef63a9cd8be1f7920"
+        val BASE_URL_MOVIES = "https://image.tmdb.org/t/p/original"
     }
 }

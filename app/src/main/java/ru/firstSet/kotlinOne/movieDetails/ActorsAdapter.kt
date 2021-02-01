@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieDetails
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.firstSet.kotlinOne.Data.Actor
 import ru.firstSet.kotlinOne.R
+import ru.firstSet.kotlinOne.data.Actor
 
 class ActorsAdapter(val actorList: List<Actor>) :
     RecyclerView.Adapter<ActorsAdapter.ActorHolder>() {
@@ -36,7 +36,7 @@ class ActorsAdapter(val actorList: List<Actor>) :
                 .with(itemView)
                 .load(actor.picture)
                 .into(actorFoto)
-            actorName.text = actor.name
+            actorName.text = actor.actorName
         }
     }
 }

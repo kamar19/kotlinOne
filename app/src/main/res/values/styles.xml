@@ -108,4 +108,10 @@
         <item name="android:maxHeight">8dp</item>
     </style>
 
+    <style name="frgActorName">
+        <item name="android:textSize">40sp</item>
+
+        <item name="android:letterSpacing">-0.01</item>
+
+    </style>
 </resources>

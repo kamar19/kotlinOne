@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieList
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,11 +8,11 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ru.firstSet.kotlinOne.Data.Movie
+import ru.firstSet.kotlinOne.data.Movie
 import com.bumptech.glide.Glide
 import ru.firstSet.kotlinOne.R
 
-class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
+class MoviesViewAdapter(val someClickListener: (Long) -> Unit) :
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
     var movieList: List<Movie> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
@@ -21,9 +21,9 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
         )
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        holder.bind(getItem(position));
+        holder.bind(getItem(position.toInt()));
         holder.itemView.setOnClickListener {
-            someClickListener(position)
+            someClickListener(position.toLong())
         }
     }
 
@@ -57,7 +57,7 @@ class MoviesViewAdapter(val someClickListener: (Int) -> Unit) :
                 .with(itemView)
                 .load(movie.posterPicture)
                 .into(this.imageViewMovieOrig)
-            textViewTag.text = movie.genreIds.joinToString(separator = ", ") { it.name }
+            textViewTag.text = movie.genres.joinToString(separator = ", ") { it.name }
             if (movie.adult==16) { imageViewLike.setImageResource(R.drawable.like_red) }
             else { imageViewLike.setImageResource(R.drawable.like) }
             textViewReview.text =

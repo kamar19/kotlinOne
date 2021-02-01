@@ -5,19 +5,19 @@
 
     <application
         android:allowBackup="true"
+        android:name=".MyAplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".MyApplication"
         android:theme="@style/Theme.KotlinOne">
 
         <activity
-            android:name=".View.FragmentMovieDetails"
+            android:name=".movieDetails.FragmentMovieDetails"
             tools:ignore="Instantiatable" />
         <activity android:name=".MovieDetailsActivity"
             tools:ignore="MissingClass" />
-        <activity android:name=".View.MainActivity">
+        <activity android:name=".MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,13 +1,5 @@
-package ru.firstSet.kotlinOne.Data
+package ru.firstSet.kotlinOne.data
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.serialization.json.Json
-import okhttp3.Interceptor
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
 import ru.firstSet.kotlinOne.ResultGenre
@@ -23,5 +15,9 @@ import ru.firstSet.kotlinOne.ResultGenre
         suspend fun getSearchRuntimes(@Path("movie_id") movie_id: Long?): ResultDetails
 
         @GET("movie/{seachMovie}?language=ru-ru&query=2&include_adult=false")
-        suspend fun getMovie(@Path("seachMovie") seachMovie: String): ResultMovie
+        suspend fun getMovies(@Path("seachMovie") seachMovie: String): ResultMovie
+
+        @GET("movie/{movie_id}?language=ru-ru&query=2&include_adult=false")
+        suspend fun getMovie(@Path("movie_id") movie_id: Long?): MovieDetail
+
 }

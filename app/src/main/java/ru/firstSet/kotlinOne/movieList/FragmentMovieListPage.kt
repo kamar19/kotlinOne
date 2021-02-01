@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,18 +11,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerTabStrip
 import org.koin.android.viewmodel.ext.android.viewModel
-import ru.firstSet.kotlinOne.Data.Movie
-import ru.firstSet.kotlinOne.Data.SeachMovie
+import ru.firstSet.kotlinOne.MainActivity
+import ru.firstSet.kotlinOne.data.Movie
+import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.R
-import ru.firstSet.kotlinOne.viewModel.ViewModelMoviesList
+import ru.firstSet.kotlinOne.movieDetails.FragmentMovieDetails
 
 
 class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
     private var listRecyclerView: RecyclerView? = null
     private lateinit var progressBar: ProgressBar
     private lateinit var pagerTabStrip: PagerTabStrip
-
-    val viewModel: ViewModelMoviesList by viewModel()
+    val viewModel: ViewModelMoviesList  by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,21 +37,18 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.stateLiveData.observe(viewLifecycleOwner, this::setState)
-        viewModel.loadMoviewList(seachMovie)
-
+        viewModel.loadMovieList(seachMovie)
         progressBar = view.findViewById(R.id.progressBarTab)
-
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
         listRecyclerView?.adapter =
             MoviesViewAdapter { item -> doOnClick(item) }
     }
 
-    fun doOnClick(id: Int) {
+    fun doOnClick(id: Long) {
         viewModel.stateLiveData.value?.let {
-            getMovie(it, id)?.let { callFragmentMovieDetails(it) }
+            getMovie(it, id)?.let { callFragmentMovieDetails(it.id) }
         }
     }
 
@@ -73,21 +70,21 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
                 errorMessage(state.error)
         }
 
-    fun getMovie(state: ViewModelMoviesList.ViewModelListState, id: Int): Movie? {
+    fun getMovie(state: ViewModelMoviesList.ViewModelListState, id: Long): Movie? {
         when (state) {
             is ViewModelMoviesList.ViewModelListState.Success -> {
                 updateData(state.list)
-                return state.list[id]
+                return state.list[id.toInt()]
             }
             else -> return null
         }
     }
 
-    fun callFragmentMovieDetails(movie: Movie) {
+    fun callFragmentMovieDetails(id: Long) {
         activity?.let {
             it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
             it.supportFragmentManager.beginTransaction()
-                .add(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(movie))
+                .add(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(id))
                 .addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
                 .commit()
         }

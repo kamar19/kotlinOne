@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.View
+package ru.firstSet.kotlinOne.movieDetails
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
-import ru.firstSet.kotlinOne.Data.Movie
+import org.koin.android.viewmodel.ext.android.viewModel
+import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.R
-import ru.firstSet.kotlinOne.viewModel.ViewModelMovieDetails
 
 class FragmentMovieDetails : Fragment() {
     private lateinit var imageViewBack: View
@@ -27,7 +27,7 @@ class FragmentMovieDetails : Fragment() {
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var progressBar:ProgressBar
     private var scope = CoroutineScope(Dispatchers.Main)
-    val viewModel: ViewModelMovieDetails = ViewModelMovieDetails()
+    val viewModelDetail: ViewModelMovieDetails by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,13 +52,13 @@ class FragmentMovieDetails : Fragment() {
         fmdReview = view.findViewById(R.id.fmdReview)
         fmdStoryLineContent = view.findViewById(R.id.fmdStoryLineContent)
         progressBar = view.findViewById(R.id.progressBarMovieDetails)
-        viewModel.movieDetailStateLiveData.observe(viewLifecycleOwner, this::setState)
+        viewModelDetail.movieDetailStateLiveData.observe(viewLifecycleOwner, this::setState)
         imageViewBack = view.findViewById<View>(R.id.fmdImageViewPath).apply {
             setOnClickListener {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
-        arguments?.let { viewModel.getMovie(it) }
+        arguments?.let { viewModelDetail.getMovie(it) }
     }
 
     @SuppressLint("SetTextI18n")
@@ -76,12 +76,11 @@ class FragmentMovieDetails : Fragment() {
                 .into(fmdPoster)
         }
         fmdMovieName.text = movie.title
-        fmdTextViewTeg.text = movie.genreIds.joinToString(separator = ", ") { it.name }
+        fmdTextViewTeg.text = movie.genres.joinToString(separator = ", ") { it.name }
         fmdReview.text =
             movie.vote_count.toString() + " " + getString(R.string.textViewReview)
         fmdStoryLineContent.text = movie.overview
         progressBar.visibility =ProgressBar.INVISIBLE
-
     }
 
     fun setState(state: ViewModelMovieDetails.ViewModelDetailState) =
@@ -106,9 +105,9 @@ class FragmentMovieDetails : Fragment() {
 
     companion object {
         const val KEY_PARSE_DATA = "movieDetails"
-        fun newInstance(movie: Movie) = FragmentMovieDetails().apply {
+        fun newInstance(id: Long) = FragmentMovieDetails().apply {
             arguments = Bundle().apply {
-                putParcelable(KEY_PARSE_DATA, movie)
+                putLong(KEY_PARSE_DATA, id.toLong())
             }
         }
     }
