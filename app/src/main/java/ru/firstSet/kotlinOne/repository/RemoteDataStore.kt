@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.data
+package ru.firstSet.kotlinOne.repository
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -9,6 +9,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import ru.firstSet.kotlinOne.ResultGenre
+import ru.firstSet.kotlinOne.data.*
 
 class RemoteDataStore {
 

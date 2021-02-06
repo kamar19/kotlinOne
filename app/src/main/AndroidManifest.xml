@@ -12,10 +12,10 @@
         android:supportsRtl="true"
 
         android:theme="@style/Theme.KotlinOne">
-        <provider
-            android:name="androidx.work.impl.WorkManagerInitializer"
-            android:authorities="${applicationId}.workmanager-init"
-            tools:node="remove" />
+<!--        <provider-->
+<!--            android:name="androidx.work.impl.WorkManagerInitializer"-->
+<!--            android:authorities="${applicationId}.workmanager-init"-->
+<!--            tools:node="remove" />-->
 
         <activity
             android:name=".movieDetails.FragmentMovieDetails"

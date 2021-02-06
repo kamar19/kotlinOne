@@ -72,10 +72,12 @@ class FragmentMovieDetails : Fragment() {
         fmdRatingBar.rating = movie.ratings.div(2)
         fmdSomeId.text = movie.adult.toString()+"+"
         scope.launch {
-            Glide
-                .with(context)
-                .load(movie.backdropPicture)
-                .into(fmdPoster)
+            context?.let {
+                Glide
+                    .with(it)
+                    .load(movie.backdropPicture)
+                    .into(fmdPoster)
+            }
         }
         fmdMovieName.text = movie.title
         fmdTextViewTeg.text = movie.genres.joinToString(separator = ", ") { it.name }
