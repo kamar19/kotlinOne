@@ -1,43 +1,58 @@
 package ru.firstSet.kotlinOne.movieList
 
+import android.util.Log
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.firstSet.kotlinOne.data.Movie
+import ru.firstSet.kotlinOne.data.MovieRelation
 import ru.firstSet.kotlinOne.repository.RepositoryNet
 import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.repository.RepositoryDB
-import ru.firstSet.kotlinOne.worker.RepositorySP
 
 class ViewModelMoviesList(
     private val repositoryNet: RepositoryNet, val repositoryDB: RepositoryDB,
-    val repositorySP: RepositorySP
 ) : ViewModel() {
-
     private var scope = viewModelScope
     private val mutableState = MutableLiveData<ViewModelListState>(ViewModelListState.Loading)
     val stateLiveData: LiveData<ViewModelListState> get() = mutableState
 
     fun loadMovieList(seachMovie: SeachMovie): List<Movie> {
-        val moviesMutable: MutableList<Movie> = mutableListOf()
         var moviesFromDb: List<Movie> = listOf()
         var moviesFromNet: List<Movie> = listOf()
         scope.launch {
-            moviesFromDb = repositoryDB.readMoviesFromDb(seachMovie)
-            if (moviesFromDb.size > 0) {
-                moviesMutable.addAll(moviesFromDb.sortedBy { it.ratings })
-                mutableState.setValue(ViewModelListState.Success(moviesMutable))
-            } else {
-                moviesFromNet = repositoryNet.loadMoviesFromNET(seachMovie.seachMovie)
-                moviesFromNet.let {
-                    moviesMutable.clear()
-                    moviesMutable.addAll(moviesFromNet.sortedBy { it.ratings })
-                    mutableState.setValue(ViewModelListState.Success(moviesMutable))
-                    repositoryDB.saveMoviesToDB(moviesMutable, seachMovie)
-                    repositorySP.saveCurrentDate()
-                } ?: mutableState.setValue(ViewModelListState.Error("Size error"))
+            val listFlowRelationMovie: Flow<List<MovieRelation>>
+            listFlowRelationMovie =
+                repositoryDB.localDataStore.getMoviesSeach(seachMovie.seachMovie)
+            listFlowRelationMovie.collect() {
+                val listRelationMovie: List<MovieRelation> = it
+                moviesFromDb = repositoryDB.convertMovieRelationToMovie(listRelationMovie)
+                    .sortedBy { it.ratings }
+                if (moviesFromDb.size > 0) {
+                    mutableState.setValue(ViewModelListState.Success(moviesFromDb))
+                }
+                Log.v("loadMoviesFromDb", "${moviesFromDb.size}")
             }
         }
-        return moviesMutable
+        var countDB: Long = 0
+        scope.launch(Dispatchers.IO) {
+            countDB = repositoryDB.getCountMoviesSeach(seachMovie)
+            scope.launch {
+                if ((countDB == null) or (countDB <= 0)) {
+                    moviesFromNet =
+                        repositoryNet.loadMoviesFromNET(seachMovie.seachMovie)
+                            .sortedBy { it.ratings }
+                    moviesFromNet.let {
+                        Log.v("loadMoviesFromNET", "${moviesFromNet.size}")
+                        repositoryDB.saveMoviesToDB(moviesFromNet, seachMovie)
+                        mutableState.setValue(ViewModelListState.Success(moviesFromNet))
+                    } ?: mutableState.setValue(ViewModelListState.Error("Size error"))
+                }
+            }
+        }
+        return moviesFromNet
     }
 
     sealed class ViewModelListState {

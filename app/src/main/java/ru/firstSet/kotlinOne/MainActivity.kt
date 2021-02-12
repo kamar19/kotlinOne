@@ -8,7 +8,6 @@ import androidx.work.WorkManager
 import org.koin.core.component.KoinApiExtension
 import ru.firstSet.kotlinOne.movieList.FragmentMoviesList
 import ru.firstSet.kotlinOne.worker.OneTimeWorker
-import ru.firstSet.kotlinOne.worker.RepositorySP
 import java.util.*
 
 @KoinApiExtension
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 .addTag(OneTimeWorker.TAG_FOR_ONE_JOB)
                 .build()
-        val currentDate = RepositorySP.sdf.format(Date())
+        val currentDate = OneTimeWorker.sdf.format(Date())
         Log.v("startOneTimeWork()", " ${currentDate.toString()}")
         workManager.enqueue(oneTimeWorkRequest)
     }
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val workManager = WorkManager.getInstance()
         workManager.cancelAllWorkByTag(OneTimeWorker.TAG_FOR_ONE_JOB)
         workManager.cancelAllWorkByTag(OneTimeWorker.TAG_FOR_PERIODIC_JOB)
-        val currentDate = RepositorySP.sdf.format(Date())
+        val currentDate = OneTimeWorker.sdf.format(Date())
         Log.v("stopAllWorkers()", " ${currentDate.toString()}")
     }
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.*
 import org.koin.core.component.KoinApiExtension
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -13,7 +14,7 @@ class OneTimeWorker(val context: Context, params: WorkerParameters) : Worker(con
     override fun doWork(): Result {
         try {
             startPeriodicWork()
-            val currentDate = RepositorySP.sdf.format(Date())
+            val currentDate = sdf.format(Date())
             Log.v("PeriodicWork, doWork()", "${currentDate.toString()}")
             return Result.success()
         } catch (e: Exception) {
@@ -39,7 +40,7 @@ class OneTimeWorker(val context: Context, params: WorkerParameters) : Worker(con
         workManager.enqueueUniquePeriodicWork(
             UNIQUE_WORK_NAME_FOR_PERIODIC_WORK, ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest
         )
-        val currentDate = RepositorySP.sdf.format(Date())
+        val currentDate = sdf.format(Date())
         Log.v("startPeriodicWork():", "${currentDate.toString()}")
     }
 
@@ -48,7 +49,8 @@ class OneTimeWorker(val context: Context, params: WorkerParameters) : Worker(con
         val UNIQUE_WORK_NAME_FOR_ONE_JOB_WORK = "MovieOneTimeJob"
         val TAG_FOR_PERIODIC_JOB = "PeriodicJob"
         val UNIQUE_WORK_NAME_FOR_PERIODIC_WORK = "MoviePeriodicJob"
-        val PERIODIC_SERVISE_TIME_DIRATION: Long = 8
-        val PERIODIC_SERVISE_TIME_UNIT = TimeUnit.HOURS
+        val PERIODIC_SERVISE_TIME_DIRATION: Long = 15
+        val PERIODIC_SERVISE_TIME_UNIT = TimeUnit.MINUTES
+         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH)
     }
 }

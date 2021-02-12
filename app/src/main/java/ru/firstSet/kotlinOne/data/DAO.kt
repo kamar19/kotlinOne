@@ -1,23 +1,36 @@
 package ru.firstSet.kotlinOne.data
 
+import android.util.Log
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import ru.firstSet.kotlinOne.Genre
 
 @Dao
 interface MovieDAO {
     @Transaction
     @Query("SELECT * FROM moviesTable WHERE seachMovie= :seachMovie ORDER BY ratings DESC")
-    suspend fun getMoviesSeach(seachMovie: String): List<MovieRelation>
+    fun getMoviesSeach(seachMovie: String): Flow<List<MovieRelation>>
+
+    @Query("SELECT count(*) FROM moviesTable WHERE seachMovie= :seachMovie")
+    fun getCountMoviesSeach(seachMovie: String): Long
 
     @Transaction
     @Query("SELECT * FROM moviesTable  WHERE id= :idMovie")
     suspend fun getMovie(idMovie: Long): MovieRelation
 
-    @Query("SELECT * FROM actorTable WHERE actorId ==:actorId")
-    suspend fun getActor(actorId: Int): Actor
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveMovies(movies: List<MovieEntity>)
+    suspend fun saveMovie(movie: MovieEntity)
+
+    @Transaction
+    suspend fun saveMovieAndRelation(
+        movie: MovieEntity,
+        genres: List<Genre>,
+        actors: List<Actor>
+    ) {
+        saveMovie(movie)
+        upsertGenres(genres)
+        saveActors(actors)
+    }
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveActors(actors: List<Actor>)
@@ -25,7 +38,7 @@ interface MovieDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertGenres(genres: List<Genre>): List<Long>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun updateGenres(genre: Genre)
 
     @Transaction

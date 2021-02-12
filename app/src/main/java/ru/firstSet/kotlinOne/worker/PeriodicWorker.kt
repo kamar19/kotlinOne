@@ -12,25 +12,21 @@ import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.repository.RepositoryDB
 import ru.firstSet.kotlinOne.repository.RepositoryNet
+import ru.firstSet.kotlinOne.worker.OneTimeWorker.Companion.sdf
 import java.util.*
 
 @KoinApiExtension
 class PeriodicWorker(val context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params),
     KoinComponent {
-    private var repositorySP: RepositorySP = RepositorySP(context)
     val repositoryNet: RepositoryNet by inject()
     val repositoryDB: RepositoryDB by inject()
 
     override suspend fun doWork(): Result {
         return withContext(Dispatchers.IO) {
             try {
-                if (repositorySP.compareSavedDate() >= OneTimeWorker.PERIODIC_SERVISE_TIME_DIRATION) {
-                    loadNet()
-                    repositorySP.saveCurrentDate()
-                } else
-                    Log.v("Periodic, doWork()", "NOT")
-                val currentDate = RepositorySP.sdf.format(Date())
+                loadNet()
+                val currentDate = sdf.format(Date())
                 Log.v("Periodic, doWork()", "${currentDate.toString()}")
                 return@withContext Result.success()
             } catch (e: Exception) {
@@ -47,13 +43,9 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
         moviesFromNet.addAll(repositoryNet.loadMoviesFromNET(SeachMovie.MovieUpComing.seachMovie))
         moviesFromNet.let {
             repositoryDB.saveMoviesToDB(moviesFromNet, SeachMovie.MovieNowPlaying)
+            Log.v("loadNet()", "saveMoviesToDB ${moviesFromNet.size}")
         }
-        Log.v("ru.firstSet.kotlinOne", "loadNet() end")
     }
-
-    companion object {
-    }
-
 }
 
 

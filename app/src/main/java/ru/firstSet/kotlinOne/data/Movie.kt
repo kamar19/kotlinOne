@@ -9,7 +9,7 @@ import ru.firstSet.kotlinOne.Genre
 
 @Entity(
     tableName = DBContract.MovieColumns.TABLE_NAME,
-    indices = [Index(DBContract.MovieColumns.COLUMN_NAME_ID)]
+    indices = [Index(DBContract.MovieColumns.COLUMN_NAME_ID)],
 )
 public data class MovieEntity(
     @PrimaryKey(autoGenerate = false)
