@@ -26,22 +26,7 @@ class ViewModelMovieDetails(val repositoryNet: RepositoryNet, val repositoryDB: 
             movie = repositoryDB.readMovieFromDb(id)
             movieDetailState.setValue(ViewModelDetailState.Success(movie))
         }
-//        coroutineScope.launch {
-//            movie = repositoryNet.loadMovieFromNET(id)
-//            movie.actors = repositoryNet.loadActorFromNET(id)
-//            if (movie.actors.size == 0) {
-//                movieDetailState.setValue(ViewModelDetailState.Error("Actors not find"))
-//            }
-//            if (movie.id > 0) {
-//                movieDetailState.setValue(ViewModelDetailState.Success(movie))
-//            } else {
-//                movieDetailState.setValue(
-//                        ViewModelDetailState.Error("Movie not find")
-//                )
-//            }
-//        }
     }
-
 
     sealed class ViewModelDetailState {
         object Loading : ViewModelDetailState()

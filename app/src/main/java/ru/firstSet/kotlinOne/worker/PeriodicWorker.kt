@@ -8,11 +8,11 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import ru.firstSet.kotlinOne.MainActivity
 import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.repository.RepositoryDB
 import ru.firstSet.kotlinOne.repository.RepositoryNet
-import ru.firstSet.kotlinOne.worker.OneTimeWorker.Companion.sdf
 import java.util.*
 
 @KoinApiExtension
@@ -25,8 +25,8 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
     override suspend fun doWork(): Result {
         return withContext(Dispatchers.IO) {
             try {
-                loadNet()
-                val currentDate = sdf.format(Date())
+                saveMoviesToDB()
+                val currentDate = MainActivity.sdf.format(Date())
                 Log.v("Periodic, doWork()", "${currentDate.toString()}")
                 return@withContext Result.success()
             } catch (e: Exception) {
@@ -35,7 +35,7 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
         }
     }
 
-    suspend fun loadNet() {
+    suspend fun saveMoviesToDB() {
         val moviesFromNet: MutableList<Movie> = mutableListOf()
         moviesFromNet.addAll(repositoryNet.loadMoviesFromNET(SeachMovie.MovieNowPlaying.seachMovie))
         moviesFromNet.addAll(repositoryNet.loadMoviesFromNET(SeachMovie.MoviePopular.seachMovie))
@@ -43,9 +43,11 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
         moviesFromNet.addAll(repositoryNet.loadMoviesFromNET(SeachMovie.MovieUpComing.seachMovie))
         moviesFromNet.let {
             repositoryDB.saveMoviesToDB(moviesFromNet, SeachMovie.MovieNowPlaying)
-            Log.v("loadNet()", "saveMoviesToDB ${moviesFromNet.size}")
+            val currentDate = MainActivity.sdf.format(Date())
+            Log.v("saveMoviesToDB", " ${currentDate.toString()} size: ${moviesFromNet.size}")
         }
     }
+
 }
 
 

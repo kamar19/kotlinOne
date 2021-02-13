@@ -31,12 +31,14 @@ class ViewModelMoviesList(
                 moviesFromDb = repositoryDB.convertMovieRelationToMovie(listRelationMovie)
                     .sortedBy { it.ratings }
                 if (moviesFromDb.size > 0) {
+                    getMovieWithMaxRating(moviesFromDb)
+                    //Нужно создать Notification для лучшего нового фильма
                     mutableState.setValue(ViewModelListState.Success(moviesFromDb))
                 }
                 Log.v("loadMoviesFromDb", "${moviesFromDb.size}")
             }
         }
-        var countDB: Long = 0
+        var countDB: Int = 0
         scope.launch(Dispatchers.IO) {
             countDB = repositoryDB.getCountMoviesSeach(seachMovie)
             scope.launch {
@@ -45,7 +47,6 @@ class ViewModelMoviesList(
                         repositoryNet.loadMoviesFromNET(seachMovie.seachMovie)
                             .sortedBy { it.ratings }
                     moviesFromNet.let {
-                        Log.v("loadMoviesFromNET", "${moviesFromNet.size}")
                         repositoryDB.saveMoviesToDB(moviesFromNet, seachMovie)
                         mutableState.setValue(ViewModelListState.Success(moviesFromNet))
                     } ?: mutableState.setValue(ViewModelListState.Error("Size error"))
@@ -54,6 +55,17 @@ class ViewModelMoviesList(
         }
         return moviesFromNet
     }
+
+    fun getMovieWithMaxRating(movies: List<Movie>): Movie {
+        var movie: Movie = movies[0]
+        movies.forEach {
+            if (it.ratings > movie.ratings) {
+                movie = it
+            }
+        }
+        return movie
+    }
+
 
     sealed class ViewModelListState {
         object Loading : ViewModelListState()

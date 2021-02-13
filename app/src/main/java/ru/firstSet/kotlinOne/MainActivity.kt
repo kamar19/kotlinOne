@@ -3,12 +3,13 @@ package ru.firstSet.kotlinOne
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
+import androidx.work.*
 import org.koin.core.component.KoinApiExtension
 import ru.firstSet.kotlinOne.movieList.FragmentMoviesList
-import ru.firstSet.kotlinOne.worker.OneTimeWorker
+import ru.firstSet.kotlinOne.worker.PeriodicWorker
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 @KoinApiExtension
 class MainActivity : AppCompatActivity() {
@@ -16,8 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        startOneTimeWork()
-//        stopAllWorkers()
+        startPeriodicWork()
+//        stopPeriodicWork()
         if (savedInstanceState == null) {
             callFragmentMoviesList()
         } else supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MOVIES_LIST)
@@ -29,31 +30,39 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun startOneTimeWork() {
+    fun startPeriodicWork() {
+        val currentDate = sdf.format(Date())
+        Log.v("startPeriodicWork():", "${currentDate.toString()}")
+
         val workManager = WorkManager.getInstance()
-        val oneTimeWorkRequest: OneTimeWorkRequest =
-            OneTimeWorkRequest.Builder(OneTimeWorker::class.java)
-                .setInitialDelay(
-                    OneTimeWorker.PERIODIC_SERVISE_TIME_DIRATION,
-                    OneTimeWorker.PERIODIC_SERVISE_TIME_UNIT
-                )
-                .addTag(OneTimeWorker.TAG_FOR_ONE_JOB)
+        val myConstraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.UNMETERED)
+            .setRequiresCharging(true)
+            .build()
+        val periodicWorkRequest: PeriodicWorkRequest =
+            PeriodicWorkRequestBuilder<PeriodicWorker>(
+                PERIODIC_SERVISE_TIME_DIRATION,
+                PERIODIC_SERVISE_TIME_UNIT
+            )
                 .build()
-        val currentDate = OneTimeWorker.sdf.format(Date())
-        Log.v("startOneTimeWork()", " ${currentDate.toString()}")
-        workManager.enqueue(oneTimeWorkRequest)
+        workManager.enqueueUniquePeriodicWork(
+            UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest
+        )
     }
 
-    fun stopAllWorkers() {
+    fun stopPeriodicWork() {
         val workManager = WorkManager.getInstance()
-        workManager.cancelAllWorkByTag(OneTimeWorker.TAG_FOR_ONE_JOB)
-        workManager.cancelAllWorkByTag(OneTimeWorker.TAG_FOR_PERIODIC_JOB)
-        val currentDate = OneTimeWorker.sdf.format(Date())
-        Log.v("stopAllWorkers()", " ${currentDate.toString()}")
+        workManager.cancelUniqueWork(UNIQUE_WORK_NAME)
+        val currentDate = sdf.format(Date())
+        Log.v("stopPeriodicWork()", " ${currentDate.toString()}")
     }
 
     companion object {
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH)
         const val FRAGMENT_TAG_MOVIES_LIST = "MoviesList"
         const val FRAGMENT_TAG_MOVIES_DETAILS = "MoviesDetails"
+        val UNIQUE_WORK_NAME = "MoviePeriodicJob"
+        val PERIODIC_SERVISE_TIME_DIRATION: Long = 15
+        val PERIODIC_SERVISE_TIME_UNIT = TimeUnit.MINUTES
     }
 }
