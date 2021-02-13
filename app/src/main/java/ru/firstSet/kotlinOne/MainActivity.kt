@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         const val FRAGMENT_TAG_MOVIES_LIST = "MoviesList"
         const val FRAGMENT_TAG_MOVIES_DETAILS = "MoviesDetails"
         val UNIQUE_WORK_NAME = "MoviePeriodicJob"
-        val PERIODIC_SERVISE_TIME_DIRATION: Long = 15
-        val PERIODIC_SERVISE_TIME_UNIT = TimeUnit.MINUTES
+        val PERIODIC_SERVISE_TIME_DIRATION: Long = 8
+        val PERIODIC_SERVISE_TIME_UNIT = TimeUnit.HOURS
     }
 }
