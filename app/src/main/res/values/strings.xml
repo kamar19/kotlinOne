@@ -23,5 +23,8 @@
     <string name="oveList">button</string>
     <string name="fragmentMovieChosenText">You chose: %1$s</string>
     <string name="frg_name_text">Robert \nDowney Jr.</string>
+    <string name="load_new_movies">Load new movies</string>
+    <string name="channel_new_messages">Best New Movie</string>
+    <string name="channel_new_messages_description">The Best Movie from Load Movies</string>
 
 </resources>

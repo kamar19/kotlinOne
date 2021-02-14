@@ -13,6 +13,7 @@ import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.repository.RepositoryDB
 import ru.firstSet.kotlinOne.repository.RepositoryNet
+import ru.firstSet.kotlinOne.utils.getCurrentDateTimeString
 import java.util.*
 
 @KoinApiExtension
@@ -26,8 +27,7 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
         return withContext(Dispatchers.IO) {
             try {
                 saveMoviesToDB()
-                val currentDate = MainActivity.sdf.format(Date())
-                Log.v("Periodic, doWork()", "${currentDate.toString()}")
+                Log.v("Periodic, doWork()", getCurrentDateTimeString())
                 return@withContext Result.success()
             } catch (e: Exception) {
                 return@withContext Result.failure()
@@ -43,8 +43,7 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
         moviesFromNet.addAll(repositoryNet.loadMoviesFromNET(SeachMovie.MovieUpComing.seachMovie))
         moviesFromNet.let {
             repositoryDB.saveMoviesToDB(moviesFromNet, SeachMovie.MovieNowPlaying)
-            val currentDate = MainActivity.sdf.format(Date())
-            Log.v("saveMoviesToDB", " ${currentDate.toString()} size: ${moviesFromNet.size}")
+            Log.v("saveMoviesToDB", " ${getCurrentDateTimeString()} size: ${moviesFromNet.size}")
         }
     }
 

@@ -7,8 +7,7 @@ import androidx.work.*
 import org.koin.core.component.KoinApiExtension
 import ru.firstSet.kotlinOne.movieList.FragmentMoviesList
 import ru.firstSet.kotlinOne.worker.PeriodicWorker
-import java.text.SimpleDateFormat
-import java.util.*
+import ru.firstSet.kotlinOne.utils.*
 import java.util.concurrent.TimeUnit
 
 @KoinApiExtension
@@ -31,9 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startPeriodicWork() {
-        val currentDate = sdf.format(Date())
-        Log.v("startPeriodicWork():", "${currentDate.toString()}")
-
+        Log.v("startPeriodicWork():", getCurrentDateTimeString())
         val workManager = WorkManager.getInstance()
         val myConstraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.UNMETERED)
@@ -44,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 PERIODIC_SERVISE_TIME_DIRATION,
                 PERIODIC_SERVISE_TIME_UNIT
             )
+                .setConstraints(myConstraints)
                 .build()
         workManager.enqueueUniquePeriodicWork(
             UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest
@@ -53,16 +51,15 @@ class MainActivity : AppCompatActivity() {
     fun stopPeriodicWork() {
         val workManager = WorkManager.getInstance()
         workManager.cancelUniqueWork(UNIQUE_WORK_NAME)
-        val currentDate = sdf.format(Date())
-        Log.v("stopPeriodicWork()", " ${currentDate.toString()}")
+        Log.v("stopPeriodicWork()", getCurrentDateTimeString())
     }
 
     companion object {
-        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH)
         const val FRAGMENT_TAG_MOVIES_LIST = "MoviesList"
         const val FRAGMENT_TAG_MOVIES_DETAILS = "MoviesDetails"
         val UNIQUE_WORK_NAME = "MoviePeriodicJob"
-        val PERIODIC_SERVISE_TIME_DIRATION: Long = 8
-        val PERIODIC_SERVISE_TIME_UNIT = TimeUnit.HOURS
+        val PERIODIC_SERVISE_TIME_DIRATION: Long = 15
+        val PERIODIC_SERVISE_TIME_UNIT = TimeUnit.MINUTES
+
     }
 }
