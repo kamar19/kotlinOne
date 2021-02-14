@@ -1,4 +1,4 @@
-package ru.firstSet.kotlinOne.Data
+package ru.firstSet.kotlinOne.repository
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
