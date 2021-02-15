@@ -4,6 +4,7 @@ import kotlinx.coroutines.*
 import ru.firstSet.kotlinOne.repository.RemoteDataStore.Companion.BASE_URL_MOVIES
 import ru.firstSet.kotlinOne.Genre
 import ru.firstSet.kotlinOne.data.*
+import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class RepositoryNet(val remoteDataStore: RemoteDataStore) {
@@ -35,6 +36,7 @@ class RepositoryNet(val remoteDataStore: RemoteDataStore) {
 
     suspend fun loadMoviesFromNET(seachMovie: String): List<Movie> =
         withContext(Dispatchers.IO) {
+            timeLoadFromNet = Calendar.getInstance()
             remoteDataStore.getMovies(seachMovie).movieForNETS.map { movie2 ->
                 val genres: List<Genre> = loadGenreFromNET(movie2.id)
                 val genresMap = genres.associateBy { it.genreId }
@@ -55,5 +57,8 @@ class RepositoryNet(val remoteDataStore: RemoteDataStore) {
                 )
             }
         }
+    companion object {
+        var timeLoadFromNet:Calendar? = null
+    }
 }
 

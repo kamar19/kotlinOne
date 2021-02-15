@@ -36,9 +36,10 @@ class RepositoryDB(val movieDatabase: MovieDatabase) {
 
     suspend fun saveMoviesToDB(movies: List<Movie>, seachMovie: SeachMovie) {
         withContext(Dispatchers.IO) {
-                localDataStore.saveMovieAndRelation(movies, seachMovie)
-            }
+            localDataStore.saveMovieAndRelation(movies, seachMovie)
+        }
         Log.v("endSaveMovies", "${movies.size}")
+
     }
 
     fun getCountMoviesSeach(seachMovie: SeachMovie): Int {
@@ -46,6 +47,15 @@ class RepositoryDB(val movieDatabase: MovieDatabase) {
         return movies.size
     }
 
+    fun getMovieWithMaxRating(movies: List<Movie>): Movie {
+        var movie: Movie = movies[0]
+        movies.forEach {
+            if (it.ratings > movie.ratings) {
+                movie = it
+            }
+        }
+        return movie
+    }
 
 }
 

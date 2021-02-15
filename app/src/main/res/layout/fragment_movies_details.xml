@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroud">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,13 +42,33 @@
                 app:layout_constraintBottom_toBottomOf="@id/fmdGuidelineHorizontalCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/orig" />
+
+            <ImageView
+                android:id="@+id/fmdImageViewShape"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_marginStart="152dp"
+                android:layout_marginTop="113dp"
+                android:background="@drawable/shape_watching"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@id/fmdPoster"
+                app:layout_constraintEnd_toEndOf="@id/fmdPoster"
+                app:layout_constraintStart_toStartOf="@id/fmdPoster"
+                app:layout_constraintTop_toTopOf="@id/fmdPoster" />
 
             <ProgressBar
                 android:id="@+id/progressBarMovieDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="113dp"
                 android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/fmdPoster"
+                app:layout_constraintEnd_toEndOf="@id/fmdPoster"
+                app:layout_constraintStart_toStartOf="@id/fmdPoster"
+                app:layout_constraintTop_toTopOf="@id/fmdPoster"
                 tools:ignore="MissingConstraints" />
 
             <androidx.constraintlayout.widget.Guideline
