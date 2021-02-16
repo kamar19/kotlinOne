@@ -4,7 +4,6 @@ import android.app.NotificationManager.IMPORTANCE_HIGH
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.core.app.*
 import androidx.core.net.toUri
 import ru.firstSet.kotlinOne.MainActivity

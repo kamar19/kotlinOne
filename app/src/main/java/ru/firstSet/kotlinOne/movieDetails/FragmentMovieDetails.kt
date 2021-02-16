@@ -2,32 +2,23 @@ package ru.firstSet.kotlinOne.movieDetails
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.DatePickerDialog
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import ru.firstSet.kotlinOne.R
 import ru.firstSet.kotlinOne.data.Movie
-import ru.firstSet.kotlinOne.utils.PickerDialog
+import ru.firstSet.kotlinOne.utils.EventCalendar
 import ru.firstSet.kotlinOne.utils.RequestPermissions
-import java.util.*
 
 class FragmentMovieDetails : Fragment() {
     private lateinit var imageViewBack: View
@@ -43,8 +34,9 @@ class FragmentMovieDetails : Fragment() {
     private lateinit var progressBar: ProgressBar
     private var scope = CoroutineScope(Dispatchers.Main)
     val viewModelDetail: ViewModelMovieDetails by viewModel()
-    private lateinit var requestPermissions : RequestPermissions
-    private lateinit var pickerDialog : PickerDialog
+    private lateinit var requestPermissions: RequestPermissions
+    private lateinit var eventCalendar: EventCalendar
+    private lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,28 +69,28 @@ class FragmentMovieDetails : Fragment() {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
-        requestPermissions = RequestPermissions(this.requireActivity())
-        pickerDialog = PickerDialog(view.context)
+        arguments?.let { viewModelDetail.getMovie(it) }
         imageViewShape = view.findViewById<View>(R.id.fmdImageViewShape).apply {
             setOnClickListener {
-                if ( requestPermissions.hasPermissions()) {
-                    pickerDialog.showPickerDialog()
-                } else {
+                requestPermissions = RequestPermissions(requireActivity())
+                if (requestPermissions.hasPermissions()) {
+                    eventCalendar = EventCalendar(view.context, savedInstanceState, movie)
+                    eventCalendar.showPickerDialog()
+                    } else {
                     requestPermissions.requestPermissionWithRationale();
                 }
+                requestPermissions.checkPermission(
+                    callbackId,
+                    Manifest.permission.READ_CALENDAR,
+                    Manifest.permission.WRITE_CALENDAR
+                )
             }
-            requestPermissions.checkPermission(
-                callbackId,
-                Manifest.permission.READ_CALENDAR,
-                Manifest.permission.WRITE_CALENDAR
-            )
         }
-        arguments?.let { viewModelDetail.getMovie(it) }
     }
-
 
     @SuppressLint("SetTextI18n")
     private fun updateMovie(movie: Movie) {
+        this.movie = movie
         listRecyclerView.layoutManager =
             LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
         listRecyclerView.adapter = ActorsAdapter(movie.actors)
@@ -145,8 +137,6 @@ class FragmentMovieDetails : Fragment() {
         const val KEY_PARSE_DATA = "movieDetails"
         const val PERMISSION_REQUEST_CODE = 152
         val callbackId: Int = 42
-
-//        var calendarDate: Calendar? = null
         fun newInstance(id: Long) = FragmentMovieDetails().apply {
             arguments = Bundle().apply {
                 putLong(KEY_PARSE_DATA, id.toLong())

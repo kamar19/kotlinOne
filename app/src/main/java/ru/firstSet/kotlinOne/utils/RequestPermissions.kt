@@ -4,9 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat
@@ -14,7 +12,6 @@ import androidx.core.content.PermissionChecker
 import com.google.android.material.snackbar.Snackbar
 import ru.firstSet.kotlinOne.R
 import ru.firstSet.kotlinOne.movieDetails.FragmentMovieDetails
-import java.util.*
 
 class RequestPermissions(val activity: Activity) {
 
@@ -73,9 +70,5 @@ class RequestPermissions(val activity: Activity) {
             permissionsId,
             callbackId
         )
-    }
-
-    companion object {
-        const val PERMISSION_REQUEST_CODE = 152
     }
 }

@@ -19,7 +19,6 @@ object koinModule {
         single { MovieNotifications(get()) }
         single { RepositoryDB(get()) }
         single { RepositoryNet(get()) }
-//        single { RequestPermissions(get()) }
         viewModel { ViewModelMoviesList(get(), get()) }
     }
     val movieDetailsModul = module {

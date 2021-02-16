@@ -9,7 +9,6 @@ import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.firstSet.kotlinOne.data.Movie
-import ru.firstSet.kotlinOne.data.MovieNotifications
 import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.repository.RepositoryDB
 import ru.firstSet.kotlinOne.repository.RepositoryNet
@@ -22,7 +21,6 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
     KoinComponent {
     val repositoryNet: RepositoryNet by inject()
     val repositoryDB: RepositoryDB by inject()
-    val notifications: MovieNotifications by inject()
 
     override suspend fun doWork(): Result {
         return withContext(Dispatchers.IO) {
