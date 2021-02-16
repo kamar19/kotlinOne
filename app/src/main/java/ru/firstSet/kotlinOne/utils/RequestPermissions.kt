@@ -65,7 +65,7 @@ class RequestPermissions(val activity: Activity) {
                     )
                 } == PackageManager.PERMISSION_GRANTED
         }
-        if (!permissions) ActivityCompat.requestPermissions(
+        if (!permissions) requestPermissions(
             activity,
             permissionsId,
             callbackId

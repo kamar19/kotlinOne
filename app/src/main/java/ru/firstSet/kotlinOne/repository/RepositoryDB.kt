@@ -1,6 +1,5 @@
 package ru.firstSet.kotlinOne.repository
 
-import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.firstSet.kotlinOne.data.*
@@ -38,23 +37,11 @@ class RepositoryDB(val movieDatabase: MovieDatabase) {
         withContext(Dispatchers.IO) {
             localDataStore.saveMovieAndRelation(movies, seachMovie)
         }
-        Log.v("endSaveMovies", "${movies.size}")
-
     }
 
     fun getCountMoviesSeach(seachMovie: SeachMovie): Int {
         val movies: List<MovieRelation> = localDataStore.getAllMovies(seachMovie.seachMovie)
         return movies.size
-    }
-
-    fun getMovieWithMaxRating(movies: List<Movie>): Movie {
-        var movie: Movie = movies[0]
-        movies.forEach {
-            if (it.ratings > movie.ratings) {
-                movie = it
-            }
-        }
-        return movie
     }
 
 }

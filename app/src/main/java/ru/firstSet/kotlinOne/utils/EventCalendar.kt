@@ -13,9 +13,16 @@ import ru.firstSet.kotlinOne.data.Movie
 import java.util.*
 
 class EventCalendar(val context: Context, val savedInstanceState: Bundle?, val movie: Movie) {
-    var yearPlan: Int = 2021
-    var monthPlan: Int = 2
-    var dayPlan: Int = 15
+    var yearPlan: Int
+    var monthPlan: Int
+    var dayPlan: Int
+    init {
+        val currentDate: Calendar = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_MONTH,1)
+        yearPlan = currentDate.get(Calendar.YEAR)
+        monthPlan = currentDate.get(Calendar.MONTH)
+        dayPlan = currentDate.get(Calendar.DAY_OF_MONTH)
+    }
 
     val dateSetListener = object : DatePickerDialog.OnDateSetListener {
         override fun onDateSet(
@@ -38,19 +45,13 @@ class EventCalendar(val context: Context, val savedInstanceState: Bundle?, val m
     }
 
     private fun createEventCalendar() {
-        val eventsUri = "content://com.android.calendar/events".toUri()
         val startMillis: Long = Calendar.getInstance().run {
-            set(yearPlan, monthPlan, dayPlan, 19, 30)
-            timeInMillis
-        }
-        val endMillis: Long = Calendar.getInstance().run {
-            set(yearPlan, monthPlan, dayPlan, 22, 30)
+            set(yearPlan, monthPlan, dayPlan, hourPlan, minutePlan)
             timeInMillis
         }
         val intent = Intent(Intent.ACTION_INSERT)
             .setData(eventsUri)
             .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
-            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
             .putExtra(CalendarContract.Events.TITLE, context.getString(R.string.calendar_contract_events_title)+" - "+ movie.title)
             .putExtra(CalendarContract.Events.DESCRIPTION, context.getString(R.string.calendar_contract_events_description))
             .putExtra(
@@ -58,5 +59,10 @@ class EventCalendar(val context: Context, val savedInstanceState: Bundle?, val m
                 CalendarContract.Events.AVAILABILITY_BUSY
             )
         startActivity(context, intent, savedInstanceState)
+    }
+    companion object{
+        val eventsUri = "content://com.android.calendar/events".toUri()
+        val hourPlan:Int = 19
+        val minutePlan:Int = 30
     }
 }

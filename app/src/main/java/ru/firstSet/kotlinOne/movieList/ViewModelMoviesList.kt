@@ -35,9 +35,12 @@ class ViewModelMoviesList(
                     .sortedBy { it.ratings }
                 Log.v("moviesFromDb", "${moviesFromDb.size}")
                 if (moviesFromDb.size > 0) {
-                    if (seachMovie==SeachMovie.MovieNowPlaying) {
-                        val movieMaxRating: Movie = repositoryDB.getMovieWithMaxRating(moviesFromDb)
-                        notifications.showNotification(movieMaxRating)
+                    if (seachMovie == SeachMovie.MovieNowPlaying) {
+                        moviesFromDb.maxByOrNull { it -> it.ratings }?.let { it1 ->
+                            notifications.showNotification(
+                                it1
+                            )
+                        }
                     }
                     movies = moviesFromDb
                     mutableState.setValue(ViewModelListState.Success(moviesFromDb))
