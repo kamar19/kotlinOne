@@ -12,8 +12,6 @@ import org.koin.core.component.inject
 import ru.firstSet.kotlinOne.data.*
 import ru.firstSet.kotlinOne.repository.RepositoryNet
 import ru.firstSet.kotlinOne.repository.RepositoryDB
-import ru.firstSet.kotlinOne.repository.RepositoryNet.Companion.timeLoadFromNet
-import ru.firstSet.kotlinOne.utils.getMinutesPassedStart
 
 @KoinApiExtension
 class ViewModelMoviesList(
@@ -26,7 +24,7 @@ class ViewModelMoviesList(
 
     fun loadMovieList(seachMovie: SeachMovie): List<Movie> {
         var movies: List<Movie> = listOf()
-        var moviesFromDb: List<Movie> = listOf()
+        var moviesFromDb: List<Movie>
         scope.launch {
             val listFlowRelationMovie: Flow<List<MovieRelation>>
             listFlowRelationMovie =
@@ -36,11 +34,8 @@ class ViewModelMoviesList(
                 moviesFromDb = repositoryDB.convertMovieRelationToMovie(listRelationMovie)
                     .sortedBy { it.ratings }
                 Log.v("moviesFromDb", "${moviesFromDb.size}")
-
                 if (moviesFromDb.size > 0) {
-                    val minutes = getMinutesPassedStart(timeLoadFromNet)
-                    Log.v("timeLoadFromNet", "${minutes}")
-                    if (minutes < 6) {
+                    if (seachMovie==SeachMovie.MovieNowPlaying) {
                         val movieMaxRating: Movie = repositoryDB.getMovieWithMaxRating(moviesFromDb)
                         notifications.showNotification(movieMaxRating)
                     }

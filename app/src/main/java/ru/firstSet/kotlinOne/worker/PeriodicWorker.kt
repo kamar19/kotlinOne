@@ -45,9 +45,6 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
         moviesFromNet.let {
             repositoryDB.saveMoviesToDB(moviesFromNet, SeachMovie.MovieNowPlaying)
             Log.v("saveMoviesToDB", " ${getCurrentDateTimeString()} size: ${moviesFromNet.size}")
-            val movieMaxRating: Movie = repositoryDB.getMovieWithMaxRating(moviesFromNet)
-            Log.v("showNotification", " ${movieMaxRating}")
-            notifications.showNotification(movieMaxRating)
         }
     }
 }

@@ -29,6 +29,9 @@
     <string name="calendar_permissions_denied">"Calendar Permissions denied"</string>
     <string name="calendar_permission_is_required_select">"Calendar Permission is required to select the movie screening date"</string>
     <string name="calendar_event_is_ready">"Запланирован просмотр фильма на "</string>
+    <string name="calendar_contract_events_title">"MovieWatch"</string>
+    <string name="calendar_contract_events_description">"Запланирован просмотр фильма"</string>
+
 
 
 

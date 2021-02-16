@@ -25,6 +25,8 @@ import kotlinx.coroutines.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import ru.firstSet.kotlinOne.R
 import ru.firstSet.kotlinOne.data.Movie
+import ru.firstSet.kotlinOne.utils.PickerDialog
+import ru.firstSet.kotlinOne.utils.RequestPermissions
 import java.util.*
 
 class FragmentMovieDetails : Fragment() {
@@ -39,12 +41,10 @@ class FragmentMovieDetails : Fragment() {
     private lateinit var fmdStoryLineContent: TextView
     private lateinit var listRecyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
-    private var yearPlan: Int = 2021
-    private var monthPlan: Int = 2
-    private var dayPlan: Int = 15
     private var scope = CoroutineScope(Dispatchers.Main)
     val viewModelDetail: ViewModelMovieDetails by viewModel()
-    val callbackId: Int = 42
+    private lateinit var requestPermissions : RequestPermissions
+    private lateinit var pickerDialog : PickerDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,15 +77,17 @@ class FragmentMovieDetails : Fragment() {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
+        requestPermissions = RequestPermissions(this.requireActivity())
+        pickerDialog = PickerDialog(view.context)
         imageViewShape = view.findViewById<View>(R.id.fmdImageViewShape).apply {
             setOnClickListener {
-                if (hasPermissions()) {
-                    showPickerDialog()
+                if ( requestPermissions.hasPermissions()) {
+                    pickerDialog.showPickerDialog()
                 } else {
-                    requestPermissionWithRationale();
+                    requestPermissions.requestPermissionWithRationale();
                 }
             }
-            checkPermission(
+            requestPermissions.checkPermission(
                 callbackId,
                 Manifest.permission.READ_CALENDAR,
                 Manifest.permission.WRITE_CALENDAR
@@ -94,33 +96,6 @@ class FragmentMovieDetails : Fragment() {
         arguments?.let { viewModelDetail.getMovie(it) }
     }
 
-    val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-        override fun onDateSet(
-            view: DatePicker, year: Int, monthOfYear: Int,
-            dayOfMonth: Int
-        ) {
-            yearPlan = year
-            monthPlan = monthOfYear
-            dayPlan = dayOfMonth
-            updateDateInView()
-        }
-    }
-
-    private fun showPickerDialog() {
-        val datePickerDialog = view?.let {
-            DatePickerDialog(
-                it.context, dateSetListener, yearPlan, monthPlan, dayPlan
-            ).show()
-        }
-        Log.v("datePicker", "$yearPlan $monthPlan $dayPlan ")
-    }
-
-        private fun updateDateInView() {
-        Log.v("datePicker2", "$yearPlan $monthPlan $dayPlan ")
-        val text:String =  getString(R.string.calendar_event_is_ready) + yearPlan + ", " + monthPlan +", "+ dayPlan
-        val toast = Toast.makeText(view?.context, text, Toast.LENGTH_SHORT)
-        toast.show()
-    }
 
     @SuppressLint("SetTextI18n")
     private fun updateMovie(movie: Movie) {
@@ -166,95 +141,12 @@ class FragmentMovieDetails : Fragment() {
         scope.cancel()
     }
 
-    fun requestPermissionWithRationale() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                this.requireActivity(),
-                Manifest.permission.READ_CALENDAR
-            )
-        ) {
-            activity?.let {
-                Snackbar.make(
-                    it.findViewById<View>(R.id.fmdBackground),
-                    R.string.calendar_permission_is_required_select,
-                    Snackbar.LENGTH_LONG
-                )
-                    .setAction("GRANT") { requestPerms() }
-                    .show()
-            }
-        } else {
-            requestPerms()
-        }
-    }
-
-    private fun requestPerms() {
-        val permissions = arrayOf(Manifest.permission.READ_CALENDAR)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(permissions, PERMISSION_REQUEST_CODE)
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        var allowed = true
-        when (requestCode) {
-            PERMISSION_REQUEST_CODE -> for (res in grantResults) {
-                allowed = allowed && res == PackageManager.PERMISSION_GRANTED
-            }
-            else ->
-                allowed = false
-        }
-        if (allowed) {
-            showPickerDialog()
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    Toast.makeText(
-                        context,
-                        R.string.calendar_permissions_denied,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-    }
-
-    private fun hasPermissions(): Boolean {
-        var res = 0
-        val permissions = arrayOf(Manifest.permission.READ_CALENDAR)
-        for (perms in permissions) {
-            res = PermissionChecker.checkCallingOrSelfPermission(context as Activity, perms)
-            if (res != PackageManager.PERMISSION_GRANTED) {
-                return false
-            }
-        }
-        return true
-    }
-
-    private fun checkPermission(callbackId: Int, vararg permissionsId: String) {
-        var permissions = true
-        for (p in permissionsId) {
-            permissions =
-                permissions && context?.let {
-                    ContextCompat.checkSelfPermission(
-                        it,
-                        p
-                    )
-                } == PackageManager.PERMISSION_GRANTED
-        }
-        if (!permissions) ActivityCompat.requestPermissions(
-            context as Activity,
-            permissionsId,
-            callbackId
-        )
-    }
-
     companion object {
         const val KEY_PARSE_DATA = "movieDetails"
         const val PERMISSION_REQUEST_CODE = 152
-        var calendarDate: Calendar? = null
+        val callbackId: Int = 42
+
+//        var calendarDate: Calendar? = null
         fun newInstance(id: Long) = FragmentMovieDetails().apply {
             arguments = Bundle().apply {
                 putLong(KEY_PARSE_DATA, id.toLong())
