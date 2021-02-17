@@ -40,7 +40,6 @@ class FragmentMovieDetails : Fragment() {
     private lateinit var eventCalendar: EventCalendar
     private lateinit var movie: Movie
     private var savedInstanceState: Bundle? = null
-    //private lateinit var movieContext: Context
     lateinit var requestPermissions: RequestPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +76,6 @@ class FragmentMovieDetails : Fragment() {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
-//        movieContext = view.context
         arguments?.let { viewModelDetail.getMovie(it) }
         imageViewShape = view.findViewById<View>(R.id.fmdImageViewShape).apply {
             setOnClickListener {
