@@ -36,9 +36,9 @@ class ViewModelMoviesList(
                 Log.v("moviesFromDb", "${moviesFromDb.size}")
                 if (moviesFromDb.size > 0) {
                     if (seachMovie == SeachMovie.MovieNowPlaying) {
-                        moviesFromDb.maxByOrNull { it -> it.ratings }?.let { it1 ->
+                        moviesFromDb.maxByOrNull { movies -> movies.ratings }?.let { movie ->
                             notifications.showNotification(
-                                it1
+                                movie
                             )
                         }
                     }

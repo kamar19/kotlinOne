@@ -1,9 +1,10 @@
 package ru.firstSet.kotlinOne.movieDetails
 
-import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import ru.firstSet.kotlinOne.R
+import ru.firstSet.kotlinOne.data.AppPermission
+import ru.firstSet.kotlinOne.data.AppPermission.Companion.permissionsMovieApp
 import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.utils.EventCalendar
 import ru.firstSet.kotlinOne.utils.RequestPermissions
@@ -34,13 +37,18 @@ class FragmentMovieDetails : Fragment() {
     private lateinit var progressBar: ProgressBar
     private var scope = CoroutineScope(Dispatchers.Main)
     val viewModelDetail: ViewModelMovieDetails by viewModel()
-    private lateinit var requestPermissions: RequestPermissions
     private lateinit var eventCalendar: EventCalendar
     private lateinit var movie: Movie
+    private var savedInstanceState: Bundle? = null
+    //private lateinit var movieContext: Context
+    lateinit var requestPermissions: RequestPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+        if (savedInstanceState != null) {
+            this.savedInstanceState = savedInstanceState
+        }
     }
 
     override fun onCreateView(
@@ -69,21 +77,18 @@ class FragmentMovieDetails : Fragment() {
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
+//        movieContext = view.context
         arguments?.let { viewModelDetail.getMovie(it) }
         imageViewShape = view.findViewById<View>(R.id.fmdImageViewShape).apply {
             setOnClickListener {
                 requestPermissions = RequestPermissions(requireActivity())
-                if (requestPermissions.hasPermissions()) {
+                if (requestPermissions.checkPermission(permissionsMovieApp)) {
+                    Log.v("EventCalendar", "start")
                     eventCalendar = EventCalendar(view.context, savedInstanceState, movie)
                     eventCalendar.showPickerDialog()
-                    } else {
-                    requestPermissions.requestPermissionWithRationale();
+                } else {
+                    requestPermission(permissionsMovieApp)
                 }
-                requestPermissions.checkPermission(
-                    callbackId,
-                    Manifest.permission.READ_CALENDAR,
-                    Manifest.permission.WRITE_CALENDAR
-                )
             }
         }
     }
@@ -133,10 +138,40 @@ class FragmentMovieDetails : Fragment() {
         scope.cancel()
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            when (requestCode) {
+                RequestPermissions.PERMISSION_REQUEST_CODE -> {
+                    if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        eventCalendar = EventCalendar(requireActivity(), savedInstanceState, movie)
+                        eventCalendar.showPickerDialog()
+                    } else {
+                        Toast.makeText(
+                            this.context,
+                            getString(R.string.permission_is_required_select),
+                            Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                    return
+            }
+        }
+    }
+
+    fun requestPermission(permissions: List<AppPermission>) {
+        for (permission in permissions) {
+            requestPermissions(
+                arrayOf(permission.permissionName),
+                permission.requestCode
+            )
+        }
+    }
+
     companion object {
         const val KEY_PARSE_DATA = "movieDetails"
-        const val PERMISSION_REQUEST_CODE = 152
-        val callbackId: Int = 42
         fun newInstance(id: Long) = FragmentMovieDetails().apply {
             arguments = Bundle().apply {
                 putLong(KEY_PARSE_DATA, id.toLong())
