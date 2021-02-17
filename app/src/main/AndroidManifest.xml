@@ -24,9 +24,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="android.example.com"
-                    android:pathPattern="/chat/.*"
-                    android:scheme="https" />
+                    android:host="ru.firstSet.kotlinOne"
+                    android:pathPattern="/movies/.*"
+                    android:scheme="kotlinOne"
+                    tools:ignore="AppLinkUrlError" />
             </intent-filter>
 
         </activity>
@@ -41,4 +42,6 @@
         tools:ignore="ManifestOrder" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 </manifest>

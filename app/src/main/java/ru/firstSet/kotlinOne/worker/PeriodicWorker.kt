@@ -8,7 +8,6 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import ru.firstSet.kotlinOne.MainActivity
 import ru.firstSet.kotlinOne.data.Movie
 import ru.firstSet.kotlinOne.data.SeachMovie
 import ru.firstSet.kotlinOne.repository.RepositoryDB
@@ -46,7 +45,6 @@ class PeriodicWorker(val context: Context, params: WorkerParameters) :
             Log.v("saveMoviesToDB", " ${getCurrentDateTimeString()} size: ${moviesFromNet.size}")
         }
     }
-
 }
 
 
