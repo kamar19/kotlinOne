@@ -5,10 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.viewpager.widget.PagerTabStrip
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialElevationScale
 import ru.firstSet.kotlinOne.R
+import ru.firstSet.kotlinOne.movieDetails.FragmentMovieDetails.Companion.DURATION
 
 class FragmentMoviesList() : Fragment() {
     private var fmlConstraintLayoutList: ConstraintLayout? = null
@@ -16,6 +22,25 @@ class FragmentMoviesList() : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+        exitTransition = Hold()
+//        exitTransition = MaterialElevationScale(/* growing= */ false)
+//        reenterTransition = MaterialElevationScale(/* growing= */ true)
+        postponeEnterTransition()
+//        view?.doOnPreDraw {
+//            startPostponedEnterTransition()
+//        }
+
+//        sharedElementEnterTransition = MaterialContainerTransform().apply {
+//            duration = DURATION
+//            interpolator = FastOutSlowInInterpolator()
+//            drawingViewId = R.id.frameLayoutContainer
+//        }
+//        sharedElementReturnTransition = MaterialContainerTransform().apply {
+//            drawingViewId = R.id.fmlConstraintLayout
+//            duration = DURATION
+//            interpolator = FastOutSlowInInterpolator()
+//        }
+
     }
 
     override fun onCreateView(

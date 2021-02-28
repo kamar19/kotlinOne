@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import ru.firstSet.kotlinOne.data.Movie
 import com.bumptech.glide.Glide
 import ru.firstSet.kotlinOne.R
 
-class MoviesViewAdapter(val someClickListener: (Long) -> Unit) :
+class MoviesViewAdapter(val someClickListener: (Long, View) -> Unit) :
     RecyclerView.Adapter<MoviesViewAdapter.MoviesViewHolder>() {
     var movieList: List<Movie> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
@@ -23,7 +24,8 @@ class MoviesViewAdapter(val someClickListener: (Long) -> Unit) :
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         holder.bind(getItem(position.toInt()));
         holder.itemView.setOnClickListener {
-            someClickListener(position.toLong())
+            ViewCompat.setTransitionName(it,it.context.getString(R.string.constraintlayoutTransitionName)+movieList[position].id)
+            someClickListener(position.toLong(),it)
         }
     }
 
