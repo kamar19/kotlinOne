@@ -10,12 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.Slide
 import com.bumptech.glide.Glide
 import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.*
@@ -52,45 +50,11 @@ class FragmentMovieDetails : Fragment() {
         if (savedInstanceState != null) {
             this.savedInstanceState = savedInstanceState
         }
-//        postponeEnterTransition()
-//        view?.doOnPreDraw {
-//            startPostponedEnterTransition()
-//        }
-
         sharedElementEnterTransition = MaterialContainerTransform().apply {
             duration = DURATION
             interpolator = FastOutSlowInInterpolator()
-//            drawingViewId = R.id.frameLayoutContainer
-            drawingViewId = R.id.fmdConstraintLayout
-            // главная Активность
+            drawingViewId = R.id.frameLayoutContainer
         }
-//        sharedElementReturnTransition = MaterialContainerTransform()
-//            .apply {
-////            drawingViewId = R.id.fmlConstraintLayout
-////            duration = DURATION
-////            interpolator = FastOutSlowInInterpolator()
-//        }
-        sharedElementReturnTransition = Slide()
-//            .apply {
-//            interpolator = FastOutSlowInInterpolator()
-//            duration = DURATION
-//            addTarget(R.id.fmdConstraintLayout)
-//        }
-//        enterTransition = MaterialContainerTransform().apply {
-////            startView = view
-//            drawingViewId = R.id.fmdConstraintLayout
-////            endView = emailCardView
-//            duration = DURATION_BACK
-//        }
-
-//        returnTransition = Slide().apply {
-//            interpolator = FastOutSlowInInterpolator()
-//            duration = DURATION
-//            addTarget(R.id.fmdConstraintLayout)
-//        }
-//fmdConstraintLayout
-
-
     }
 
     override fun onCreateView(
@@ -116,9 +80,6 @@ class FragmentMovieDetails : Fragment() {
         viewModelDetail.movieDetailStateLiveData.observe(viewLifecycleOwner, this::setState)
         imageViewBack = view.findViewById<View>(R.id.fmdImageViewPath).apply {
             setOnClickListener {
-                view.doOnPreDraw {
-                    startPostponedEnterTransition()
-                }
                 activity?.supportFragmentManager?.popBackStack()
             }
         }
@@ -218,8 +179,6 @@ class FragmentMovieDetails : Fragment() {
     companion object {
         const val KEY_PARSE_DATA = "movieDetails"
         const val DURATION: Long = 1000
-        const val DURATION_BACK: Long = 5000
-
         fun newInstance(id: Long) = FragmentMovieDetails().apply {
             arguments = Bundle().apply {
                 putLong(KEY_PARSE_DATA, id.toLong())

@@ -24,7 +24,6 @@ class MoviesViewAdapter(val someClickListener: (Long, View) -> Unit) :
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         holder.bind(getItem(position.toInt()));
         holder.itemView.setOnClickListener {
-            ViewCompat.setTransitionName(it,it.context.getString(R.string.constraintlayoutTransitionName)+movieList[position].id)
             someClickListener(position.toLong(),it)
         }
     }
@@ -51,6 +50,7 @@ class MoviesViewAdapter(val someClickListener: (Long, View) -> Unit) :
 
         @SuppressLint("SetTextI18n")
         fun bind(movie: Movie) {
+            ViewCompat.setTransitionName(itemView,itemView.context.getString(R.string.constraintlayoutTransitionName)+movie.id)
                 textViewSomeId.text = movie.adult.toString()+"+"
             textViewMinuteTime.text =
                 movie.runtime.toString() + " " + itemView.context.getString(R.string.fmlTextViewMin)
