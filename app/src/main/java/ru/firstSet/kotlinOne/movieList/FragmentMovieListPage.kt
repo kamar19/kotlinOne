@@ -42,12 +42,12 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
         listRecyclerView = view.findViewById<RecyclerView>(R.id.fmlRecyclerViewMovies)
         listRecyclerView?.layoutManager = GridLayoutManager(activity, 2)
         listRecyclerView?.adapter =
-            MoviesViewAdapter { item -> doOnClick(item) }
+            MoviesViewAdapter { item, viewMovie-> doOnClick(item,viewMovie) }
     }
 
-    fun doOnClick(id: Long) {
+    fun doOnClick(id: Long, viewMovie: View) {
         viewModel.stateLiveData.value?.let {
-            getMovie(it, id)?.let { callFragmentMovieDetails(it.id) }
+            getMovie(it, id)?.let { callFragmentMovieDetails(it.id,viewMovie) }
         }
     }
 
@@ -79,14 +79,19 @@ class FragmentMoviesListPage(val seachMovie: SeachMovie) : Fragment() {
         }
     }
 
-    fun callFragmentMovieDetails(id: Long) {
+    fun callFragmentMovieDetails(id: Long,viewMovie: View) {
         activity?.let {
             it.supportFragmentManager.findFragmentByTag(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
-            it.supportFragmentManager.beginTransaction()
-                .add(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(id))
+            it.supportFragmentManager
+                .beginTransaction()
+//                .add(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(id))
+                .addSharedElement(viewMovie, resources.getString(R.string.fmdСonstraintlayoutTransitionName))
+                .replace(R.id.frameLayoutContainer, FragmentMovieDetails.newInstance(id))
+
                 .addToBackStack(MainActivity.FRAGMENT_TAG_MOVIES_DETAILS)
                 .commit()
         }
+
     }
 
     fun errorMessage(string: String?) {

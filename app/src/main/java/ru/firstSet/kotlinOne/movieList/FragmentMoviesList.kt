@@ -4,18 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.viewpager.widget.PagerTabStrip
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.transition.Hold
 import ru.firstSet.kotlinOne.R
+import ru.firstSet.kotlinOne.movieDetails.FragmentMovieDetails.Companion.DURATION
 
 class FragmentMoviesList() : Fragment() {
-    private var fmlConstraintLayoutList: ConstraintLayout? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+        postponeEnterTransition()
+        view?.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+        exitTransition = Hold().apply {
+            duration = DURATION
+            interpolator = FastOutSlowInInterpolator()
+        }
     }
 
     override fun onCreateView(
@@ -32,12 +41,5 @@ class FragmentMoviesList() : Fragment() {
         val pagerTabStrip: PagerTabStrip = view.findViewById(R.id.pagerTabStrip)
         pagerTabStrip.drawFullUnderline = false
         pagerTabStrip.setTabIndicatorColorResource(R.color.colorLinePager)
-        fmlConstraintLayoutList =
-            view.findViewById<ConstraintLayout>(R.id.fmlConstraintLayoutList).apply {
-                setOnClickListener {
-                    // В будующем буду использовать этот лиссенер, возможно для поиска городов или стран
-                    // что бы в зависимости от выбора показывались локализованные данные для региона.
-                }
-            }
     }
 }
